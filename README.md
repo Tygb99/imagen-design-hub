@@ -89,3 +89,7 @@ glassmorphism, soap bubble, water drop, crystal, hologram, highlight, glossy, pa
 ```
 
 In Korean-first workflows, prefer Korean search terms and add common loanwords only when they are useful search terms.
+
+## License
+
+MIT. See [LICENSE](LICENSE). Korean translation: [LICENSE.ko.md](LICENSE.ko.md).
