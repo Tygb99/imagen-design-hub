@@ -1,5 +1,7 @@
 # imagegen-chroma-cutout
 
+[한국어 README](README.ko.md)
+
 Codex skill for generating transparent PNG/WebP cutouts from `image_gen` outputs.
 
 The workflow is intentionally public-repo friendly:
@@ -87,9 +89,3 @@ glassmorphism, soap bubble, water drop, crystal, hologram, highlight, glossy, pa
 ```
 
 In Korean-first workflows, prefer Korean search terms and add common loanwords only when they are useful search terms.
-
-## Public Release Checklist
-
-- Do not commit generated client assets, private workspace outputs, or local `.codex` cache paths.
-- Keep `SKILL.md`, `src/imagegen_chroma_cutout/`, `scripts/remove_chroma_key.py`, `scripts/prepare_designhub_unique_upload.py`, `requirements.txt`, `README.md`, `README.ko.md`, `LICENSE`, `LICENSE.ko.md`, and `evals/evals.json`.
-- License: MIT.
