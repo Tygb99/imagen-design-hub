@@ -90,9 +90,9 @@ python scripts/remove_chroma_key.py \
 Windows PowerShell:
 
 ```powershell
-py -3 .\scripts\remove_chroma_key.py `
-  --input ".\source.png" `
-  --out ".\final-alpha.png" `
+py -3 ./scripts/remove_chroma_key.py `
+  --input "./source.png" `
+  --out "./final-alpha.png" `
   --auto-key border `
   --soft-matte `
   --transparent-threshold 12 `
@@ -112,10 +112,10 @@ python scripts/write_photopea_runner.py \
 Windows PowerShell:
 
 ```powershell
-py -3 .\scripts\write_photopea_runner.py `
-  --raw-dir "outputs\<run-id>\assets\raw" `
-  --processed-dir "outputs\<run-id>\assets\processed" `
-  --out "outputs\<run-id>\photopea\runner.html"
+py -3 ./scripts/write_photopea_runner.py `
+  --raw-dir "outputs/<run-id>/assets/raw" `
+  --processed-dir "outputs/<run-id>/assets/processed" `
+  --out "outputs/<run-id>/photopea/runner.html"
 ```
 
 ## DesignHub Keyword Rules

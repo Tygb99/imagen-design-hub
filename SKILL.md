@@ -170,9 +170,9 @@ python scripts/remove_chroma_key.py \
 PowerShell equivalent:
 
 ```powershell
-py -3 .\scripts\remove_chroma_key.py `
-  --input ".\source.png" `
-  --out ".\final-alpha.png" `
+py -3 ./scripts/remove_chroma_key.py `
+  --input "./source.png" `
+  --out "./final-alpha.png" `
   --auto-key border `
   --soft-matte `
   --transparent-threshold 12 `
@@ -217,10 +217,10 @@ For DesignHub/MiriCanvas PNG element runs:
    ```
    On Windows PowerShell:
    ```powershell
-   py -3 .\scripts\write_photopea_runner.py `
-     --raw-dir "outputs\<run-id>\assets\raw" `
-     --processed-dir "outputs\<run-id>\assets\processed" `
-     --out "outputs\<run-id>\photopea\runner.html"
+   py -3 ./scripts/write_photopea_runner.py `
+     --raw-dir "outputs/<run-id>/assets/raw" `
+     --processed-dir "outputs/<run-id>/assets/processed" `
+     --out "outputs/<run-id>/photopea/runner.html"
    ```
 5. For the `miricanvas-design` repo, keep PNG elements at 350 DPI, at least 2500 px on each side, tight alpha bbox, and alpha preserved.
 
@@ -274,11 +274,11 @@ python scripts/prepare_designhub_unique_upload.py \
 PowerShell equivalent:
 
 ```powershell
-py -3 .\scripts\prepare_designhub_unique_upload.py `
-  --csv "outputs\<run-id>\metadata\preupload.csv" `
-  --images-dir "outputs\<run-id>\assets\processed" `
-  --out-dir "outputs\<run-id>\assets\processed-designhub-unique-<YYYYMMDD-HHmm>" `
-  --out-csv "outputs\<run-id>\metadata\designhub-preupload-unique-<YYYYMMDD-HHmm>.csv" `
+py -3 ./scripts/prepare_designhub_unique_upload.py `
+  --csv "outputs/<run-id>/metadata/preupload.csv" `
+  --images-dir "outputs/<run-id>/assets/processed" `
+  --out-dir "outputs/<run-id>/assets/processed-designhub-unique-<YYYYMMDD-HHmm>" `
+  --out-csv "outputs/<run-id>/metadata/designhub-preupload-unique-<YYYYMMDD-HHmm>.csv" `
   --prefix "<short-topic-slug>-<YYYYMMDD>-<HHmm>"
 ```
 

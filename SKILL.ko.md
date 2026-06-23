@@ -170,9 +170,9 @@ python scripts/remove_chroma_key.py \
 PowerShell 예시:
 
 ```powershell
-py -3 .\scripts\remove_chroma_key.py `
-  --input ".\source.png" `
-  --out ".\final-alpha.png" `
+py -3 ./scripts/remove_chroma_key.py `
+  --input "./source.png" `
+  --out "./final-alpha.png" `
   --auto-key border `
   --soft-matte `
   --transparent-threshold 12 `
@@ -217,10 +217,10 @@ DesignHub/MiriCanvas PNG 요소 작업:
    ```
    Windows PowerShell:
    ```powershell
-   py -3 .\scripts\write_photopea_runner.py `
-     --raw-dir "outputs\<run-id>\assets\raw" `
-     --processed-dir "outputs\<run-id>\assets\processed" `
-     --out "outputs\<run-id>\photopea\runner.html"
+   py -3 ./scripts/write_photopea_runner.py `
+     --raw-dir "outputs/<run-id>/assets/raw" `
+     --processed-dir "outputs/<run-id>/assets/processed" `
+     --out "outputs/<run-id>/photopea/runner.html"
    ```
 5. `miricanvas-design` repo에서는 PNG 요소를 350 DPI, 한 변 최소 2500 px, tight alpha bbox, alpha 보존 기준에 맞춘다.
 
@@ -274,11 +274,11 @@ python scripts/prepare_designhub_unique_upload.py \
 PowerShell 예시:
 
 ```powershell
-py -3 .\scripts\prepare_designhub_unique_upload.py `
-  --csv "outputs\<run-id>\metadata\preupload.csv" `
-  --images-dir "outputs\<run-id>\assets\processed" `
-  --out-dir "outputs\<run-id>\assets\processed-designhub-unique-<YYYYMMDD-HHmm>" `
-  --out-csv "outputs\<run-id>\metadata\designhub-preupload-unique-<YYYYMMDD-HHmm>.csv" `
+py -3 ./scripts/prepare_designhub_unique_upload.py `
+  --csv "outputs/<run-id>/metadata/preupload.csv" `
+  --images-dir "outputs/<run-id>/assets/processed" `
+  --out-dir "outputs/<run-id>/assets/processed-designhub-unique-<YYYYMMDD-HHmm>" `
+  --out-csv "outputs/<run-id>/metadata/designhub-preupload-unique-<YYYYMMDD-HHmm>.csv" `
   --prefix "<short-topic-slug>-<YYYYMMDD>-<HHmm>"
 ```
 
