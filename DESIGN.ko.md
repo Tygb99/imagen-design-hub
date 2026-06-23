@@ -109,6 +109,14 @@ Imagen Design Hub는 시각 asset을 다루는 차분한 제작 벤치처럼 느
 - **접근성**: 색상만으로 의미를 전달하지 않는다.
 - **모션**: hover 때 약한 translate.
 
+### Star Link
+- **구조**: SVG star icon, label, mono count badge가 GitHub stargazers로 연결된다.
+- **변형**: hero, footer.
+- **간격**: 세로 --space-3, 가로 --space-4, 내부 gap --space-2.
+- **상태**: hover, active, focus-visible, API fallback count.
+- **접근성**: 설명 가능한 link label과 눈에 보이는 count text.
+- **모션**: hover와 active에서 약한 translate.
+
 ## 6. 모션과 상호작용
 
 ### 타이밍

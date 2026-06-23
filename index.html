@@ -219,6 +219,7 @@
       flex-wrap: wrap;
       gap: var(--space-3);
       margin-top: var(--space-8);
+      align-items: center;
     }
 
     .button {
@@ -268,6 +269,62 @@
       color: var(--surface-primary);
       background: rgba(23, 35, 33, 0.3);
       border-color: rgba(246, 251, 250, 0.24);
+    }
+
+    .star-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      min-height: 48px;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid rgba(246, 251, 250, 0.24);
+      border-radius: 8px;
+      background: rgba(23, 35, 33, 0.34);
+      color: var(--surface-primary);
+      font-weight: 760;
+      transition: transform 160ms ease-out, border-color 160ms ease-out, background 160ms ease-out;
+    }
+
+    .star-link:hover {
+      transform: translateY(-1px);
+      background: rgba(23, 35, 33, 0.42);
+      border-color: rgba(246, 251, 250, 0.34);
+    }
+
+    .star-link:active {
+      transform: translateY(1px);
+    }
+
+    .star-link:focus-visible {
+      outline: 3px solid rgba(183, 227, 216, 0.72);
+      outline-offset: 3px;
+    }
+
+    .star-icon {
+      width: 18px;
+      height: 18px;
+      color: var(--accent-quiet);
+      flex: none;
+    }
+
+    .star-count {
+      display: inline-flex;
+      min-width: 28px;
+      justify-content: center;
+      padding: var(--space-1) var(--space-2);
+      border-radius: 8px;
+      background: rgba(246, 251, 250, 0.12);
+      font-family: "Cascadia Code", SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .star-link-footer {
+      min-height: 44px;
+      color: var(--surface-primary);
+      background: rgba(246, 251, 250, 0.06);
     }
 
     .proof-panel {
@@ -589,6 +646,13 @@
       color: var(--surface-primary);
     }
 
+    .footer-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
     @media (max-width: 860px) {
       .hero {
         min-height: auto;
@@ -685,6 +749,13 @@
           <div class="hero-actions">
             <a class="button button-primary" href="#commands">설치 명령 보기</a>
             <a class="button button-secondary" href="https://github.com/Tygb99/imagen-design-hub">GitHub 열기</a>
+            <a class="star-link" href="https://github.com/Tygb99/imagen-design-hub/stargazers" aria-label="View GitHub stars for Imagen Design Hub">
+              <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 3.2l2.7 5.48 6.05.88-4.38 4.27 1.03 6.02L12 17.02l-5.4 2.83 1.03-6.02-4.38-4.27 6.05-.88L12 3.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+              <span>Star</span>
+              <span class="star-count" data-star-count>0</span>
+            </a>
           </div>
         </div>
 
@@ -820,7 +891,16 @@ py -3 ./scripts/remove_chroma_key.py `
     <footer class="footer">
       <div class="footer-inner">
         <div><strong>Imagen Design Hub</strong><br>Codex skill for DesignHub raster asset production.</div>
-        <a class="button button-secondary" href="https://github.com/Tygb99/imagen-design-hub">Repository</a>
+        <div class="footer-actions">
+          <a class="button button-secondary" href="https://github.com/Tygb99/imagen-design-hub">Repository</a>
+          <a class="star-link star-link-footer" href="https://github.com/Tygb99/imagen-design-hub/stargazers" aria-label="View GitHub stars for Imagen Design Hub">
+            <svg class="star-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3.2l2.7 5.48 6.05.88-4.38 4.27 1.03 6.02L12 17.02l-5.4 2.83 1.03-6.02-4.38-4.27 6.05-.88L12 3.2z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+            <span>Star</span>
+            <span class="star-count" data-star-count>0</span>
+          </a>
+        </div>
       </div>
     </footer>
   </div>
@@ -865,6 +945,35 @@ py -3 ./scripts/remove_chroma_key.py `
         }
       });
     }
+
+    function formatStarCount(value) {
+      if (!Number.isFinite(value)) return "0";
+      return new Intl.NumberFormat("en", { notation: value >= 1000 ? "compact" : "standard" }).format(value);
+    }
+
+    async function updateStarCounts() {
+      const counters = document.querySelectorAll("[data-star-count]");
+      if (!counters.length) return;
+
+      try {
+        const response = await fetch("https://api.github.com/repos/Tygb99/imagen-design-hub", {
+          headers: { Accept: "application/vnd.github+json" },
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        const stars = formatStarCount(Number(data.stargazers_count));
+        for (const counter of counters) {
+          counter.textContent = stars;
+          counter.setAttribute("aria-label", `${stars} GitHub stars`);
+        }
+      } catch {
+        for (const counter of counters) {
+          counter.textContent = "0";
+        }
+      }
+    }
+
+    updateStarCounts();
   </script>
 </body>
 </html>

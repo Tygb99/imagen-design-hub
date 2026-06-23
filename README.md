@@ -2,6 +2,8 @@
 
 [한국어 README](README.ko.md)
 
+[![GitHub stars](https://img.shields.io/github/stars/Tygb99/imagen-design-hub?style=social)](https://github.com/Tygb99/imagen-design-hub/stargazers)
+
 Codex skill for creating MiriCanvas / DesignHub raster assets with `image_gen`.
 
 It covers two common routes:

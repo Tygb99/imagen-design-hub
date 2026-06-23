@@ -2,6 +2,8 @@
 
 [English README](README.md)
 
+[![GitHub stars](https://img.shields.io/github/stars/Tygb99/imagen-design-hub?style=social)](https://github.com/Tygb99/imagen-design-hub/stargazers)
+
 `image_gen`으로 MiriCanvas / DesignHub용 비트맵 산출물을 만드는 Codex 스킬입니다.
 
 두 가지 주요 경로를 다룹니다.

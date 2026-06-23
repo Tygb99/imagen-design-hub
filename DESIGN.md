@@ -109,6 +109,14 @@ All spacing derives from a base of 4px.
 - **Accessibility**: readable text without relying on color.
 - **Motion**: subtle translate on hover.
 
+### Star Link
+- **Structure**: SVG star icon, label, and mono count badge linking to GitHub stargazers.
+- **Variants**: hero, footer.
+- **Spacing**: --space-3 vertical, --space-4 horizontal, --space-2 internal gap.
+- **States**: hover, active, focus-visible, API fallback count.
+- **Accessibility**: descriptive link label and visible count text.
+- **Motion**: subtle translate on hover and active.
+
 ## 6. Motion & Interaction
 
 ### Timing
