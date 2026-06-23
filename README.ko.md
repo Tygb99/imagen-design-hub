@@ -37,6 +37,7 @@ python3 -m pip install -r requirements.txt
 ## 저장소 구조
 
 - `SKILL.md`: 라우팅과 검증 지침.
+- `SKILL.ko.md`: 한국어 스킬 지침.
 - `src/imagegen_chroma_cutout/`: 호환성을 위해 기존 패키지명을 유지한 재사용 Python 구현.
 - `scripts/remove_chroma_key.py`: 크로마키 배경을 alpha로 바꾸는 헬퍼.
 - `scripts/write_photopea_runner.py`: 번들 Photopea runner 생성기.

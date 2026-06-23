@@ -37,6 +37,7 @@ Required for upload-ready PNG elements:
 ## Repository Layout
 
 - `SKILL.md`: routing and validation instructions.
+- `SKILL.ko.md`: Korean version of the skill instructions.
 - `src/imagegen_chroma_cutout/`: reusable Python implementation kept under the old package name for compatibility.
 - `scripts/remove_chroma_key.py`: chroma-key to alpha helper.
 - `scripts/write_photopea_runner.py`: bundled Photopea runner generator.

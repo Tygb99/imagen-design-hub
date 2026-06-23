@@ -5,6 +5,8 @@ description: Use this skill whenever the user is preparing MiriCanvas or DesignH
 
 # Imagen Design Hub
 
+[한국어판](SKILL.ko.md)
+
 이 스킬은 MiriCanvas / DesignHub에 올릴 `imagegen` 기반 비트맵 산출물을 다룬다. 기존 투명 PNG 중심 흐름을 포함하되, 이제 투명 PNG 요소뿐 아니라 DesignHub 배경 JPG까지 같은 판단 체계 안에서 처리한다.
 
 핵심 분기:
