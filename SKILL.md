@@ -268,7 +268,7 @@ Run validation suited to the route.
 
 ### PNG element checks
 
-- Final files are PNG/WebP with alpha.
+- Final files are PNG with alpha.
 - Transparent corners and plausible subject coverage.
 - No obvious key-color fringe.
 - Checkerboard, white, and dark previews pass.

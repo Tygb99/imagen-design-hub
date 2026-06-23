@@ -75,8 +75,8 @@ def remove_background(args: argparse.Namespace) -> None:
         die(f"Input image not found: {source}")
     if output.exists() and not args.force:
         die(f"Output already exists: {output}. Use --force to overwrite.")
-    if output.suffix.lower() not in {".png", ".webp"}:
-        die("--out must end in .png or .webp to preserve alpha.")
+    if output.suffix.lower() != ".png":
+        die("--out must end in .png to preserve alpha.")
     if args.soft_matte and args.transparent_threshold >= args.opaque_threshold:
         die("--transparent-threshold must be lower than --opaque-threshold.")
 
@@ -161,4 +161,3 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> None:
     args = build_parser().parse_args()
     remove_background(args)
-

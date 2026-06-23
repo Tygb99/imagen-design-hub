@@ -268,7 +268,7 @@ JPG 배경도 generic name은 피한다. topic slug와 timestamp/index를 사용
 
 ### PNG 요소 검사
 
-- 최종 파일이 alpha가 있는 PNG/WebP다.
+- 최종 파일이 alpha가 있는 PNG다.
 - 모서리가 투명하고 피사체 범위가 그럴듯하다.
 - 눈에 띄는 key-color fringe가 없다.
 - 체크보드, 흰색, 어두운 배경 preview가 통과한다.
