@@ -62,7 +62,8 @@ Required for SVG/GIF element work:
 - `SKILL.md`: routing and validation instructions.
 - `SKILL.ko.md`: Korean version of the skill instructions.
 - `src/imagegen_chroma_cutout/`: reusable Python implementation kept under the old package name for compatibility.
-- `scripts/remove_chroma_key.py`: chroma-key to alpha helper.
+- `scripts/chroma_key.py`: primary edge-connected chroma-key to alpha helper copied from the project helper.
+- `scripts/remove_chroma_key.py`: legacy soft-matte chroma-key helper; use only for explicit comparison or fallback.
 - `scripts/write_photopea_runner.py`: bundled Photopea runner generator.
 - `scripts/prepare_designhub_unique_upload.py`: upload-safe basename/CSV helper for PNG element batches.
 - `assets/photopea_runner.html`: browser template for the bundled Photopea runner.
@@ -92,30 +93,28 @@ CSV rules for background JPGs:
 
 ## Transparent PNG Element Route
 
-Use the chroma-key helper and Photopea route for PNG elements.
+Use `scripts/chroma_key.py` and the Photopea route for PNG elements. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
 
 ```bash
-python scripts/remove_chroma_key.py \
+python scripts/chroma_key.py \
   --input source.png \
-  --out final-alpha.png \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --despill
+  --output final-alpha.png \
+  --background "#8000ff" \
+  --tolerance 48 \
+  --scope edge \
+  --dpi 350
 ```
 
 Windows PowerShell:
 
 ```powershell
-py -3 ./scripts/remove_chroma_key.py `
+py -3 ./scripts/chroma_key.py `
   --input "./source.png" `
-  --out "./final-alpha.png" `
-  --auto-key border `
-  --soft-matte `
-  --transparent-threshold 12 `
-  --opaque-threshold 220 `
-  --despill
+  --output "./final-alpha.png" `
+  --background "#8000ff" `
+  --tolerance 48 `
+  --scope edge `
+  --dpi 350
 ```
 
 For DesignHub/MiriCanvas upload-ready PNGs, generate or use a Photopea runner:
