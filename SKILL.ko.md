@@ -13,15 +13,15 @@ description: 사용자가 imagegen 또는 로컬 source art로 MiriCanvas/Design
 
 - 배경 요소가 목표이면 `image_gen -> source PNG 보존 -> JPG 변환/검증 -> Background CSV`.
 - 투명 PNG 요소가 목표이면 `image_gen -> chroma-key source 보존 -> helper alpha -> Photopea -> PNG element CSV`.
-- SVG 요소가 목표이면 `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`.
-- GIF 요소가 목표이면 `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`.
+- SVG 요소가 목표이면 `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
+- GIF 요소가 목표이면 `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
 - HTML/canvas보다 자연스러운 수면, 물결, 빛반사, 사진풍 질감, 실사 배경이 더 중요하면 imagegen 배경 경로를 우선한다.
 - 공식 요소 가이드 전체 링크맵이 필요하면 [references/designhub-element-guide-map.ko.md](references/designhub-element-guide-map.ko.md)를 읽는다.
 
 ## 의존성
 
 - 생성 필수: built-in `image_gen` 도구.
-- 로컬 이미지 처리 필수: Python 3.10 이상, Pillow, 그리고 `scripts/remove_chroma_key.py` 사용 시 NumPy.
+- 로컬 이미지 처리 필수: `scripts/chroma_key.py` 사용 시 Python 3.10 이상과 Pillow. NumPy는 legacy fallback인 `scripts/remove_chroma_key.py`를 사용할 때만 필요하다.
 - 업로드용 PNG 요소 필수: Chromium 계열 브라우저의 Photopea와 Photopea runner. 프로젝트 전용 runner가 있으면 우선 사용하고, 없으면 `scripts/write_photopea_runner.py`를 사용한다.
 - SVG 요소 필수: 실제 벡터 source/editor/export 경로와 XML/SVG 검증. raster 이미지만 embed한 SVG는 제출하지 않는다.
 - GIF 요소 필수: frame 또는 animation source와 loop/playback, 투명도, 크기, 용량을 확인할 GIF encoder/player.
@@ -73,7 +73,7 @@ outputs/<run-id>/logs/
 
 - 제거 가능한 단색 크로마키 배경으로 생성한다.
 - source 이미지는 `assets/source-imagegen/`에 보존한다.
-- `scripts/remove_chroma_key.py`를 실행해 `assets/raw/`로 출력한다.
+- 복사된 `scripts/chroma_key.py` helper를 실행해 `assets/raw/`로 출력한다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않는다.
 - DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea 또는 프로젝트 Photopea runner를 실행해 `assets/processed/`를 만든다.
 - DesignHub CSV의 `contentType` 값은 `PNG element`를 사용한다.
 - 실제 DesignHub 등록 전에 업로드 안전 고유 basename을 준비한다.
@@ -86,6 +86,7 @@ outputs/<run-id>/logs/
 
 명확한 피사체와 완전히 제거된 배경을 가진 단순하고 색상 변경 가능한 벡터 일러스트에 사용한다.
 
+- 이 스킬의 SVG 지원은 아직 초기 alpha다. vector 생성 품질, path 모양, crop/viewBox, 색상 수, DesignHub 승인 가능성에 한계가 있을 수 있다.
 - 손으로 작성한 SVG, 벡터 에디터 export, trace/rebuild 벡터 art처럼 실제 벡터 workflow를 사용한다.
 - 형태는 단순하게 유지하고 색상은 5개 이하로 정리한다.
 - 같은 flat 디자인이 MiriCanvas에서 색상 변경 가능해야 한다면 PNG보다 SVG를 우선한다.
@@ -98,6 +99,7 @@ outputs/<run-id>/logs/
 
 명확한 피사체와 완전히 제거된 배경을 가진 움직이는 일러스트/아트 요소에 사용한다.
 
+- 이 스킬의 GIF 지원은 아직 초기 alpha다. 투명도 한계, dithering, edge halo, frame flicker, 큰 파일 크기, loop/playback 문제를 수동으로 보정해야 할 수 있다.
 - frame 또는 animation source 파일을 사용하고 `.gif`로 encode한다.
 - 최종 산출물은 눈에 보이게 움직여야 한다. 정지 이미지를 GIF로 저장한 것만으로는 부족하다.
 - animation format과 source가 허용하는 범위에서 배경을 제거/투명하게 유지한다.
@@ -160,9 +162,10 @@ Constraints: no text, no logo, no watermark, no people, no objects, no transpare
    - 초록 피사체에는 `#ff00ff`
    - 파란 피사체에는 `#0000ff`를 피한다
    - 기존 프로젝트 key color는 피사체와 충돌하지 않을 때만 사용한다
+   - 피사체 색이 key color와 가깝다면 생성 전에 다른 key color를 고른다. 충돌하는 key color를 helper가 해결해 줄 것이라고 기대하지 않는다.
 2. built-in `image_gen`으로 완전히 평평한 key-color 배경에 생성한다.
 3. 생성 source를 작업 폴더로 복사한다.
-4. 번들 helper를 실행한다.
+4. 복사된 `scripts/chroma_key.py` helper를 실행한다.
 5. alpha, 투명 모서리, 피사체 범위, key-color fringe를 검증한다.
 6. DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea finishing을 실행하고 `assets/processed/`를 검증한다.
 7. 업로드 안전 고유 파일명과 매칭 CSV를 준비한다.
@@ -187,47 +190,53 @@ Constraints:
 
 ## Helper 명령
 
-번들 helper를 먼저 사용한다. Windows 호환성을 위해 Bash 전용 환경변수 fallback 문법에 기대지 말고, 스킬 디렉터리에서 상대 script 경로로 실행하는 방식을 우선한다.
+복사된 `scripts/chroma_key.py` helper를 먼저 사용한다. 이 파일은 첨부/프로젝트의 `scripts/chroma_key.py` helper를 스킬 번들에 복사해 둔 것이다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않는다. 사용자가 비교나 fallback을 명시적으로 요청한 경우가 아니면 legacy `scripts/remove_chroma_key.py`도 기본 helper로 쓰지 않는다.
+
+복사된 helper가 없거나 오래되었으면 실행 전에 첨부/프로젝트 helper를 스킬로 복사한다.
 
 ```bash
-python scripts/remove_chroma_key.py \
+cp "<repo>/scripts/chroma_key.py" "scripts/chroma_key.py"
+chmod +x "scripts/chroma_key.py"
+```
+
+명시적인 key color와 edge-connected cleanup으로 실행한다.
+
+```bash
+python scripts/chroma_key.py \
   --input "<source.png>" \
-  --out "<final-alpha.png>" \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --despill
+  --output "<final-alpha.png>" \
+  --background "<KEY_COLOR>" \
+  --tolerance 48 \
+  --scope edge \
+  --dpi 350
 ```
 
 PowerShell 예시:
 
 ```powershell
-py -3 ./scripts/remove_chroma_key.py `
+py -3 ./scripts/chroma_key.py `
   --input "./source.png" `
-  --out "./final-alpha.png" `
-  --auto-key border `
-  --soft-matte `
-  --transparent-threshold 12 `
-  --opaque-threshold 220 `
-  --despill
+  --output "./final-alpha.png" `
+  --background "<KEY_COLOR>" `
+  --tolerance 48 `
+  --scope edge `
+  --dpi 350
 ```
 
-얇은 key-color fringe가 남으면 한 번만 다시 시도한다.
+기본 edge mode는 이미지 border와 연결된 픽셀을 지우고, 내부의 정확/근접 key-color 섬도 `min(tolerance, 24)` 기준으로 제거한다. 피사체에 key color와 가까운 색이 있다면 먼저 더 안전한 key color로 다시 생성한다. 내부 near-key 피사체 색을 보존하는 비교용 run이 필요할 때만 다음 옵션을 쓴다.
 
 ```bash
-python scripts/remove_chroma_key.py \
+python scripts/chroma_key.py \
   --input "<source.png>" \
-  --out "<final-alpha-v2.png>" \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --edge-contract 1 \
-  --despill
+  --output "<final-alpha-preserve0.png>" \
+  --background "<KEY_COLOR>" \
+  --tolerance 48 \
+  --scope edge \
+  --enclosed-tolerance 0 \
+  --dpi 350
 ```
 
-`--edge-feather 0.25`는 stair-stepping이 보이고 피사체가 유리, 물, 연기, 안개, 반사처럼 반투명 재질이 아닐 때만 사용한다.
+tolerance를 높이는 것은 key color가 피사체와 겹치지 않는다고 확인한 뒤에만 한다. key color가 피사체와 충돌하면 tolerance를 넓히지 말고 프롬프트/배경색을 바꾼다.
 
 ## Photopea 처리
 
@@ -263,24 +272,29 @@ DesignHub/MiriCanvas PNG 요소 작업:
 
 사용자가 SVG 요소, vector 요소, 색상 변경 가능한 icon, 단순 sticker, 확장형 요소, 말풍선, label, flag, memo note, 깨끗하게 resize되어야 하는 shape를 요청할 때 이 경로를 사용한다.
 
+이 경로는 아직 초기 alpha다. DesignHub 승인을 보장하는 경로가 아니라 후보와 검증 근거를 만드는 경로로 취급한다. 시각 품질이 중요하면 vector editor 또는 Claude 생성 후보와 비교해 더 나은 source를 선택한다.
+
 1. vector source에서 시작한다. imagegen을 아이디어용으로 썼다면 최종 export 전에 실제 vector shape로 다시 만들거나 trace한다.
 2. 사각형 이미지처럼 동작하는 배경과 artboard를 제거한다.
 3. 명확한 단일 피사체 또는 재사용 가능한 요소를 유지한다. template처럼 완성된 layout은 피한다.
 4. 보이는 fill/stroke 색상을 5개 이하로 줄이고 정리한다.
 5. embedded raster image, external link, script, `foreignObject`, 숨은 watermark, 알 수 없는 font text, artboard 밖 stray object를 피한다.
-6. 적절한 `viewBox`가 있는 깨끗한 `.svg`로 export한다.
+6. tight-crop `viewBox`가 있는 깨끗한 `.svg`로 export한다.
 7. 파일 규격을 검증한다.
    - SVG 확장자
    - export 도구가 DPI를 제공한다면 최소 72 DPI
    - 최대 dimension 6000 px
    - 150 MB 미만
-8. CSV 행은 확장자 없는 `fileName`, 빈칸 또는 DesignHub 제공 `uniqueId`, `tier=Premium`, `contentType=SVG element`로 작성한다.
+8. SVG를 체크보드, 흰색, 어두운 배경 preview에서 렌더링하고 사각형 artboard/backdrop, 잘린 피사체, 과한 여백, path 품질 문제가 없는지 확인한다.
+9. CSV 행은 확장자 없는 `fileName`, 빈칸 또는 DesignHub 제공 `uniqueId`, `tier=Premium`, `contentType=SVG element`로 작성한다.
 
 확장형 SVG 요소도 파일 workflow는 동일하다. 확장형/기본형 차이는 파일 확장자가 아니라 메타데이터의 크기조정 타입에서 선택한다.
 
 ## GIF 요소 워크플로
 
 사용자가 GIF 요소, animated sticker, looping illustration, motion badge, 움직이는 icon형 art를 요청할 때 이 경로를 사용한다.
+
+이 경로는 아직 초기 alpha다. DesignHub 승인을 보장하는 경로가 아니라 후보와 검증 근거를 만드는 경로로 취급한다. GIF 투명도와 frame 최적화는 수동 검수가 자주 필요하다.
 
 1. frame/animation source 파일을 만들거나 모은다. source 폴더에 보존한다.
 2. 모든 frame에서 피사체가 명확하고, 잘리지 않고, 배경과 분리되어 있어야 한다.
@@ -293,7 +307,8 @@ DesignHub/MiriCanvas PNG 요소 작업:
    - 최소 700 px
    - 최대 1920 px
    - 25 MB 미만
-6. CSV 행은 확장자 없는 `fileName`, 빈칸 또는 DesignHub 제공 `uniqueId`, `tier=Premium`, `contentType=GIF`로 작성한다.
+6. GIF를 체크보드, 흰색, 어두운 배경 preview에서 렌더링하고 투명/제거된 배경이 frame 사이에서 flicker되지 않는지 확인한다.
+7. CSV 행은 확장자 없는 `fileName`, 빈칸 또는 DesignHub 제공 `uniqueId`, `tier=Premium`, `contentType=GIF`로 작성한다.
 
 요청된 움직임이 촬영 영상에 가깝다면 `video-element`로 보내고, MP4 제출 배치를 준비하기 전에 사용자가 DesignHub 영상 권한을 보유했는지 확인한다.
 
@@ -394,6 +409,7 @@ JPG 배경, SVG 요소, GIF 요소도 generic name은 피한다. topic slug와 t
 - 보이는 색상이 5개 이하이다.
 - 배경이 제거되어 있으며, 요소 자체가 재사용 가능한 memo/sticker shape인 경우가 아니라면 사각형 backdrop을 포함하지 않는다.
 - crack, stray shape, 숨은 off-artboard object, watermark, logo, text artifact가 없다.
+- 이 경로는 초기 alpha이므로 upload-ready라고 부르기 전에 path 품질, crop, DesignHub 적합성을 눈으로 확인한다.
 - CSV `contentType`이 `SVG element`이고 CSV basename이 최종 SVG basename과 확장자 없이 일치한다.
 
 ### GIF 요소 검사
@@ -404,6 +420,7 @@ JPG 배경, SVG 요소, GIF 요소도 generic name은 피한다. topic slug와 t
 - 적절한 경우 배경이 제거/투명하고 frame 사이에서 flicker가 없다.
 - loop 전체에서 피사체가 명확하고 잘리지 않으며 안정적이다.
 - GIF로 잘못 분류한 video element가 아니라 움직이는 일러스트/아트다.
+- 이 경로는 초기 alpha이므로 upload-ready라고 부르기 전에 투명도 품질, edge halo, playback 안정성을 눈으로 확인한다.
 - CSV `contentType`이 `GIF`이고 CSV basename이 최종 GIF basename과 확장자 없이 일치한다.
 
 프로젝트가 적용 가능한 검증 명령을 제공하면 실행한다.
@@ -431,6 +448,7 @@ node src/cli.mjs validate --run outputs/<run-id>
 - batch를 생성했다면 prompt log 경로
 - 키워드 개수와 제거한 제작 용어
 - 검증 요약
+- SVG/GIF 경로를 사용했다면 초기 alpha 한계와 남은 수동 검수 리스크
 - Photopea 사용 여부 또는 의도적으로 건너뛴 이유
 - 남은 업로드 리스크
 

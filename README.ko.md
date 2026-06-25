@@ -62,7 +62,8 @@ SVG/GIF 요소 작업 필수:
 - `SKILL.md`: 라우팅과 검증 지침.
 - `SKILL.ko.md`: 한국어 스킬 지침.
 - `src/imagegen_chroma_cutout/`: 호환성을 위해 기존 패키지명을 유지한 재사용 Python 구현.
-- `scripts/remove_chroma_key.py`: 크로마키 배경을 alpha로 바꾸는 헬퍼.
+- `scripts/chroma_key.py`: 프로젝트 helper에서 복사한 primary edge-connected 크로마키 alpha 헬퍼.
+- `scripts/remove_chroma_key.py`: legacy soft-matte 크로마키 헬퍼. 명시적인 비교나 fallback 때만 사용.
 - `scripts/write_photopea_runner.py`: 번들 Photopea runner 생성기.
 - `scripts/prepare_designhub_unique_upload.py`: PNG 요소 배치용 업로드 안전 basename/CSV 헬퍼.
 - `assets/photopea_runner.html`: 번들 Photopea runner용 브라우저 템플릿.
@@ -92,30 +93,28 @@ outputs/<run-id>/logs/
 
 ## 투명 PNG 요소 경로
 
-PNG 요소는 크로마키 헬퍼와 Photopea 경로를 사용합니다.
+PNG 요소는 `scripts/chroma_key.py`와 Photopea 경로를 사용합니다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않습니다.
 
 ```bash
-python scripts/remove_chroma_key.py \
+python scripts/chroma_key.py \
   --input source.png \
-  --out final-alpha.png \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --despill
+  --output final-alpha.png \
+  --background "#8000ff" \
+  --tolerance 48 \
+  --scope edge \
+  --dpi 350
 ```
 
 Windows PowerShell:
 
 ```powershell
-py -3 ./scripts/remove_chroma_key.py `
+py -3 ./scripts/chroma_key.py `
   --input "./source.png" `
-  --out "./final-alpha.png" `
-  --auto-key border `
-  --soft-matte `
-  --transparent-threshold 12 `
-  --opaque-threshold 220 `
-  --despill
+  --output "./final-alpha.png" `
+  --background "#8000ff" `
+  --tolerance 48 `
+  --scope edge `
+  --dpi 350
 ```
 
 DesignHub/MiriCanvas 업로드용 PNG라면 Photopea runner를 만들거나 프로젝트 runner를 사용합니다.

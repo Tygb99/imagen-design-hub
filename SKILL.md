@@ -13,15 +13,15 @@ Core routes:
 
 - If the target is a background element, use `image_gen -> preserve source PNG -> convert/validate JPG -> Background CSV`.
 - If the target is a transparent PNG element, use `image_gen -> preserve chroma-key source -> helper alpha -> Photopea -> PNG element CSV`.
-- If the target is an SVG element, use `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`.
-- If the target is a GIF element, use `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`.
+- If the target is an SVG element, use `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`, but treat this route as early alpha and verify manually.
+- If the target is a GIF element, use `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`, but treat this route as early alpha and verify manually.
 - Prefer the imagegen background route when natural water surfaces, ripples, light reflections, photographic textures, or realistic backgrounds matter more than HTML/canvas determinism.
 - Read [references/designhub-element-guide-map.md](references/designhub-element-guide-map.md) when you need the full official element-guide link map.
 
 ## Dependencies
 
 - Required for generation: built-in `image_gen` tool.
-- Required for local image processing: Python 3.10+, Pillow, and NumPy when using `scripts/remove_chroma_key.py`.
+- Required for local image processing: Python 3.10+ and Pillow when using `scripts/chroma_key.py`. NumPy is only needed for the legacy `scripts/remove_chroma_key.py` fallback.
 - Required for upload-ready PNG elements: Photopea in a Chromium-family browser plus a Photopea runner. Prefer a project-specific runner when one exists; otherwise use `scripts/write_photopea_runner.py`.
 - Required for SVG elements: a true vector source/editor/export path and an XML/SVG validation pass. Do not submit an SVG that only embeds a raster image.
 - Required for GIF elements: a frame or animation source plus a GIF encoder/player that can confirm loop/playback, transparency, dimensions, and file size.
@@ -73,7 +73,7 @@ Use for transparent stickers, illustrations, objects, cutouts, PNG elements, bac
 
 - Generate with a flat removable chroma-key background.
 - Preserve source images under `assets/source-imagegen/`.
-- Run `scripts/remove_chroma_key.py` into `assets/raw/`.
+- Run the copied `scripts/chroma_key.py` helper into `assets/raw/`. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
 - For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea or the project Photopea runner into `assets/processed/`.
 - Use DesignHub CSV `contentType` value `PNG element`.
 - Prepare upload-safe unique basenames before actual DesignHub registration.
@@ -86,6 +86,7 @@ Use for real photos that are not background elements. A real photo should not be
 
 Use for simple, color-changeable vector illustrations with a clear subject and fully removed background.
 
+- SVG support in this skill is still early alpha. Expect imperfect vector generation, awkward paths, crop/viewBox mistakes, excess colors, or DesignHub rejection even after basic checks pass.
 - Use a true vector workflow: hand-authored SVG, vector-editor export, or traced/rebuilt vector art.
 - Keep the illustration simple and use 5 colors or fewer.
 - Prefer SVG over PNG when the same flat design could reasonably be color-editable in MiriCanvas.
@@ -98,6 +99,7 @@ Use for simple, color-changeable vector illustrations with a clear subject and f
 
 Use for animated illustration/art elements with a clear subject and fully removed background.
 
+- GIF support in this skill is still early alpha. Expect transparency limits, dithering, edge halos, frame flicker, large file sizes, or loop/playback problems that require manual correction.
 - Use frame or animation source files and encode to `.gif`.
 - The final asset must visibly animate; a still image saved as GIF is not enough.
 - Keep the background removed/transparent wherever the animation format and source allow.
@@ -160,9 +162,10 @@ Use this route when the user asks for transparent PNG, PNG element, cutout, back
    - use `#ff00ff` for green subjects
    - avoid `#0000ff` for blue subjects
    - use the existing project key color only when it does not conflict with the subject
+   - if any subject color is close to the key color, choose another key color before generating; do not rely on the helper to rescue a conflicting key
 2. Generate with built-in `image_gen` on a perfectly flat key-color background.
 3. Copy the generated source into the workspace.
-4. Run the bundled helper.
+4. Run the copied `scripts/chroma_key.py` helper.
 5. Validate alpha, transparent corners, subject coverage, and key-color fringe.
 6. For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea finishing and validate `assets/processed/`.
 7. Prepare upload-safe unique filenames and a matching CSV.
@@ -187,47 +190,53 @@ Constraints:
 
 ## Helper Command
 
-Use the bundled helper first. For Windows compatibility, prefer running from the skill directory with a relative script path instead of relying on Bash-only environment-variable fallback syntax.
+Use the copied `scripts/chroma_key.py` helper first. This file is intentionally copied from the attached/project `scripts/chroma_key.py` helper and should be kept in this skill bundle. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs. Do not use the legacy `scripts/remove_chroma_key.py` helper unless the user explicitly asks for a comparison or fallback.
+
+If the copied helper is missing or stale, copy the attached/project helper into the skill before running it:
 
 ```bash
-python scripts/remove_chroma_key.py \
+cp "<repo>/scripts/chroma_key.py" "scripts/chroma_key.py"
+chmod +x "scripts/chroma_key.py"
+```
+
+Run the helper with an explicit key color and edge-connected cleanup:
+
+```bash
+python scripts/chroma_key.py \
   --input "<source.png>" \
-  --out "<final-alpha.png>" \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --despill
+  --output "<final-alpha.png>" \
+  --background "<KEY_COLOR>" \
+  --tolerance 48 \
+  --scope edge \
+  --dpi 350
 ```
 
 PowerShell equivalent:
 
 ```powershell
-py -3 ./scripts/remove_chroma_key.py `
+py -3 ./scripts/chroma_key.py `
   --input "./source.png" `
-  --out "./final-alpha.png" `
-  --auto-key border `
-  --soft-matte `
-  --transparent-threshold 12 `
-  --opaque-threshold 220 `
-  --despill
+  --output "./final-alpha.png" `
+  --background "<KEY_COLOR>" `
+  --tolerance 48 `
+  --scope edge `
+  --dpi 350
 ```
 
-If a thin key-color fringe remains, retry once:
+Default edge mode removes pixels connected to the image border and also removes enclosed exact/near key-color islands using `min(tolerance, 24)`. If the subject contains colors close to the key color, regenerate with a safer key color first. For an explicit comparison run that preserves enclosed near-key subject colors, use:
 
 ```bash
-python scripts/remove_chroma_key.py \
+python scripts/chroma_key.py \
   --input "<source.png>" \
-  --out "<final-alpha-v2.png>" \
-  --auto-key border \
-  --soft-matte \
-  --transparent-threshold 12 \
-  --opaque-threshold 220 \
-  --edge-contract 1 \
-  --despill
+  --output "<final-alpha-preserve0.png>" \
+  --background "<KEY_COLOR>" \
+  --tolerance 48 \
+  --scope edge \
+  --enclosed-tolerance 0 \
+  --dpi 350
 ```
 
-Use `--edge-feather 0.25` only when stair-stepping is visible and the subject is not glass, water, smoke, mist, reflection, or another semi-transparent material.
+Use higher tolerance only after confirming the key color does not overlap with the subject. If the key color conflicts with the subject, change the prompt/background color instead of widening tolerance.
 
 ## Photopea Processing
 
@@ -263,24 +272,29 @@ Skip Photopea for JPG backgrounds unless the user explicitly asks for manual ima
 
 Use this route when the user asks for SVG elements, vector elements, color-changeable icons, simple stickers, extended elements, speech bubbles, labels, flags, memo notes, or shapes that should resize cleanly.
 
+This route is early alpha. Use it to produce candidates and validation evidence, not to imply DesignHub acceptance. When visual quality matters, compare against a vector-editor or Claude-generated candidate and keep the better source.
+
 1. Start from a vector source. If imagegen was used for ideation, rebuild or trace it into real vector shapes before final export.
 2. Remove backgrounds and artboards that would behave like rectangular images.
 3. Keep one clear subject or reusable element. Avoid template-like finished layouts.
 4. Reduce and clean colors to 5 or fewer visible fill/stroke colors.
 5. Avoid embedded raster images, external links, scripts, `foreignObject`, hidden watermarks, text converted from unknown fonts, and stray off-artboard objects.
-6. Export a clean `.svg` with a sensible `viewBox`.
+6. Export a clean `.svg` with a sensible tight-crop `viewBox`.
 7. Validate file specs:
    - SVG extension
    - at least 72 DPI when the exporting tool exposes DPI
    - maximum dimension 6000 px
    - under 150 MB
-8. Write CSV rows with extensionless `fileName`, blank or DesignHub-provided `uniqueId`, `tier` set to `Premium`, and `contentType` set to `SVG element`.
+8. Render the SVG on checkerboard, white, and dark previews and confirm it has no rectangular artboard/backdrop, no clipped subject, no excess whitespace, and no obvious path-quality problems.
+9. Write CSV rows with extensionless `fileName`, blank or DesignHub-provided `uniqueId`, `tier` set to `Premium`, and `contentType` set to `SVG element`.
 
 For extended SVG elements, keep the file workflow identical. The extended/basic distinction is selected in metadata as a resize type, not by changing the file extension.
 
 ## GIF Element Workflow
 
 Use this route when the user asks for GIF elements, animated stickers, looping illustrations, motion badges, or moving icon-like art.
+
+This route is early alpha. Use it to produce candidates and validation evidence, not to imply DesignHub acceptance. GIF transparency and frame optimization often need manual review.
 
 1. Build or collect frame/animation source files. Preserve them in a source folder.
 2. Keep the subject clear, fully visible, and separated from the background across every frame.
@@ -293,7 +307,8 @@ Use this route when the user asks for GIF elements, animated stickers, looping i
    - minimum 700 px
    - maximum 1920 px
    - under 25 MB
-6. Write CSV rows with extensionless `fileName`, blank or DesignHub-provided `uniqueId`, `tier` set to `Premium`, and `contentType` set to `GIF`.
+6. Render the GIF on checkerboard, white, and dark previews and confirm transparent/removed backgrounds do not flicker across frames.
+7. Write CSV rows with extensionless `fileName`, blank or DesignHub-provided `uniqueId`, `tier` set to `Premium`, and `contentType` set to `GIF`.
 
 If the requested motion is better represented as filmed video, stop and route it to `video-element`; confirm the user has DesignHub video permission before preparing an MP4 submission batch.
 
@@ -394,6 +409,7 @@ Run validation suited to the route.
 - Visible colors are 5 or fewer.
 - Background is removed; the SVG does not contain a rectangular backdrop unless the element itself is a reusable note/sticker shape.
 - No cracks, stray shapes, hidden off-artboard objects, watermarks, logos, or text artifacts.
+- Because this route is early alpha, path quality, crop, and DesignHub suitability must be checked by eye before calling it upload-ready.
 - CSV `contentType` is `SVG element`, and CSV basenames match final SVG basenames without extensions.
 
 ### GIF element checks
@@ -404,6 +420,7 @@ Run validation suited to the route.
 - Background is removed/transparent where appropriate and does not flicker between frames.
 - Subject remains clear, uncropped, and stable through the loop.
 - It is animated illustration/art, not a video element mislabeled as GIF.
+- Because this route is early alpha, transparency quality, edge halos, and playback smoothness must be checked by eye before calling it upload-ready.
 - CSV `contentType` is `GIF`, and CSV basenames match final GIF basenames without extensions.
 
 If the project provides a validation command, run it when it applies:
@@ -431,6 +448,7 @@ Report the concrete route and artifacts:
 - prompt log path when a batch was generated
 - keyword count and removed production terms
 - validation summary
+- SVG/GIF early-alpha limitations when those routes were used
 - whether Photopea was used or intentionally skipped
 - any remaining upload risk
 
