@@ -133,6 +133,14 @@ Imagen Design Hub는 시각 asset을 다루는 차분한 제작 벤치처럼 느
 - **접근성**: 색에 의존하지 않는 label과 semantic ordered list를 사용한다.
 - **모션**: 사용하지 않는다.
 
+### Install Command Panel
+- **구조**: command block, mono command text, copy button을 포함한 elevated command surface.
+- **변형**: recommended npx install, non-interactive install, manual git fallback.
+- **간격**: panel padding은 --space-5, command block 사이 간격은 --space-3, code padding은 --space-4.
+- **상태**: copy, copied, focus-visible.
+- **접근성**: 각 copy button은 복사할 정확한 command 옆에 있고, 상태 변경 후에도 읽을 수 있는 text를 유지한다.
+- **모션**: button transform만 사용하고 command block은 static으로 둔다.
+
 ## 6. 모션과 상호작용
 
 ### 타이밍
