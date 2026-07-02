@@ -133,6 +133,14 @@ All spacing derives from a base of 4px.
 - **Accessibility**: semantic ordered list with readable labels that do not rely on color.
 - **Motion**: none.
 
+### Install Command Panel
+- **Structure**: elevated command surface with command blocks, mono command text, and copy buttons.
+- **Variants**: recommended npx install, non-interactive install, manual git fallback.
+- **Spacing**: --space-5 panel padding, --space-3 between command blocks, --space-4 code padding.
+- **States**: copy, copied, focus-visible.
+- **Accessibility**: each copy button sits next to the exact command it copies and keeps readable text after state changes.
+- **Motion**: button transform only; command blocks stay static.
+
 ## 6. Motion & Interaction
 
 ### Timing

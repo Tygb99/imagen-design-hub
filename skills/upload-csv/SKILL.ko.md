@@ -31,10 +31,13 @@ DesignHub UI를 실제로 조작하는 모든 단계는 사용자가 요청한 s
 2. DesignHub가 `10 of 10 uploaded` 같은 업로드 완료 상태를 보일 때까지 기다린 뒤 업로드 완료로 본다.
 3. 같은 확인된 live surface로 파일 업로드 후 DesignHub가 제공하는 CSV를 다운로드한다.
 4. 다운로드한 CSV를 `fileName`과 `uniqueId`의 source of truth로 취급한다.
-5. 준비한 metadata를 다운로드 행에 병합하되 `uniqueId`를 삭제하거나 다시 만들지 않는다.
-6. 로컬 프로젝트 계약이 quote-all CSV를 요구하면 CSV는 UTF-8 without BOM, 모든 field quote 상태로 유지한다.
-7. 사용자가 해당 외부 action을 명시적으로 확인한 경우에만, 확인된 live surface로 병합 CSV를 다시 업로드한다.
-8. 완료 보고 전에 전체 처리 행 수가 포함된 DesignHub 완료 메시지를 확인한다.
+5. 준비한 metadata를 다운로드한 행에 병합하되 `uniqueId`를 삭제하거나, 불필요하게 재정렬하거나, 다시 만들지 않는다.
+6. 병합 CSV는 새 batch 행만이 아니라 다운로드한 DesignHub CSV의 모든 행을 유지한다.
+7. 로컬 프로젝트 계약이 quote-all CSV를 요구하면 CSV는 UTF-8 without BOM, 모든 field quote 상태로 유지한다.
+8. 사용자가 해당 외부 action을 명시적으로 확인한 경우에만, 확인된 live surface로 병합 CSV를 다시 업로드한다.
+9. CSV 업로드 후 DesignHub 완료 메시지나 배너를 확인한다. 처리된 행 수를 기록하고, 파일 업로드, CSV 업로드, 최종 심사 제출을 구분한다.
+
+파일 등록 후 로컬 preupload CSV를 바로 올리지 않는다. DesignHub는 파일 업로드 후에만 `uniqueId`를 부여하므로, 올바른 흐름은 항상 현재 DesignHub CSV를 다운로드하고, 그 전체 파일에 병합한 뒤, 병합한 전체 CSV를 업로드하는 것이다.
 
 ## Content Type 값
 
@@ -67,6 +70,7 @@ Background
 - 행 수가 DesignHub에서 다운로드한 CSV와 일치한다.
 - 다운로드한 CSV의 모든 `uniqueId` 값이 보존되었다.
 - 모든 최종 `fileName` 값이 업로드된 파일과 매칭된다.
+- 병합 CSV는 새 batch 행만이 아니라 다운로드한 DesignHub CSV의 모든 행을 유지한다.
 - `contentType` 값이 공식 목록에 있다.
 - 각 행 안에 중복 keyword가 없다.
 - keyword 수가 행마다 20~25개다.
@@ -74,5 +78,6 @@ Background
 - 로컬 프로젝트 계약이 quote-all CSV를 요구하면 모든 field가 quote되어 있다.
 - DesignHub 파일 업로드, CSV 다운로드, CSV 업로드가 사용자가 요청한 surface에서 수행되었다.
 - Aside 사용은 macOS로 제한되었거나, MCP/다른 지원 경로가 명시적으로 선택되었다.
+- DesignHub가 성공 처리 행 수를 표시했거나 오류 메시지를 그대로 캡처했다.
 - DesignHub가 예상 업로드 수와 CSV 처리 행 수를 보고했다.
 - 파일 업로드, CSV 업로드, 최종 심사 제출이 실제로 일어났는지 분명히 보고한다.

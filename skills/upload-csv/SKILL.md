@@ -31,10 +31,13 @@ Any live DesignHub UI action in this route must use the surface the user request
 2. Wait for DesignHub's upload completion state, such as `10 of 10 uploaded`, before treating the upload as complete.
 3. Use the same confirmed live surface to download the CSV provided by DesignHub after file upload.
 4. Treat the downloaded CSV as the source of truth for `fileName` and `uniqueId`.
-5. Merge prepared metadata into the downloaded rows without dropping or regenerating `uniqueId`.
-6. Keep the CSV UTF-8 without BOM and quote all fields when the local project contract requires quote-all CSV.
-7. Use the confirmed live surface to re-upload the merged CSV only when the user has explicitly confirmed that external action.
-8. Verify the DesignHub completion message, including total processed rows, before reporting CSV application as complete.
+5. Merge prepared metadata into the downloaded rows without dropping, reordering unnecessarily, or regenerating `uniqueId`.
+6. Keep every row from the downloaded DesignHub CSV, not just the new batch rows.
+7. Keep the CSV UTF-8 without BOM and quote all fields when the local project contract requires quote-all CSV.
+8. Use the confirmed live surface to re-upload the merged CSV only when the user has explicitly confirmed that external action.
+9. Verify the DesignHub completion message or banner after CSV upload. Record the processed row count, and distinguish file upload, CSV upload, and final review submission.
+
+Do not upload a local preupload CSV directly after files are registered. DesignHub assigns `uniqueId` values only after the file upload, so the correct flow is always download the current DesignHub CSV, merge into that full file, and upload the merged full CSV.
 
 ## Content Type Values
 
@@ -67,6 +70,7 @@ Before reporting ready:
 - row count matches DesignHub's downloaded CSV
 - all `uniqueId` values from the downloaded CSV are preserved
 - all final `fileName` values map to uploaded files
+- the merged CSV keeps every row from the downloaded DesignHub CSV, not just the new batch rows
 - `contentType` values are from the official list
 - no duplicate keywords remain within each row
 - keyword counts are 20 to 25 per row
@@ -74,5 +78,6 @@ Before reporting ready:
 - every field is quoted if the local project contract requires quote-all CSV
 - live DesignHub file upload, CSV download, and CSV upload were performed through the user-requested surface
 - Aside use was limited to macOS, or MCP/another supported route was explicitly selected
+- DesignHub displayed a successful processed-row count or an error message was captured verbatim
 - DesignHub reported the expected upload count and CSV processed-row count
 - state clearly whether file upload, CSV upload, or final review submission actually happened

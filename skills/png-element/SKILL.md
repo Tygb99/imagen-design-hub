@@ -26,7 +26,9 @@ Shared route map: read `../../SKILL.md` if you need the full DesignHub plugin ro
 - Use the installed `$image-gen` skill for source creation so generation runs in a fresh `codex exec` session. The underlying image tool is built-in `image_gen`.
 - Preserve source files in `assets/source-imagegen/`; never overwrite original generation outputs.
 - Generate on a perfectly flat solid chroma-key background. Do not ask imagegen for transparent or checkerboard backgrounds.
+- For multiple standalone PNG elements, generate one source image per element. Do not generate a crowded sheet and crop it into separate assets later.
 - Run `../../scripts/chroma_key.py` first into `assets/raw/`; do not use `.system/imagegen/remove_chroma_key.py` for DesignHub PNG-element runs.
+- Do not use `../../scripts/remove_chroma_key.py` unless the user explicitly asks for a comparison or fallback.
 - Use magenta-fringe decontamination only when the key is magenta/purple and the prompt forbade pink, purple, and magenta inside the subject.
 - For wind, breeze, air, mist, or other translucent effects, an intentional light/neutral outline or stroke is a good preservation choice when it keeps the effect readable and prevents key-color bleed.
 - For upload-ready DesignHub PNGs, finish through Photopea or the project Photopea runner into `assets/processed/`.

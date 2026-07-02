@@ -72,6 +72,7 @@ outputs/<run-id>/logs/
 Use for transparent stickers, illustrations, objects, cutouts, PNG elements, background removal, and any asset that must have alpha.
 
 - Generate with a flat removable chroma-key background.
+- For multiple standalone PNG elements, generate one source image per element. Do not generate one crowded sheet and crop it later; separated enlargements can expose stair-stepped edges and weak anti-aliasing.
 - Preserve source images under `assets/source-imagegen/`.
 - Run the copied `scripts/chroma_key.py` helper into `assets/raw/`. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
 - For magenta or purple key runs where the subject intentionally avoids pink/purple/magenta, remove visible magenta cast after alpha extraction and validate on a dark preview.
@@ -169,7 +170,7 @@ Use this route when the user asks for transparent PNG, PNG element, cutout, back
    - For wind, breeze, air flow, mist, glass, or other translucent effects, explicitly ask for crisp readable edges and a subtle non-key-color outline/stroke when needed. This is preferred over accepting key-color contamination inside the effect.
 3. Copy the generated source into the workspace.
 4. Run the copied `scripts/chroma_key.py` helper.
-5. Validate alpha, transparent corners, subject coverage, and key-color fringe.
+5. Validate alpha, transparent corners, subject coverage, key-color fringe, interior detail preservation, and anti-aliased edges on checkerboard, white, and dark previews.
 6. For magenta/purple key runs with no real subject magenta, neutralize visible pixels where `red > green` and `blue > green` to `(green, green, green)`, keep alpha unchanged, and require a remaining count of `0`.
 7. For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea finishing and validate `assets/processed/`.
 8. Prepare upload-safe unique filenames and a matching CSV.
@@ -241,6 +242,8 @@ python scripts/chroma_key.py \
 ```
 
 Use higher tolerance only after confirming the key color does not overlap with the subject. If the key color conflicts with the subject, change the prompt/background color instead of widening tolerance.
+
+Contact sheets are review artifacts only. Do not crop final upload PNGs out of a multi-object sheet; if a standalone element looks jagged after separation, return to the original per-element source or regenerate it individually.
 
 ## Photopea Processing
 
@@ -343,6 +346,17 @@ Background
 
 Do not write `JPG background` in DesignHub CSV. Use `Background`.
 
+## DesignHub CSV Roundtrip
+
+After live file upload, DesignHub's downloaded CSV is the source of truth for `fileName` and `uniqueId`. Do not upload a local preupload CSV directly after files are registered.
+
+1. Upload the files through the approved UI route only after user confirmation.
+2. Download the current DesignHub CSV.
+3. Merge prepared metadata into the downloaded full CSV while preserving every existing row and every `uniqueId`.
+4. Upload the merged full CSV through the UI.
+5. Verify the DesignHub completion message or banner, including the processed row count.
+6. State separately whether file upload, CSV upload, and final review submission happened. Never click final review submission unless the user asks for that separate step.
+
 ## Upload-Safe Filenames
 
 For PNG elements, DesignHub can reject names that were used in earlier attempts. Before upload, create a separate unique-name folder and matching CSV.
@@ -402,6 +416,9 @@ Run validation suited to the route.
 - Transparent corners and plausible subject coverage.
 - No obvious key-color fringe.
 - Magenta/purple key runs have `0` remaining visible magenta-cast pixels after decontamination, unless real subject magenta/purple detail required a different key or manual mask.
+- No subject interior detail was erased because it matched the key color.
+- Edges look anti-aliased at magnified scale, not stair-stepped.
+- Final upload files were not cropped out of a combined contact sheet.
 - Checkerboard, white, and dark previews pass.
 - Photopea processed outputs exist when upload-ready PNG elements are requested.
 - PNG element dimensions/DPI match the local project rule.
