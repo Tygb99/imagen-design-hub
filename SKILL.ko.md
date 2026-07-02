@@ -7,12 +7,12 @@ description: 사용자가 imagegen 또는 로컬 source art로 MiriCanvas/Design
 
 [English version](SKILL.md)
 
-이 스킬은 `image_gen`, 로컬 source art, 벡터/애니메이션 도구로 준비하는 MiriCanvas / DesignHub 시각 산출물을 다룬다. raster imagegen 경로와 공식 SVG/GIF 요소 가이드 라우팅을 한곳에서 관리한다.
+이 스킬은 `$image-gen` / `image_gen`, 로컬 source art, 벡터/애니메이션 도구로 준비하는 MiriCanvas / DesignHub 시각 산출물을 다룬다. raster imagegen 경로와 공식 SVG/GIF 요소 가이드 라우팅을 한곳에서 관리한다.
 
 핵심 분기:
 
-- 배경 요소가 목표이면 `image_gen -> source PNG 보존 -> JPG 변환/검증 -> Background CSV`.
-- 투명 PNG 요소가 목표이면 `image_gen -> chroma-key source 보존 -> helper alpha -> Photopea -> PNG element CSV`.
+- 배경 요소가 목표이면 `$image-gen -> source PNG 보존 -> JPG 변환/검증 -> Background CSV`.
+- 투명 PNG 요소가 목표이면 `$image-gen -> chroma-key source 보존 -> helper alpha -> 필요 시 magenta-fringe QA/decontamination -> Photopea -> PNG element CSV`.
 - SVG 요소가 목표이면 `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
 - GIF 요소가 목표이면 `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
 - HTML/canvas보다 자연스러운 수면, 물결, 빛반사, 사진풍 질감, 실사 배경이 더 중요하면 imagegen 배경 경로를 우선한다.
@@ -20,7 +20,7 @@ description: 사용자가 imagegen 또는 로컬 source art로 MiriCanvas/Design
 
 ## 의존성
 
-- 생성 필수: built-in `image_gen` 도구.
+- 생성 필수: 가능하면 설치된 `$image-gen` 스킬. 이 스킬은 새 `codex exec` 세션을 열고 내부적으로 built-in `image_gen`을 사용한다.
 - 로컬 이미지 처리 필수: `scripts/chroma_key.py` 사용 시 Python 3.10 이상과 Pillow. NumPy는 legacy fallback인 `scripts/remove_chroma_key.py`를 사용할 때만 필요하다.
 - 업로드용 PNG 요소 필수: Chromium 계열 브라우저의 Photopea와 Photopea runner. 프로젝트 전용 runner가 있으면 우선 사용하고, 없으면 `scripts/write_photopea_runner.py`를 사용한다.
 - SVG 요소 필수: 실제 벡터 source/editor/export 경로와 XML/SVG 검증. raster 이미지만 embed한 SVG는 제출하지 않는다.
@@ -48,7 +48,7 @@ py -3 -m pip install -r requirements.txt
 
 DesignHub 배경 요소, JPG 배경, 넓은 질감, 수면, 수영장 바닥, 패턴, 종이/그라데이션 배경, 문서 전체를 채우는 이미지에 사용한다.
 
-- built-in `image_gen`을 사용한다.
+- `$image-gen` / built-in `image_gen`으로 source를 생성한다.
 - 투명 배경, 크로마키, 체크보드, 컷아웃, Photopea alpha 처리를 요청하지 않는다.
 - 뚜렷한 피사체가 없는 full-bleed 직사각형 또는 정사각형 배경으로 프롬프트를 작성한다.
 - Codex generated image directory의 source PNG를 작업 폴더에 보존한다. POSIX shell에서는 `$CODEX_HOME/generated_images/...`, Windows PowerShell에서는 환경 변수가 있을 때 `$env:CODEX_HOME\generated_images\...` 형식을 사용한다.
@@ -74,6 +74,7 @@ outputs/<run-id>/logs/
 - 제거 가능한 단색 크로마키 배경으로 생성한다.
 - source 이미지는 `assets/source-imagegen/`에 보존한다.
 - 복사된 `scripts/chroma_key.py` helper를 실행해 `assets/raw/`로 출력한다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않는다.
+- magenta 또는 purple key run이고 피사체에 의도적인 pink/purple/magenta가 없다면 alpha 추출 뒤 visible magenta cast를 제거하고 어두운 preview에서 검증한다.
 - DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea 또는 프로젝트 Photopea runner를 실행해 `assets/processed/`를 만든다.
 - DesignHub CSV의 `contentType` 값은 `PNG element`를 사용한다.
 - 실제 DesignHub 등록 전에 업로드 안전 고유 basename을 준비한다.
@@ -163,12 +164,13 @@ Constraints: no text, no logo, no watermark, no people, no objects, no transpare
    - 파란 피사체에는 `#0000ff`를 피한다
    - 기존 프로젝트 key color는 피사체와 충돌하지 않을 때만 사용한다
    - 피사체 색이 key color와 가깝다면 생성 전에 다른 key color를 고른다. 충돌하는 key color를 helper가 해결해 줄 것이라고 기대하지 않는다.
-2. built-in `image_gen`으로 완전히 평평한 key-color 배경에 생성한다.
+2. `$image-gen`으로 완전히 평평한 key-color 배경에 생성한다.
 3. 생성 source를 작업 폴더로 복사한다.
 4. 복사된 `scripts/chroma_key.py` helper를 실행한다.
 5. alpha, 투명 모서리, 피사체 범위, key-color fringe를 검증한다.
-6. DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea finishing을 실행하고 `assets/processed/`를 검증한다.
-7. 업로드 안전 고유 파일명과 매칭 CSV를 준비한다.
+6. magenta/purple key run이고 실제 피사체 magenta가 없다면 `red > green`이고 `blue > green`인 visible pixel을 `(green, green, green)`으로 중화하고 alpha는 유지한다. 남은 count는 `0`이어야 한다.
+7. DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea finishing을 실행하고 `assets/processed/`를 검증한다.
+8. 업로드 안전 고유 파일명과 매칭 CSV를 준비한다.
 
 ### 크로마 프롬프트 템플릿
 
@@ -316,9 +318,12 @@ DesignHub/MiriCanvas PNG 요소 작업:
 
 DesignHub/MiriCanvas 메타데이터는 제작 과정이 아니라 구매자가 검색할 단어를 설명해야 한다.
 
+- 키워드 생성에는 [references/keyword-generation.ko.md](references/keyword-generation.ko.md)를 읽는다. 이 문서는 로컬 `miricanvas_element_keyword_report (1).md` 리서치 파일을 재사용 규칙으로 정리한 것이며, 공식 랭킹 공식이 아니라 우선순위 프레임으로 다룬다.
 - 쉼표로 구분한 키워드 20~25개를 사용한다.
 - 중복을 제거한다.
 - 공식 주제어와 구체적인 시각 용어를 앞쪽에 둔다.
+- 느슨한 동의어를 추가하기 전에 대상/사물, 요소 형식, 스타일, 용도, 시즌/이벤트, 대상/산업, 색상/무드를 먼저 채운다.
+- 사용자가 명시적으로 요청하지 않으면 한 키워드 목록 안에서 한국어와 영어를 섞지 않는다.
 - `keywords`와 `elementName`에서 제작/프로세스/파일/관리 용어를 제거한다.
 - `Photopea`, `API`, `후처리`, `프롬프트`, `imagegen`, `배경제거`, `PNG`, `JPG`, `SVG`, `GIF`, `MP4`, `2D`, `350DPI`, `투명배경`, run ID, 날짜, `DesignHub`, `MiriCanvas`, `CSV`, `Premium`, `클립아트`, `디자인소스`, `배경소스`, `꾸밈요소` 같은 용어를 피한다.
 - 사용자가 특정 키워드를 유지하거나 제거하라고 명시하면 CSV와 문서 전체에 적용한다.
@@ -394,6 +399,7 @@ JPG 배경, SVG 요소, GIF 요소도 generic name은 피한다. topic slug와 t
 - 최종 파일이 alpha가 있는 PNG다.
 - 모서리가 투명하고 피사체 범위가 그럴듯하다.
 - 눈에 띄는 key-color fringe가 없다.
+- magenta/purple key run은 decontamination 뒤 남은 visible magenta-cast pixel이 `0`이다. 실제 magenta/purple 디테일을 보존해야 한다면 다른 key 또는 manual mask를 사용한다.
 - 체크보드, 흰색, 어두운 배경 preview가 통과한다.
 - 업로드용 PNG 요소를 요청받았다면 Photopea processed 출력이 존재한다.
 - PNG 요소 크기/DPI가 로컬 프로젝트 규칙과 맞는다.

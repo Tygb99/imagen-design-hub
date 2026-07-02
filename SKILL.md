@@ -7,12 +7,12 @@ description: Use when preparing MiriCanvas or DesignHub assets from imagegen or 
 
 [Korean version](SKILL.ko.md)
 
-This skill handles MiriCanvas / DesignHub visual assets prepared from `image_gen`, local source art, or vector/animation tools. It keeps raster imagegen routes and official SVG/GIF element-guide routing in one place.
+This skill handles MiriCanvas / DesignHub visual assets prepared from `$image-gen` / `image_gen`, local source art, or vector/animation tools. It keeps raster imagegen routes and official SVG/GIF element-guide routing in one place.
 
 Core routes:
 
-- If the target is a background element, use `image_gen -> preserve source PNG -> convert/validate JPG -> Background CSV`.
-- If the target is a transparent PNG element, use `image_gen -> preserve chroma-key source -> helper alpha -> Photopea -> PNG element CSV`.
+- If the target is a background element, use `$image-gen -> preserve source PNG -> convert/validate JPG -> Background CSV`.
+- If the target is a transparent PNG element, use `$image-gen -> preserve chroma-key source -> helper alpha -> magenta-fringe QA/decontamination when applicable -> Photopea -> PNG element CSV`.
 - If the target is an SVG element, use `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`, but treat this route as early alpha and verify manually.
 - If the target is a GIF element, use `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`, but treat this route as early alpha and verify manually.
 - Prefer the imagegen background route when natural water surfaces, ripples, light reflections, photographic textures, or realistic backgrounds matter more than HTML/canvas determinism.
@@ -20,7 +20,7 @@ Core routes:
 
 ## Dependencies
 
-- Required for generation: built-in `image_gen` tool.
+- Required for generation: installed `$image-gen` skill when available. It runs a fresh `codex exec` session and uses built-in `image_gen` internally.
 - Required for local image processing: Python 3.10+ and Pillow when using `scripts/chroma_key.py`. NumPy is only needed for the legacy `scripts/remove_chroma_key.py` fallback.
 - Required for upload-ready PNG elements: Photopea in a Chromium-family browser plus a Photopea runner. Prefer a project-specific runner when one exists; otherwise use `scripts/write_photopea_runner.py`.
 - Required for SVG elements: a true vector source/editor/export path and an XML/SVG validation pass. Do not submit an SVG that only embeds a raster image.
@@ -48,7 +48,7 @@ Classify the deliverable before generating images.
 
 Use for DesignHub background elements, JPG backgrounds, broad textures, water surfaces, pool floors, patterns, paper/gradient backgrounds, and other document-filling images.
 
-- Use built-in `image_gen`.
+- Use `$image-gen` / built-in `image_gen` for source generation.
 - Do not request transparent background, chroma key, checkerboard, cutout, or Photopea alpha processing.
 - Prompt for a full-bleed rectangular or square background with no dominant subject.
 - Preserve source PNGs from the Codex generated image directory in the workspace. Use `$CODEX_HOME/generated_images/...` in POSIX shells and `$env:CODEX_HOME\generated_images\...` in Windows PowerShell when the environment variable is available.
@@ -74,6 +74,7 @@ Use for transparent stickers, illustrations, objects, cutouts, PNG elements, bac
 - Generate with a flat removable chroma-key background.
 - Preserve source images under `assets/source-imagegen/`.
 - Run the copied `scripts/chroma_key.py` helper into `assets/raw/`. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
+- For magenta or purple key runs where the subject intentionally avoids pink/purple/magenta, remove visible magenta cast after alpha extraction and validate on a dark preview.
 - For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea or the project Photopea runner into `assets/processed/`.
 - Use DesignHub CSV `contentType` value `PNG element`.
 - Prepare upload-safe unique basenames before actual DesignHub registration.
@@ -163,12 +164,13 @@ Use this route when the user asks for transparent PNG, PNG element, cutout, back
    - avoid `#0000ff` for blue subjects
    - use the existing project key color only when it does not conflict with the subject
    - if any subject color is close to the key color, choose another key color before generating; do not rely on the helper to rescue a conflicting key
-2. Generate with built-in `image_gen` on a perfectly flat key-color background.
+2. Generate with `$image-gen` on a perfectly flat key-color background.
 3. Copy the generated source into the workspace.
 4. Run the copied `scripts/chroma_key.py` helper.
 5. Validate alpha, transparent corners, subject coverage, and key-color fringe.
-6. For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea finishing and validate `assets/processed/`.
-7. Prepare upload-safe unique filenames and a matching CSV.
+6. For magenta/purple key runs with no real subject magenta, neutralize visible pixels where `red > green` and `blue > green` to `(green, green, green)`, keep alpha unchanged, and require a remaining count of `0`.
+7. For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea finishing and validate `assets/processed/`.
+8. Prepare upload-safe unique filenames and a matching CSV.
 
 ### Chroma Prompt Template
 
@@ -316,9 +318,12 @@ If the requested motion is better represented as filmed video, stop and route it
 
 DesignHub/MiriCanvas metadata should describe what buyers search for, not the production workflow.
 
+- For keyword generation, read [references/keyword-generation.md](references/keyword-generation.md). It distills the local `miricanvas_element_keyword_report (1).md` research file into reusable rules; treat it as a priority framework, not an official ranking formula.
 - Use 20 to 25 comma-separated keywords.
 - Remove duplicates.
 - Put official topic words and concrete visual terms first.
+- Build keyword coverage from subject/object, element form, style, use case, season/event, audience/industry, and color/mood before adding loose synonyms.
+- Do not mix Korean and English in the same keyword list unless the user explicitly asks for it.
 - Remove production/process/file/admin terms from `keywords` and `elementName`.
 - Avoid terms such as `Photopea`, `API`, `후처리`, `프롬프트`, `imagegen`, `배경제거`, `PNG`, `JPG`, `SVG`, `GIF`, `MP4`, `2D`, `350DPI`, `투명배경`, run IDs, dates, `DesignHub`, `MiriCanvas`, `CSV`, `Premium`, `클립아트`, `디자인소스`, `배경소스`, `꾸밈요소`.
 - If the user explicitly keeps or removes a keyword, enforce that across CSV and docs.
@@ -394,6 +399,7 @@ Run validation suited to the route.
 - Final files are PNG with alpha.
 - Transparent corners and plausible subject coverage.
 - No obvious key-color fringe.
+- Magenta/purple key runs have `0` remaining visible magenta-cast pixels after decontamination, unless real subject magenta/purple detail required a different key or manual mask.
 - Checkerboard, white, and dark previews pass.
 - Photopea processed outputs exist when upload-ready PNG elements are requested.
 - PNG element dimensions/DPI match the local project rule.

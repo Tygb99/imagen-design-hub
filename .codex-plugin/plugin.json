@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.2.1",
-  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, JPG backgrounds, SVG/GIF beta routes, and post-upload CSV metadata.",
+  "version": "0.3.0",
+  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, and PNG fringe QA.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -13,7 +13,9 @@
     "miricanvas",
     "designhub",
     "imagegen",
+    "image-gen",
     "png-element",
+    "fringe-cleanup",
     "jpg-background",
     "svg",
     "gif",
@@ -26,19 +28,21 @@
   "interface": {
     "displayName": "Imagen Design Hub",
     "shortDescription": "Prepare DesignHub PNG, JPG, SVG, GIF, and CSV assets.",
-    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin reuses the copied chroma-key helper for PNG elements instead of the built-in imagegen removal helper, and requires Computer Use for live DesignHub upload/download CSV UI actions.",
+    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill, reuses the copied chroma-key helper for PNG elements instead of the built-in imagegen removal helper, adds magenta-fringe decontamination QA when a magenta key is safe, and requires Computer Use for live DesignHub upload/download CSV UI actions.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
       "Image generation routing",
+      "image-gen skill workflow",
       "File preparation",
+      "Magenta fringe QA",
       "CSV metadata",
       "Auto-update"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
-      "Prepare 10 PNG elements for DesignHub.",
-      "Make JPG background assets and CSV rows.",
+      "Use $image-gen to prepare PNG elements for DesignHub.",
+      "Run png-element chroma cleanup and fringe QA.",
       "Use Computer Use for DesignHub CSV upload."
     ],
     "brandColor": "#8000ff",

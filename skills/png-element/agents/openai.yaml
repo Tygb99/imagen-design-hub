@@ -1,0 +1,10 @@
+interface:
+  display_name: "Imagen Design Hub: PNG Element"
+  short_description: "DesignHub PNG element route with image-gen, chroma cleanup, Photopea, and fringe QA"
+  search_terms:
+    - "png-element"
+    - "png요소"
+    - "transparent PNG"
+    - "image-gen"
+    - "magenta fringe"
+  default_prompt: "Use $imagen-design-hub:png-element to prepare upload-ready DesignHub PNG elements with $image-gen, chroma cleanup, Photopea, and fringe QA."
