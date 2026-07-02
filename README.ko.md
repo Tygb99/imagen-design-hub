@@ -23,7 +23,13 @@
 - `jpg-background`: JPG 배경과 `contentType=Background`.
 - `svg-beta`: SVG 요소 후보. 시각 검증 전까지는 beta 경로로 둡니다.
 - `gif-beta`: GIF 요소 후보. playback과 투명도 검증 전까지는 beta 경로로 둡니다.
-- `upload-csv`: Computer Use로 DesignHub 파일 업로드, CSV 다운로드, 병합 CSV 업로드를 진행하고 `uniqueId`를 보존하는 단계.
+- `upload-csv`: 사용자가 지정한 live surface로 DesignHub 파일 업로드, CSV 다운로드, 병합 CSV 업로드를 진행하고 `uniqueId`를 보존하는 단계. Aside는 현재 macOS 경로이며 Windows 지원은 예정 상태다. MCP가 가능하면 다음 우선 자동화 경로로 검토한다.
+
+## 최근 운영에서 배운 점
+
+- 바람, breeze, 공기 흐름, 안개, 부드러운 motion line처럼 반투명한 PNG 효과는 배경색 테스트만으로 부족하다. chroma 색이 효과 안에 끼면 배경 제거 전에 의도적인 밝은색/중립색 outline 또는 stroke를 넣어 효과를 살리고, 체크보드, 흰색, 어두운 preview에서 검증한다.
+- DesignHub 상태는 파일 업로드, CSV 다운로드, `uniqueId` 병합, CSV 업로드, 최종 심사 제출을 분리해서 보고한다. 사용자가 별도로 요청하지 않으면 최종 심사 제출은 누르지 않는다.
+- 사용자가 지정한 표면을 그대로 쓴다. Aside를 요청했다면 Chrome으로 바꾸지 않는다. Aside는 현재 macOS 전용이므로 Windows에서는 예정 지원을 기다리거나 MCP/확인된 지원 표면을 사용한다.
 
 ## Codex 플러그인 설치
 
