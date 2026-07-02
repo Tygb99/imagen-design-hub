@@ -75,6 +75,7 @@ outputs/<run-id>/logs/
 - source 이미지는 `assets/source-imagegen/`에 보존한다.
 - 복사된 `scripts/chroma_key.py` helper를 실행해 `assets/raw/`로 출력한다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않는다.
 - magenta 또는 purple key run이고 피사체에 의도적인 pink/purple/magenta가 없다면 alpha 추출 뒤 visible magenta cast를 제거하고 어두운 preview에서 검증한다.
+- 공기, 바람, breeze, 안개, motion 효과처럼 반투명한 표현은 key 제거 전에 가독성을 보존한다. 효과 안에 key color가 끼면 다시 생성하거나 의도적인 밝은색/중립색 outline 또는 stroke를 넣고, 체크보드, 흰색, 어두운 preview에서 검증한다.
 - DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea 또는 프로젝트 Photopea runner를 실행해 `assets/processed/`를 만든다.
 - DesignHub CSV의 `contentType` 값은 `PNG element`를 사용한다.
 - 실제 DesignHub 등록 전에 업로드 안전 고유 basename을 준비한다.
@@ -165,6 +166,7 @@ Constraints: no text, no logo, no watermark, no people, no objects, no transpare
    - 기존 프로젝트 key color는 피사체와 충돌하지 않을 때만 사용한다
    - 피사체 색이 key color와 가깝다면 생성 전에 다른 key color를 고른다. 충돌하는 key color를 helper가 해결해 줄 것이라고 기대하지 않는다.
 2. `$image-gen`으로 완전히 평평한 key-color 배경에 생성한다.
+   - wind, breeze, air flow, mist, glass 같은 반투명 효과는 필요하면 key color가 아닌 미묘한 outline/stroke와 또렷한 edge를 요청한다. 효과 내부의 key-color 오염을 그대로 받아들이지 않는다.
 3. 생성 source를 작업 폴더로 복사한다.
 4. 복사된 `scripts/chroma_key.py` helper를 실행한다.
 5. alpha, 투명 모서리, 피사체 범위, key-color fringe를 검증한다.

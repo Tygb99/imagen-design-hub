@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "MiriCanvas and DesignHub asset workflows for PNG elements, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, and PNG fringe QA.",
   "author": {
     "name": "Tygb99",
@@ -28,7 +28,7 @@
   "interface": {
     "displayName": "Imagen Design Hub",
     "shortDescription": "Prepare DesignHub PNG, JPG, SVG, GIF, and CSV assets.",
-    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill, reuses the copied chroma-key helper for PNG elements instead of the built-in imagegen removal helper, adds magenta-fringe decontamination QA when a magenta key is safe, and requires Computer Use for live DesignHub upload/download CSV UI actions.",
+    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus breeze/air outline guidance for transparent effects, and keeps DesignHub upload/download actions on the user-requested live surface such as Aside on macOS or MCP when available.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
@@ -36,14 +36,17 @@
       "image-gen skill workflow",
       "File preparation",
       "Magenta fringe QA",
+      "Breeze outline QA",
       "CSV metadata",
+      "Mac Aside upload guidance",
+      "MCP-ready upload notes",
       "Auto-update"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
       "Use $image-gen to prepare PNG elements for DesignHub.",
       "Run png-element chroma cleanup and fringe QA.",
-      "Use Computer Use for DesignHub CSV upload."
+      "Use the requested DesignHub upload surface; Aside is macOS-only and MCP is the next preferred automation route."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

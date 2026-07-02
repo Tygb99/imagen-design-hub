@@ -1,9 +1,11 @@
 ---
 name: upload-csv
-description: Use after MiriCanvas or DesignHub element files are ready for upload and the next step requires Computer Use to upload files, download DesignHub CSV metadata, preserve uniqueId values, merge rows, and re-upload the CSV.
+description: Use after MiriCanvas or DesignHub element files are ready for upload and the next step requires a live DesignHub surface such as Aside on macOS, MCP when available, or an explicitly confirmed UI route to upload files, download CSV metadata, preserve uniqueId values, merge rows, and re-upload the CSV.
 ---
 
 # Imagen Design Hub: Upload Then CSV
+
+[Korean version](SKILL.ko.md)
 
 Use this route when the user says `요소 업로드후 csv업로드`, `uplode-csv`, `upload-csv`, DesignHub upload CSV, metadata upload, CSV merge, uniqueId preservation, or post-upload DesignHub metadata.
 
@@ -11,24 +13,28 @@ This skill is for the post-file-upload metadata phase. It should not silently su
 
 Shared reference: read `../../SKILL.md` for route-specific `contentType` values and keyword rules.
 
-## Mandatory Computer Use
+## Mandatory Live Surface
 
-Any live DesignHub UI action in this route must use `computer-use`.
+Any live DesignHub UI action in this route must use the surface the user requested.
 
-- Use `computer-use` for Chrome/Finder-style UI actions: opening DesignHub in Chrome, clicking upload controls, selecting files, downloading the DesignHub CSV, uploading the merged CSV, scrolling, typing, or checking UI state.
-- Do not use browser automation, direct HTTP calls, hidden APIs, or terminal-only shortcuts for the DesignHub upload/download steps.
+- If the user asks for Aside, use `aside-browser`. Aside is currently supported on macOS only; Windows support is planned, so do not claim or assume Windows Aside support.
+- The next preferred automation route is MCP. If DesignHub MCP tools are available and the user asks for them, use MCP for upload/download actions instead of a browser UI route.
+- Do not switch to Chrome, Computer Use, hidden browser automation, direct HTTP calls, hidden APIs, or terminal-only shortcuts after the user names another surface.
+- Use Chrome or Computer Use only when the user explicitly asks for it, or when no specific surface was requested and that route is the confirmed supported path.
 - Local CSV merging, row validation, encoding checks, and file inspections may still use normal filesystem and terminal tools.
-- Follow the `computer-use` confirmation policy at action time. Uploading files and transmitting CSV metadata to DesignHub require explicit user confirmation before the UI action if that confirmation has not already been provided for the specific files and destination.
+- Uploading files and transmitting CSV metadata to DesignHub require explicit user confirmation before the live action if that confirmation has not already been provided for the specific files and destination.
 - Never click final review submission unless the user explicitly asks for that separate external submission step.
 
 ## Required Sequence
 
-1. Use `computer-use` to upload the prepared image/vector/GIF files only when the user has explicitly confirmed the external DesignHub action.
-2. Use `computer-use` to download the CSV provided by DesignHub after file upload.
-3. Treat the downloaded CSV as the source of truth for `fileName` and `uniqueId`.
-4. Merge prepared metadata into the downloaded rows without dropping or regenerating `uniqueId`.
-5. Keep the CSV no-BOM and quote all fields.
-6. Use `computer-use` to re-upload the merged CSV only when the user has explicitly confirmed that external action.
+1. Use the confirmed live surface to upload the prepared image/vector/GIF files only when the user has explicitly confirmed the external DesignHub action.
+2. Wait for DesignHub's upload completion state, such as `10 of 10 uploaded`, before treating the upload as complete.
+3. Use the same confirmed live surface to download the CSV provided by DesignHub after file upload.
+4. Treat the downloaded CSV as the source of truth for `fileName` and `uniqueId`.
+5. Merge prepared metadata into the downloaded rows without dropping or regenerating `uniqueId`.
+6. Keep the CSV UTF-8 without BOM and quote all fields when the local project contract requires quote-all CSV.
+7. Use the confirmed live surface to re-upload the merged CSV only when the user has explicitly confirmed that external action.
+8. Verify the DesignHub completion message, including total processed rows, before reporting CSV application as complete.
 
 ## Content Type Values
 
@@ -66,5 +72,7 @@ Before reporting ready:
 - keyword counts are 20 to 25 per row
 - CSV encoding is UTF-8 without BOM
 - every field is quoted if the local project contract requires quote-all CSV
-- live DesignHub file upload, CSV download, and CSV upload were performed through `computer-use`
+- live DesignHub file upload, CSV download, and CSV upload were performed through the user-requested surface
+- Aside use was limited to macOS, or MCP/another supported route was explicitly selected
+- DesignHub reported the expected upload count and CSV processed-row count
 - state clearly whether file upload, CSV upload, or final review submission actually happened

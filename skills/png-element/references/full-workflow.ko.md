@@ -26,6 +26,7 @@ MiriCanvas / DesignHub용 투명 스티커, 일러스트, 오브젝트, cutout, 
 - imagegen 프롬프트에 key color를 피사체 내부에 쓰지 말라고 명시한다.
 - key가 magenta 또는 purple이고 피사체 안에 pink, purple, magenta를 의도적으로 쓰지 않는다면 alpha 추출 뒤 magenta-fringe decontamination을 실행한다.
 - 피사체에 실제 pink, purple, magenta 디테일이 있다면 magenta-fringe decontamination을 실행하지 않는다. 더 안전한 key color를 고르거나 해당 디테일을 mask로 보존한다.
+- 바람, breeze, 공기 흐름, 안개, 유리, 물보라, motion line 같은 반투명 효과는 배경색 테스트만으로 부족하다. 효과 안에 key color가 끼면 더 안전한 key로 다시 생성하거나, key 제거 전에 효과 주변에 의도적인 밝은색/중립색 outline 또는 stroke를 넣는다.
 - 독립 PNG 요소를 여러 개 만들 때는 요소마다 source 이미지를 따로 생성한다. 여러 요소를 한 장에 몰아 만든 뒤 잘라 쓰지 않는다. 분리 후 확대하면 계단현상과 약한 anti-aliasing이 드러날 수 있다.
 - source 파일은 `assets/source-imagegen/`에 보존한다.
 - 먼저 `../../scripts/chroma_key.py`를 실행해 `assets/raw/`로 출력한다.
@@ -85,6 +86,7 @@ batch ready라고 말하기 전에 모두 확인한다.
 - 체크보드, 흰색, 어두운 preview에서 visible key-color fringe가 없다.
 - magenta-key run은 decontamination 뒤 남은 visible magenta-cast pixel이 `0`이다. 실제 magenta/purple 디테일을 보존해야 한다면 다른 key 또는 manual mask를 사용한다.
 - key color와 비슷하다는 이유로 피사체 내부 디테일이 지워지지 않았다.
+- 반투명 wind, breeze, air, mist, motion 효과가 key-color 오염 없이 보인다. 효과 보존을 위한 의도적인 outline/stroke는 허용한다.
 - 확대 검수에서 edge가 계단형이 아니라 anti-aliased 상태다.
 - 피사체가 잘리지 않았다.
 - 각 최종 PNG는 자체 source asset 또는 full-resolution per-element source에서 왔고, cropped combined sheet에서 온 것이 아니다.

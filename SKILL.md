@@ -75,6 +75,7 @@ Use for transparent stickers, illustrations, objects, cutouts, PNG elements, bac
 - Preserve source images under `assets/source-imagegen/`.
 - Run the copied `scripts/chroma_key.py` helper into `assets/raw/`. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
 - For magenta or purple key runs where the subject intentionally avoids pink/purple/magenta, remove visible magenta cast after alpha extraction and validate on a dark preview.
+- For semi-transparent air, wind, breeze, mist, or motion effects, preserve readability before key removal. If the effect absorbs the key color, regenerate or add an intentional light/neutral outline or stroke around the effect, then validate it on checkerboard, white, and dark previews.
 - For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea or the project Photopea runner into `assets/processed/`.
 - Use DesignHub CSV `contentType` value `PNG element`.
 - Prepare upload-safe unique basenames before actual DesignHub registration.
@@ -165,6 +166,7 @@ Use this route when the user asks for transparent PNG, PNG element, cutout, back
    - use the existing project key color only when it does not conflict with the subject
    - if any subject color is close to the key color, choose another key color before generating; do not rely on the helper to rescue a conflicting key
 2. Generate with `$image-gen` on a perfectly flat key-color background.
+   - For wind, breeze, air flow, mist, glass, or other translucent effects, explicitly ask for crisp readable edges and a subtle non-key-color outline/stroke when needed. This is preferred over accepting key-color contamination inside the effect.
 3. Copy the generated source into the workspace.
 4. Run the copied `scripts/chroma_key.py` helper.
 5. Validate alpha, transparent corners, subject coverage, and key-color fringe.

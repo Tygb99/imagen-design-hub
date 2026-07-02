@@ -26,6 +26,7 @@ Read `../../SKILL.md` when the request crosses into JPG backgrounds, SVG/GIF rou
 - Tell imagegen not to use the key color anywhere inside the subject.
 - If the key is magenta or purple and the subject intentionally avoids pink, purple, and magenta, run magenta-fringe decontamination after alpha extraction.
 - If the subject has real pink, purple, or magenta details, do not run magenta-fringe decontamination. Choose a safer key color or mask the subject details instead.
+- For semi-transparent effects such as wind, breeze, air flow, mist, glass, water spray, or motion lines, background color tests are not enough. If the effect absorbs the key color, regenerate with a safer key or add an intentional light/neutral outline or stroke around the effect before key removal.
 - For multiple standalone PNG elements, generate one source image per element. Do not generate a crowded sheet and crop it into separate assets later; separated enlargements can reveal stair-stepped edges and weak anti-aliasing.
 - Preserve source files in `assets/source-imagegen/`.
 - Run `../../scripts/chroma_key.py` first into `assets/raw/`.
@@ -85,6 +86,7 @@ Check all of these before calling the batch ready:
 - no visible key-color fringe on checkerboard, white, and dark previews
 - magenta-key runs have `0` remaining visible magenta-cast pixels after decontamination, unless real subject magenta/purple detail required a different key or manual mask
 - no subject interior detail was erased because it matched the key color
+- translucent wind, breeze, air, mist, or motion effects remain visible without key-color contamination; intentional outline/stroke is acceptable when it preserves the effect
 - edges look anti-aliased at magnified scale, not stair-stepped
 - subject is not clipped
 - each final PNG came from its own source asset or a full-resolution per-element source, not from a cropped combined sheet

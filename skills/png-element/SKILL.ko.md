@@ -28,6 +28,7 @@ metadata:
 - 완전히 평평한 단색 chroma-key 배경으로 생성한다. imagegen에 투명 배경이나 체크보드 배경을 요청하지 않는다.
 - 먼저 `../../scripts/chroma_key.py`를 실행해 `assets/raw/`로 출력한다. DesignHub PNG 요소 작업에는 `.system/imagegen/remove_chroma_key.py`를 사용하지 않는다.
 - magenta-fringe decontamination은 key가 magenta/purple이고 프롬프트가 피사체 내부의 pink, purple, magenta 사용을 금지한 경우에만 사용한다.
+- 바람, breeze, 공기, 안개 같은 반투명 효과는 밝은색/중립색 outline 또는 stroke를 의도적으로 넣는 판단이 좋다. 효과를 읽기 쉽게 유지하고 key-color bleed를 막을 수 있을 때 적용한다.
 - 업로드용 DesignHub PNG는 Photopea 또는 프로젝트 Photopea runner를 거쳐 `assets/processed/`로 마무리한다.
 - contact sheet는 preview artifact일 뿐이다. 최종 업로드 PNG를 contact sheet에서 잘라 만들지 않는다.
 - 사용자가 명시적으로 확인하지 않았다면 외부 DesignHub 업로드/제출은 수행하지 않는다.

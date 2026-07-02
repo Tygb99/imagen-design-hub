@@ -28,6 +28,7 @@ Shared route map: read `../../SKILL.md` if you need the full DesignHub plugin ro
 - Generate on a perfectly flat solid chroma-key background. Do not ask imagegen for transparent or checkerboard backgrounds.
 - Run `../../scripts/chroma_key.py` first into `assets/raw/`; do not use `.system/imagegen/remove_chroma_key.py` for DesignHub PNG-element runs.
 - Use magenta-fringe decontamination only when the key is magenta/purple and the prompt forbade pink, purple, and magenta inside the subject.
+- For wind, breeze, air, mist, or other translucent effects, an intentional light/neutral outline or stroke is a good preservation choice when it keeps the effect readable and prevents key-color bleed.
 - For upload-ready DesignHub PNGs, finish through Photopea or the project Photopea runner into `assets/processed/`.
 - Treat contact sheets as preview artifacts only. Never crop final upload PNGs out of a contact sheet.
 - External DesignHub upload/submission is off-limits unless the user explicitly confirms it.
