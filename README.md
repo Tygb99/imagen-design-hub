@@ -6,20 +6,22 @@
 
 Codex skill for preparing MiriCanvas / DesignHub assets with `image_gen`, local source art, vector exports, and animation files.
 
-It covers four common routes:
+It covers five common routes:
 
 1. **JPG background elements**: generate natural bitmap backgrounds with built-in `image_gen`, preserve source PNGs, convert to validated JPG, and write DesignHub CSV rows with `contentType=Background`.
 2. **Transparent PNG elements**: generate on a flat chroma-key background, remove the key with the bundled helper, finish upload-ready PNGs through Photopea when needed, and write matching DesignHub metadata.
-3. **SVG elements**: route simple vector illustrations through SVG cleanup, color-count checks, and `contentType=SVG element`.
-4. **GIF elements**: route animated illustration frames through GIF encode/playback checks and `contentType=GIF`.
+3. **Aside / ChatGPT native transparent PNG elements**: generate one image at a time through logged-in ChatGPT, download native RGBA sources, inspect alpha on checker/white/dark backgrounds, finish through Photopea, and write keywords/CSV.
+4. **SVG elements**: route simple vector illustrations through SVG cleanup, color-count checks, and `contentType=SVG element`.
+5. **GIF elements**: route animated illustration frames through GIF encode/playback checks and `contentType=GIF`.
 
 The skill intentionally keeps source files, final files, review sheets, prompt logs, and CSVs separated so a DesignHub batch can be audited before upload.
 
 ## Plugin Skill Split
 
-The personal plugin exposes five focused skill entrypoints:
+The personal plugin exposes six focused skill entrypoints:
 
 - `png-element`: PNG elements, chroma-key removal, Photopea finishing, and `contentType=PNG element`.
+- `aside-chatgpt-transparent`: Aside/ChatGPT native transparent PNG generation, download QA, dark-background alpha inspection, Photopea finishing, and keyword CSV rows.
 - `jpg-background`: JPG backgrounds and `contentType=Background`.
 - `svg-beta`: SVG element candidates, kept as a beta route until visual validation passes.
 - `gif-beta`: GIF element candidates, kept as a beta route until playback and transparency validation pass.
@@ -28,6 +30,7 @@ The personal plugin exposes five focused skill entrypoints:
 ## Recent Production Lessons
 
 - For semi-transparent PNG effects such as wind, breeze, air flow, mist, or soft motion lines, background-color tests alone are not enough. If chroma color leaks into the effect, regenerate or add an intentional light/neutral outline or stroke around the effect before background removal, then validate on checkerboard, white, and dark previews.
+- For native transparent ChatGPT outputs, white backgrounds can hide broken alpha. Inspect checkerboard, white, and dark previews, and scan for interior transparent holes before accepting the image.
 - Keep DesignHub state transitions separate: file upload, CSV download, `uniqueId` merge, CSV upload, and final review submission are different states. Do not click final review submission unless the user explicitly asks for that separate step.
 - Use the surface the user names. If the user asks for Aside, do not switch to Chrome. Aside is currently macOS-only; on Windows, wait for planned support or use MCP/a confirmed supported surface.
 
@@ -109,6 +112,7 @@ Required for SVG/GIF element work:
 
 - `SKILL.md`: routing and validation instructions.
 - `SKILL.ko.md`: Korean version of the skill instructions.
+- `skills/aside-chatgpt-transparent/`: Aside/ChatGPT native transparent PNG route.
 - `src/imagegen_chroma_cutout/`: reusable Python implementation kept under the old package name for compatibility.
 - `scripts/chroma_key.py`: primary edge-connected chroma-key to alpha helper copied from the project helper.
 - `scripts/remove_chroma_key.py`: legacy soft-matte chroma-key helper; use only for explicit comparison or fallback.
