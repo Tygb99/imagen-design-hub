@@ -103,7 +103,7 @@ All spacing derives from a base of 4px.
 
 ### Pipeline Row
 - **Structure**: label, format badge, output status, short proof.
-- **Variants**: background-jpg, png-element, svg-element, gif-element, metadata.
+- **Variants**: background-jpg, png-element, aside-chatgpt-transparent, svg-element, gif-element, metadata.
 - **Spacing**: --space-4 padding, --space-2 internal gap.
 - **States**: hover highlight only.
 - **Accessibility**: readable text without relying on color.

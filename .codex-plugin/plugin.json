@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.3.1",
-  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, and PNG fringe QA.",
+  "version": "0.4.0",
+  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, Aside/ChatGPT native transparent PNGs, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, Photopea finishing, keyword cleanup, and PNG fringe QA.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -14,6 +14,9 @@
     "designhub",
     "imagegen",
     "image-gen",
+    "aside",
+    "chatgpt",
+    "native-transparent",
     "png-element",
     "fringe-cleanup",
     "jpg-background",
@@ -27,16 +30,18 @@
   ],
   "interface": {
     "displayName": "Imagen Design Hub",
-    "shortDescription": "Prepare DesignHub PNG, JPG, SVG, GIF, and CSV assets.",
-    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus breeze/air outline guidance for transparent effects, and keeps DesignHub upload/download actions on the user-requested live surface such as Aside on macOS or MCP when available.",
+    "shortDescription": "Prepare DesignHub PNG, ChatGPT transparent, JPG, SVG, GIF, and CSV assets.",
+    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, Aside/ChatGPT native transparent PNG batches, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill for chroma-key routes, uses Aside when the user wants logged-in ChatGPT native transparent output, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus hidden-alpha QA on dark backgrounds, and keeps DesignHub upload/download actions on the user-requested live surface such as Aside on macOS or MCP when available.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
       "Image generation routing",
       "image-gen skill workflow",
+      "Aside ChatGPT transparent PNG workflow",
       "File preparation",
       "Magenta fringe QA",
       "Breeze outline QA",
+      "Hidden alpha QA",
       "CSV metadata",
       "Mac Aside upload guidance",
       "MCP-ready upload notes",
@@ -45,6 +50,7 @@
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
       "Use $image-gen to prepare PNG elements for DesignHub.",
+      "Use aside-chatgpt-transparent when the user asks for Aside or ChatGPT native transparent PNG generation.",
       "Run png-element chroma cleanup and fringe QA.",
       "Use the requested DesignHub upload surface; Aside is macOS-only and MCP is the next preferred automation route."
     ],

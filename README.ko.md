@@ -6,20 +6,22 @@
 
 `image_gen`, 로컬 source art, vector export, animation 파일로 MiriCanvas / DesignHub 산출물을 준비하는 Codex 스킬입니다.
 
-네 가지 주요 경로를 다룹니다.
+다섯 가지 주요 경로를 다룹니다.
 
 1. **JPG 배경 요소**: built-in `image_gen`으로 자연스러운 배경 이미지를 만들고, source PNG를 보존한 뒤, 최종 JPG와 `contentType=Background` CSV를 만듭니다.
 2. **투명 PNG 요소**: 단색 크로마키 배경으로 생성하고, 번들 헬퍼로 배경을 제거한 뒤, 필요하면 Photopea로 업로드용 PNG를 마무리하고 메타데이터를 만듭니다.
-3. **SVG 요소**: 단순 vector 일러스트를 SVG cleanup, 색상 수 검사, `contentType=SVG element` 경로로 보냅니다.
-4. **GIF 요소**: 움직이는 일러스트 frame을 GIF encode/playback 검사와 `contentType=GIF` 경로로 보냅니다.
+3. **Aside / ChatGPT native transparent PNG 요소**: 로그인된 ChatGPT에서 1장씩 생성하고, native RGBA source를 다운로드한 뒤, checker/white/dark 배경에서 alpha를 검수하고, Photopea로 마무리해 키워드/CSV를 만듭니다.
+4. **SVG 요소**: 단순 vector 일러스트를 SVG cleanup, 색상 수 검사, `contentType=SVG element` 경로로 보냅니다.
+5. **GIF 요소**: 움직이는 일러스트 frame을 GIF encode/playback 검사와 `contentType=GIF` 경로로 보냅니다.
 
 이 스킬은 source, final, review sheet, prompt log, CSV를 분리해서 DesignHub 업로드 전에 배치를 검수할 수 있게 합니다.
 
 ## 플러그인 스킬 분리
 
-개인 플러그인은 다섯 개의 좁은 스킬 엔트리를 제공합니다.
+개인 플러그인은 여섯 개의 좁은 스킬 엔트리를 제공합니다.
 
 - `png-element`: PNG 요소, 크로마키 제거, Photopea 마무리, `contentType=PNG element`.
+- `aside-chatgpt-transparent`: Aside/ChatGPT native transparent PNG 생성, 다운로드 검수, 어두운 배경 alpha 검사, Photopea 마무리, keyword CSV 행.
 - `jpg-background`: JPG 배경과 `contentType=Background`.
 - `svg-beta`: SVG 요소 후보. 시각 검증 전까지는 beta 경로로 둡니다.
 - `gif-beta`: GIF 요소 후보. playback과 투명도 검증 전까지는 beta 경로로 둡니다.
@@ -28,6 +30,7 @@
 ## 최근 운영에서 배운 점
 
 - 바람, breeze, 공기 흐름, 안개, 부드러운 motion line처럼 반투명한 PNG 효과는 배경색 테스트만으로 부족하다. chroma 색이 효과 안에 끼면 배경 제거 전에 의도적인 밝은색/중립색 outline 또는 stroke를 넣어 효과를 살리고, 체크보드, 흰색, 어두운 preview에서 검증한다.
+- ChatGPT native transparent 출력은 흰 배경에서 깨진 alpha가 숨어 보일 수 있다. 이미지를 통과시키기 전에 checkerboard, white, dark preview를 보고 내부 투명 구멍을 검사한다.
 - DesignHub 상태는 파일 업로드, CSV 다운로드, `uniqueId` 병합, CSV 업로드, 최종 심사 제출을 분리해서 보고한다. 사용자가 별도로 요청하지 않으면 최종 심사 제출은 누르지 않는다.
 - 사용자가 지정한 표면을 그대로 쓴다. Aside를 요청했다면 Chrome으로 바꾸지 않는다. Aside는 현재 macOS 전용이므로 Windows에서는 예정 지원을 기다리거나 MCP/확인된 지원 표면을 사용한다.
 
@@ -109,6 +112,7 @@ SVG/GIF 요소 작업 필수:
 
 - `SKILL.md`: 라우팅과 검증 지침.
 - `SKILL.ko.md`: 한국어 스킬 지침.
+- `skills/aside-chatgpt-transparent/`: Aside/ChatGPT native transparent PNG 경로.
 - `src/imagegen_chroma_cutout/`: 호환성을 위해 기존 패키지명을 유지한 재사용 Python 구현.
 - `scripts/chroma_key.py`: 프로젝트 helper에서 복사한 primary edge-connected 크로마키 alpha 헬퍼.
 - `scripts/remove_chroma_key.py`: legacy soft-matte 크로마키 헬퍼. 명시적인 비교나 fallback 때만 사용.

@@ -1152,7 +1152,7 @@
           <h1>Codex 플러그인으로<br><span class="accent-word">바뀐 제작<br class="mobile-only"> 파이프라인</span></h1>
           <p class="hero-copy">
             npx 한 줄로 설치하고 Codex 시작 때 업데이트를 확인합니다.
-            PNG, JPG, SVG, GIF, CSV 스킬을 필요한 순간에만 불러옵니다.
+            PNG, Aside/ChatGPT 투명 PNG, JPG, SVG, GIF, CSV 스킬을 필요한 순간에만 불러옵니다.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#install">설치 명령 보기</a>
@@ -1246,9 +1246,9 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 <span class="badge badge-coral">04</span>
                 <div>
                   <h3>분리된 엔트리포인트</h3>
-                  <p>PNG, JPG, SVG, GIF, upload-csv가 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
+                  <p>PNG, Aside/ChatGPT 투명 PNG, JPG, SVG, GIF, upload-csv가 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
                 </div>
-                <span class="format-note">5 skills</span>
+                <span class="format-note">6 skills</span>
               </article>
             </div>
           </div>
@@ -1258,7 +1258,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
       <section id="features" class="section">
         <div class="section-inner">
           <p class="section-kicker">Core features</p>
-          <h2 class="section-title">다섯 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
+          <h2 class="section-title">여섯 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
           <p class="section-lead">
             배경, 투명 PNG, 벡터, 애니메이션, CSV 업로드는 실패 지점이 다릅니다.
             플러그인 방식은 각 route를 좁게 나누고, 실제 제출 표면에 맞는 규칙만 불러옵니다.
@@ -1289,6 +1289,20 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                   <li>1개씩 개별 source 생성</li>
                   <li>피사체 내부 색 보존</li>
                   <li>계단현상과 anti-aliasing 확대 검수</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-media feature-media-element" aria-hidden="true"></div>
+              <div class="feature-body">
+                <span class="badge badge-green">ASIDE</span>
+                <h3>aside-chatgpt-transparent</h3>
+                <p>ChatGPT native transparent PNG를 1장씩 받고, 어두운 배경 alpha 검수와 Photopea 마무리, 키워드 CSV까지 이어갑니다.</p>
+                <ul class="feature-list">
+                  <li>Aside 다운로드 source 보존</li>
+                  <li>내부 투명 구멍과 factual detail 검수</li>
+                  <li>350DPI processed PNG와 keyword CSV 생성</li>
                 </ul>
               </div>
             </article>
@@ -1342,7 +1356,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
             <article class="workflow-step">
               <strong>02 / ROUTE</strong>
               <h3>Load</h3>
-              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg-beta</code>, <code>gif-beta</code>, <code>upload-csv</code>만 선택합니다.</p>
+              <p>요청에 맞춰 <code>png-element</code>, <code>aside-chatgpt-transparent</code>, <code>jpg-background</code>, <code>svg-beta</code>, <code>gif-beta</code>, <code>upload-csv</code>만 선택합니다.</p>
             </article>
             <article class="workflow-step">
               <strong>03 / ROUNDTRIP</strong>
@@ -1369,7 +1383,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <li>
                 <div>
                   <strong>요청에 맞는 스킬만 로드합니다.</strong>
-                  <p>PNG, JPG, SVG, GIF, CSV 업로드 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
+                  <p>PNG, Aside/ChatGPT 투명 PNG, JPG, SVG, GIF, CSV 업로드 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
                 </div>
               </li>
               <li>
@@ -1428,6 +1442,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <ul class="spec-list">
                 <li><code>jpg-background</code> route</li>
                 <li><code>png-element</code> route</li>
+                <li><code>aside-chatgpt-transparent</code> route</li>
                 <li><code>svg-beta</code> route</li>
                 <li><code>gif-beta</code> route</li>
                 <li><code>upload-csv</code> route</li>

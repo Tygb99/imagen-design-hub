@@ -13,6 +13,7 @@ Core routes:
 
 - If the target is a background element, use `$image-gen -> preserve source PNG -> convert/validate JPG -> Background CSV`.
 - If the target is a transparent PNG element, use `$image-gen -> preserve chroma-key source -> helper alpha -> magenta-fringe QA/decontamination when applicable -> Photopea -> PNG element CSV`.
+- If the user asks for Aside/ChatGPT native transparent output, use `Aside/ChatGPT -> native transparent PNG source -> local alpha QA -> Photopea -> PNG element CSV`.
 - If the target is an SVG element, use `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`, but treat this route as early alpha and verify manually.
 - If the target is a GIF element, use `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`, but treat this route as early alpha and verify manually.
 - Prefer the imagegen background route when natural water surfaces, ripples, light reflections, photographic textures, or realistic backgrounds matter more than HTML/canvas determinism.
@@ -23,6 +24,7 @@ Core routes:
 - Required for generation: installed `$image-gen` skill when available. It runs a fresh `codex exec` session and uses built-in `image_gen` internally.
 - Required for local image processing: Python 3.10+ and Pillow when using `scripts/chroma_key.py`. NumPy is only needed for the legacy `scripts/remove_chroma_key.py` fallback.
 - Required for upload-ready PNG elements: Photopea in a Chromium-family browser plus a Photopea runner. Prefer a project-specific runner when one exists; otherwise use `scripts/write_photopea_runner.py`.
+- Required for Aside/ChatGPT native transparent batches: the installed `aside-browser` skill and local Aside CLI when the user requests logged-in ChatGPT generation/downloads.
 - Required for SVG elements: a true vector source/editor/export path and an XML/SVG validation pass. Do not submit an SVG that only embeds a raster image.
 - Required for GIF elements: a frame or animation source plus a GIF encoder/player that can confirm loop/playback, transparency, dimensions, and file size.
 - Reusable Python code lives in `src/imagegen_chroma_cutout/`; the old package name is kept for script compatibility.
@@ -80,6 +82,18 @@ Use for transparent stickers, illustrations, objects, cutouts, PNG elements, bac
 - For DesignHub/MiriCanvas upload-ready PNG elements, run Photopea or the project Photopea runner into `assets/processed/`.
 - Use DesignHub CSV `contentType` value `PNG element`.
 - Prepare upload-safe unique basenames before actual DesignHub registration.
+
+### `aside-chatgpt-transparent`
+
+Use when the user explicitly wants Aside or ChatGPT native transparent PNG generation for DesignHub PNG elements.
+
+- Use the route skill `skills/aside-chatgpt-transparent/SKILL.md`.
+- Generate one image at a time through Aside/ChatGPT unless the user asks for comparison candidates.
+- Wait for the user-specified generation window, commonly about 2 minutes, then download the completed image to Aside artifacts and copy it into the run folder.
+- Treat the native transparent download as source only. It may be 1024 px and low DPI, so finish through Photopea or the project Photopea runner before calling it upload-ready.
+- Validate alpha on checkerboard, white, and dark backgrounds. Dark previews are essential because white subject areas can hide transparent holes that are invisible on a white background.
+- For factual visual symbols, verify required counts/positions before acceptance. If the user gives a stricter local criterion file, use it as the source of truth.
+- Write `PNG element` metadata with 20 to 25 buyer-facing keywords and remove process terms such as ChatGPT, Aside, Photopea, native transparent, PNG, DPI, CSV, DesignHub, and MiriCanvas.
 
 ### `photo-jpg`
 
@@ -466,6 +480,7 @@ Report the concrete route and artifacts:
 
 - built-in `image_gen` or CLI fallback
 - deliverable type: `background-jpg`, `png-element`, `photo-jpg`, `svg-element`, `gif-element`, `video-element`, or `combination-element`
+- note `aside-chatgpt-transparent` when that route produced the PNG sources
 - source image folder
 - final image folder
 - metadata CSV path

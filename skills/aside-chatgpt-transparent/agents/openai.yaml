@@ -1,0 +1,11 @@
+interface:
+  display_name: "Imagen Design Hub: Aside ChatGPT Transparent"
+  short_description: "Aside + ChatGPT native transparent PNG route with local QA, Photopea, and keywords"
+  search_terms:
+    - "aside"
+    - "ChatGPT"
+    - "native transparent"
+    - "transparent PNG"
+    - "Photopea"
+    - "DesignHub keywords"
+  default_prompt: "Use $imagen-design-hub:aside-chatgpt-transparent to generate native transparent PNG elements through Aside/ChatGPT, download them, QA alpha on checker/white/dark backgrounds, finish through Photopea, and prepare DesignHub keywords/CSV."

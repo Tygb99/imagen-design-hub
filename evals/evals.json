@@ -54,6 +54,18 @@
       "prompt": "DesignHub GIF 요소로 움직이는 반짝이 스티커 6개 만들어줘. 영상 말고 일러스트 애니메이션으로.",
       "expected_output": "Routes to gif-element, builds or preserves frame/animation sources, encodes animated GIFs rather than still GIFs or MP4 footage, verifies playback, loop stability, removed/transparent background, 700-1920 px bounds, under-25MB size, and writes metadata with extensionless fileName and contentType GIF.",
       "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "aside로 ChatGPT에서 native transparent 태극기 PNG 요소 10개를 1장씩 만들고 2분 기다렸다가 다운로드해. 로컬에서 검수하고 Photopea 후처리랑 키워드 CSV까지 만들어줘.",
+      "expected_output": "Routes to aside-chatgpt-transparent, uses Aside/ChatGPT one image at a time with a generation wait window, downloads native RGBA sources, preserves originals, validates alpha on checkerboard/white/dark previews including hidden transparent holes and factual flag criteria, finishes processed PNGs through Photopea at 350 DPI and 2500px+ size, writes PNG element metadata with 20-25 buyer-facing keywords, and does not perform DesignHub upload or final submission without explicit confirmation.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "ChatGPT 투명 PNG로 나온 캐릭터 4번이 흰 배경에선 괜찮은데 어두운 배경에서 괘 사이가 뚫려 보여. 교체 또는 수리 기준까지 포함해서 검수해줘.",
+      "expected_output": "Uses the aside-chatgpt-transparent QA rules for native transparent sources, inspects dark-background and zoomed detail previews, scans for interior transparent/low-alpha components, preserves before files, repairs only localized alpha defects with a manifest or replaces structurally/factually wrong images, regenerates Photopea processed outputs, and reports before/after hashes plus validation evidence.",
+      "files": []
     }
   ]
 }

@@ -13,6 +13,7 @@ description: 사용자가 imagegen 또는 로컬 source art로 MiriCanvas/Design
 
 - 배경 요소가 목표이면 `$image-gen -> source PNG 보존 -> JPG 변환/검증 -> Background CSV`.
 - 투명 PNG 요소가 목표이면 `$image-gen -> chroma-key source 보존 -> helper alpha -> 필요 시 magenta-fringe QA/decontamination -> Photopea -> PNG element CSV`.
+- 사용자가 Aside/ChatGPT native transparent 출력을 요청하면 `Aside/ChatGPT -> native transparent PNG source -> 로컬 alpha 검수 -> Photopea -> PNG element CSV`.
 - SVG 요소가 목표이면 `vector source -> SVG cleanup -> SVG validation -> SVG element CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
 - GIF 요소가 목표이면 `frame/animation source -> GIF encode -> animation/size validation -> GIF CSV`를 사용하되, 이 경로는 아직 초기 alpha라 수동 검수를 강화한다.
 - HTML/canvas보다 자연스러운 수면, 물결, 빛반사, 사진풍 질감, 실사 배경이 더 중요하면 imagegen 배경 경로를 우선한다.
@@ -23,6 +24,7 @@ description: 사용자가 imagegen 또는 로컬 source art로 MiriCanvas/Design
 - 생성 필수: 가능하면 설치된 `$image-gen` 스킬. 이 스킬은 새 `codex exec` 세션을 열고 내부적으로 built-in `image_gen`을 사용한다.
 - 로컬 이미지 처리 필수: `scripts/chroma_key.py` 사용 시 Python 3.10 이상과 Pillow. NumPy는 legacy fallback인 `scripts/remove_chroma_key.py`를 사용할 때만 필요하다.
 - 업로드용 PNG 요소 필수: Chromium 계열 브라우저의 Photopea와 Photopea runner. 프로젝트 전용 runner가 있으면 우선 사용하고, 없으면 `scripts/write_photopea_runner.py`를 사용한다.
+- Aside/ChatGPT native transparent batch 필수: 사용자가 로그인된 ChatGPT 생성/다운로드를 요청하면 설치된 `aside-browser` 스킬과 로컬 Aside CLI.
 - SVG 요소 필수: 실제 벡터 source/editor/export 경로와 XML/SVG 검증. raster 이미지만 embed한 SVG는 제출하지 않는다.
 - GIF 요소 필수: frame 또는 animation source와 loop/playback, 투명도, 크기, 용량을 확인할 GIF encoder/player.
 - 재사용 Python 코드는 `src/imagegen_chroma_cutout/`에 있다. 기존 스크립트 호환성을 위해 예전 패키지명을 유지한다.
@@ -80,6 +82,18 @@ outputs/<run-id>/logs/
 - DesignHub/MiriCanvas 업로드용 PNG 요소라면 Photopea 또는 프로젝트 Photopea runner를 실행해 `assets/processed/`를 만든다.
 - DesignHub CSV의 `contentType` 값은 `PNG element`를 사용한다.
 - 실제 DesignHub 등록 전에 업로드 안전 고유 basename을 준비한다.
+
+### `aside-chatgpt-transparent`
+
+사용자가 DesignHub PNG 요소를 Aside 또는 ChatGPT native transparent PNG 생성으로 만들라고 명시할 때 사용한다.
+
+- route skill `skills/aside-chatgpt-transparent/SKILL.ko.md`를 사용한다.
+- 사용자가 비교 후보를 요청하지 않았다면 Aside/ChatGPT에서 이미지를 1장씩 생성한다.
+- 사용자가 지정한 생성 대기 시간, 보통 약 2분까지 기다린 뒤 완료 이미지를 Aside artifacts로 다운로드하고 run folder로 복사한다.
+- native transparent 다운로드는 source로만 취급한다. 1024px와 낮은 DPI일 수 있으므로 Photopea 또는 프로젝트 Photopea runner를 거친 뒤에만 upload-ready라고 부른다.
+- checkerboard, white, dark 배경에서 alpha를 검증한다. 흰 피사체 영역의 투명 구멍은 흰 배경에서 숨고 어두운 배경에서 드러나므로 dark preview가 필수다.
+- 사실 기반 시각 기호는 받아들이기 전에 필요한 개수/위치를 검증한다. 사용자가 더 엄격한 로컬 기준 파일을 주면 그 파일을 우선한다.
+- `PNG element` metadata를 만들고 20~25개의 구매자 검색 키워드를 사용한다. ChatGPT, Aside, Photopea, native transparent, PNG, DPI, CSV, DesignHub, MiriCanvas 같은 제작 용어는 제거한다.
 
 ### `photo-jpg`
 
@@ -466,6 +480,7 @@ node src/cli.mjs validate --run outputs/<run-id>
 
 - built-in `image_gen` 또는 CLI fallback
 - 산출물 종류: `background-jpg`, `png-element`, `photo-jpg`, `svg-element`, `gif-element`, `video-element`, `combination-element`
+- PNG source가 이 경로에서 나왔으면 `aside-chatgpt-transparent`를 함께 표시
 - source 이미지 폴더
 - 최종 이미지 폴더
 - metadata CSV 경로

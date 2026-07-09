@@ -103,7 +103,7 @@ Imagen Design Hub는 시각 asset을 다루는 차분한 제작 벤치처럼 느
 
 ### Pipeline Row
 - **구조**: label, format badge, output status, 짧은 근거.
-- **변형**: background-jpg, png-element, svg-element, gif-element, metadata.
+- **변형**: background-jpg, png-element, aside-chatgpt-transparent, svg-element, gif-element, metadata.
 - **간격**: padding --space-4, 내부 gap --space-2.
 - **상태**: hover highlight.
 - **접근성**: 색상만으로 의미를 전달하지 않는다.

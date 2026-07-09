@@ -8,6 +8,7 @@ build/
 *.egg-info/
 outputs/
 tmp/
+aside-chatgpt-transparent-workspace/
 *.png
 *.webp
 !assets/**
