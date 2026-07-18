@@ -25,14 +25,14 @@ The personal plugin exposes six focused skill entrypoints:
 - `jpg-background`: JPG backgrounds and `contentType=Background`.
 - `svg-beta`: SVG element candidates, kept as a beta route until visual validation passes.
 - `gif-beta`: GIF element candidates, kept as a beta route until playback and transparency validation pass.
-- `upload-csv`: use the user-requested live surface for DesignHub file upload, CSV download, and merged CSV upload while preserving `uniqueId` values. Aside is currently a macOS route; Windows support is planned, and MCP is the next preferred automation route when available.
+- `upload-csv`: use Computer Use for DesignHub file upload, CSV download, and merged CSV upload, including the macOS file picker, while preserving `uniqueId` values. MCP and Aside are not live-action routes for this flow.
 
 ## Recent Production Lessons
 
 - For semi-transparent PNG effects such as wind, breeze, air flow, mist, or soft motion lines, background-color tests alone are not enough. If chroma color leaks into the effect, regenerate or add an intentional light/neutral outline or stroke around the effect before background removal, then validate on checkerboard, white, and dark previews.
 - For native transparent ChatGPT outputs, white backgrounds can hide broken alpha. Inspect checkerboard, white, and dark previews, and scan for interior transparent holes before accepting the image.
 - Keep DesignHub state transitions separate: file upload, CSV download, `uniqueId` merge, CSV upload, and final review submission are different states. Do not click final review submission unless the user explicitly asks for that separate step.
-- Use the surface the user names. If the user asks for Aside, do not switch to Chrome. Aside is currently macOS-only; on Windows, wait for planned support or use MCP/a confirmed supported surface.
+- Use Computer Use for every live DesignHub upload, CSV download, and CSV upload action, including the macOS file picker. Keep MCP and Aside out of this flow.
 
 ## Codex Plugin Install
 

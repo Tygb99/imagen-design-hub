@@ -1,6 +1,6 @@
 ---
 name: upload-csv
-description: MiriCanvas 또는 DesignHub 요소 파일이 업로드 준비된 뒤, Aside(macOS), 사용 가능한 MCP, macOS 파일 탐색기 접근용 Computer Use, 또는 명시적으로 확인된 UI 경로 같은 live DesignHub surface로 파일 업로드, CSV 메타데이터 다운로드, uniqueId 보존 병합, CSV 재업로드를 진행할 때 사용한다.
+description: MiriCanvas 또는 DesignHub 요소 파일이 업로드 준비된 뒤, Computer Use로 live DesignHub surface를 조작해 파일 업로드, CSV 메타데이터 다운로드, uniqueId 보존 병합, 병합 CSV 재업로드를 진행할 때 사용한다.
 ---
 
 # Imagen Design Hub: 업로드 후 CSV
@@ -15,13 +15,10 @@ description: MiriCanvas 또는 DesignHub 요소 파일이 업로드 준비된 �
 
 ## 필수 Live Surface
 
-DesignHub UI를 실제로 조작하는 모든 단계는 사용자가 요청한 surface를 사용한다.
+이 경로의 DesignHub UI를 실제로 조작하는 모든 단계는 Computer Use를 사용한다.
 
-- 사용자가 Aside를 요청하면 `aside-browser`를 사용한다. Aside는 현재 macOS에서만 지원된다. Windows 지원은 예정이므로 Windows Aside 지원을 있다고 말하거나 가정하지 않는다.
-- 다음 우선 자동화 경로는 MCP다. DesignHub MCP 도구가 사용 가능하고 사용자가 요청하면, 파일 선택 단계를 완료할 수 있는 경우 browser UI 대신 MCP로 upload/download action을 수행한다.
-- Aside MCP CLI 또는 다른 MCP 경로가 DesignHub 파일 업로드나 CSV 업로드의 macOS 파일 탐색기/파일 선택기에 접근하지 못하면, 해당 파일 선택 단계는 Computer Use로 전환하고 나머지 흐름은 확인된 DesignHub surface를 유지한다. 이 fallback은 최종 상태 보고에 기록한다.
-- 사용자가 다른 surface를 지정한 뒤에는 Chrome, 숨은 browser automation, direct HTTP call, hidden API, terminal-only shortcut으로 바꾸지 않는다.
-- Chrome은 사용자가 명시적으로 요청했거나, 특정 surface 요청이 없고 Chrome이 확인된 지원 경로일 때만 사용한다.
+- DesignHub 페이지, 파일 업로드 컨트롤, CSV 다운로드 컨트롤, macOS 파일 탐색기/파일 선택기, CSV 재업로드 컨트롤 모두 Computer Use로 조작한다.
+- 이 경로의 live DesignHub action에는 MCP, Aside MCP CLI, `aside-browser`, Chrome 전용 automation, 숨은 browser automation, direct HTTP call, hidden API, terminal-only shortcut을 사용하지 않는다.
 - 로컬 CSV 병합, 행 검증, encoding 검사, 파일 검사는 일반 filesystem과 terminal 도구를 사용해도 된다.
 - 파일 업로드와 CSV 메타데이터 전송은 외부 DesignHub 상태를 바꾸므로, 특정 파일과 대상에 대한 확인이 아직 없었다면 live action 전에 사용자 확인이 필요하다.
 - 사용자가 별도 외부 제출 단계를 명시적으로 요청하지 않았다면 최종 심사 제출은 절대 누르지 않는다.
@@ -77,8 +74,8 @@ Background
 - keyword 수가 행마다 20~25개다.
 - CSV encoding은 UTF-8 without BOM이다.
 - 로컬 프로젝트 계약이 quote-all CSV를 요구하면 모든 field가 quote되어 있다.
-- DesignHub 파일 업로드, CSV 다운로드, CSV 업로드가 사용자가 요청한 surface에서 수행되었고, 필요한 경우 Computer Use는 막힌 macOS 파일 탐색기/파일 선택기 단계에만 사용되었다.
-- Aside 사용은 macOS로 제한되었거나, MCP/Computer Use/다른 지원 경로가 명시적으로 선택되었다.
+- DesignHub 파일 업로드, CSV 다운로드, CSV 업로드가 macOS 파일 탐색기/파일 선택기를 포함해 모두 Computer Use로 수행되었다.
+- 이 경로의 live DesignHub action에 MCP와 Aside를 사용하지 않았다.
 - DesignHub가 성공 처리 행 수를 표시했거나 오류 메시지를 그대로 캡처했다.
 - DesignHub가 예상 업로드 수와 CSV 처리 행 수를 보고했다.
 - 파일 업로드, CSV 업로드, 최종 심사 제출이 실제로 일어났는지 분명히 보고한다.

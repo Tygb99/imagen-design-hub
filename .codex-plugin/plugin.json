@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "MiriCanvas and DesignHub asset workflows for PNG elements, Aside/ChatGPT native transparent PNGs, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, Photopea finishing, keyword cleanup, and PNG fringe QA.",
   "author": {
     "name": "Tygb99",
@@ -31,7 +31,7 @@
   "interface": {
     "displayName": "Imagen Design Hub",
     "shortDescription": "Prepare DesignHub PNG, ChatGPT transparent, JPG, SVG, GIF, and CSV assets.",
-    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, Aside/ChatGPT native transparent PNG batches, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill for chroma-key routes, uses Aside when the user wants logged-in ChatGPT native transparent output, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus hidden-alpha QA on dark backgrounds, and keeps DesignHub upload/download actions on the user-requested live surface such as Aside on macOS, MCP when available, or Computer Use when MCP cannot reach the macOS file picker.",
+    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, Aside/ChatGPT native transparent PNG batches, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill for chroma-key routes, uses Aside when the user wants logged-in ChatGPT native transparent output, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus hidden-alpha QA on dark backgrounds, and always uses Computer Use for live DesignHub upload, CSV download, and merged CSV upload actions, including macOS file-picker steps.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
@@ -43,9 +43,8 @@
       "Breeze outline QA",
       "Hidden alpha QA",
       "CSV metadata",
-      "Mac Aside upload guidance",
-      "MCP-ready upload notes",
-      "Computer Use file-picker fallback",
+      "Mac Aside generation guidance",
+      "Computer Use DesignHub upload/download",
       "Auto-update"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
@@ -53,7 +52,7 @@
       "Use $image-gen to prepare PNG elements for DesignHub.",
       "Use aside-chatgpt-transparent when the user asks for Aside or ChatGPT native transparent PNG generation.",
       "Run png-element chroma cleanup and fringe QA.",
-      "Use the requested DesignHub upload surface; Aside is macOS-only, MCP is preferred when it can reach the file picker, and Computer Use is the fallback for blocked macOS file selection."
+      "Always use Computer Use for live DesignHub file upload, CSV download, and merged CSV upload, including macOS file-picker steps."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

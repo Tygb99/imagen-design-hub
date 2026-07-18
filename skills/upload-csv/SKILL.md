@@ -1,6 +1,6 @@
 ---
 name: upload-csv
-description: Use after MiriCanvas or DesignHub element files are ready for upload and the next step requires a live DesignHub surface such as Aside on macOS, MCP when available, Computer Use for macOS file-picker access, or an explicitly confirmed UI route to upload files, download CSV metadata, preserve uniqueId values, merge rows, and re-upload the CSV.
+description: Use after MiriCanvas or DesignHub element files are ready for upload and the next step requires Computer Use to operate the live DesignHub surface for file upload, CSV metadata download, uniqueId preservation, metadata merge, and merged CSV re-upload.
 ---
 
 # Imagen Design Hub: Upload Then CSV
@@ -15,13 +15,10 @@ Shared reference: read `../../SKILL.md` for route-specific `contentType` values 
 
 ## Mandatory Live Surface
 
-Any live DesignHub UI action in this route must use the surface the user requested.
+Every live DesignHub UI action in this route must use Computer Use.
 
-- If the user asks for Aside, use `aside-browser`. Aside is currently supported on macOS only; Windows support is planned, so do not claim or assume Windows Aside support.
-- The next preferred automation route is MCP. If DesignHub MCP tools are available and the user asks for them, use MCP for upload/download actions instead of a browser UI route when it can complete the file picker steps.
-- If Aside MCP CLI or another MCP route cannot access the macOS file picker/file explorer for DesignHub upload or CSV upload, switch that picker step to Computer Use and keep the rest of the flow on the confirmed DesignHub surface. Record that fallback in the final state.
-- Do not switch to Chrome, hidden browser automation, direct HTTP calls, hidden APIs, or terminal-only shortcuts after the user names another surface.
-- Use Chrome only when the user explicitly asks for it, or when no specific surface was requested and Chrome is the confirmed supported path.
+- Use Computer Use for the DesignHub page, file upload controls, CSV download controls, macOS file picker/file explorer, and CSV re-upload controls.
+- Do not use MCP, Aside MCP CLI, `aside-browser`, Chrome-only automation, hidden browser automation, direct HTTP calls, hidden APIs, or terminal-only shortcuts for the live DesignHub actions in this route.
 - Local CSV merging, row validation, encoding checks, and file inspections may still use normal filesystem and terminal tools.
 - Uploading files and transmitting CSV metadata to DesignHub require explicit user confirmation before the live action if that confirmation has not already been provided for the specific files and destination.
 - Never click final review submission unless the user explicitly asks for that separate external submission step.
@@ -77,8 +74,8 @@ Before reporting ready:
 - keyword counts are 20 to 25 per row
 - CSV encoding is UTF-8 without BOM
 - every field is quoted if the local project contract requires quote-all CSV
-- live DesignHub file upload, CSV download, and CSV upload were performed through the user-requested surface, with Computer Use used only for blocked macOS file-picker/file-explorer steps when needed
-- Aside use was limited to macOS, or MCP/Computer Use/another supported route was explicitly selected
+- live DesignHub file upload, CSV download, and CSV upload were all performed through Computer Use, including macOS file-picker/file-explorer steps
+- MCP and Aside were not used for the live DesignHub actions in this route
 - DesignHub displayed a successful processed-row count or an error message was captured verbatim
 - DesignHub reported the expected upload count and CSV processed-row count
 - state clearly whether file upload, CSV upload, or final review submission actually happened
