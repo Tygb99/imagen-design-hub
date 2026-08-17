@@ -34,6 +34,8 @@
 - DesignHub 상태는 파일 업로드, CSV 다운로드, `uniqueId` 병합, CSV 업로드, 최종 심사 제출을 분리해서 보고한다. 사용자가 별도로 요청하지 않으면 최종 심사 제출은 누르지 않는다.
 - DesignHub 파일 업로드, CSV 다운로드, CSV 업로드 같은 live action은 macOS 파일 선택기를 포함해 모두 Computer Use로 수행한다. 이 흐름에서는 MCP와 Aside를 사용하지 않는다.
 
+`upload-csv` 경로는 선택한 CSV가 제출 예정/대상 목록에서 나온 것인지, 새로 업로드한 basename을 모두 포함하는지도 확인한다. 관리 페이지의 `업로드된 모든 콘텐츠` export는 active-only일 수 있어 pending 파일이 빠질 수 있다. CSV 다운로드가 macOS 저장 대화상자를 열면 timestamp 파일명으로 먼저 저장한 뒤 로컬 검증을 진행한다.
+
 ## Codex 플러그인 설치
 
 공개 플러그인은 다음 명령으로 설치합니다.
@@ -56,6 +58,15 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs
 ```
 
 설치 스크립트는 `~/plugins/imagen-design-hub`를 `~/.agents/plugins/marketplace.json`에 등록합니다.
+Codex를 재시작하거나 플러그인 선택기를 다시 열고 `Imagen Design Hub`가 보이는지 확인합니다.
+
+체크아웃 파일은 삭제하지 않고 marketplace 등록만 해제하려면 다음을 실행합니다.
+
+```bash
+node ~/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs
+```
+
+등록 해제 후 더 이상 로컬 체크아웃이 필요하지 않으면 `~/plugins/imagen-design-hub`를 다른 위치로 옮기거나 삭제한 뒤 Codex를 재시작하거나 플러그인 선택기를 다시 엽니다.
 
 ## 자동 업데이트
 
