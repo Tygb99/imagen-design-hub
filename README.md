@@ -34,6 +34,8 @@ The personal plugin exposes six focused skill entrypoints:
 - Keep DesignHub state transitions separate: file upload, CSV download, `uniqueId` merge, CSV upload, and final review submission are different states. Do not click final review submission unless the user explicitly asks for that separate step.
 - Use Computer Use for every live DesignHub upload, CSV download, and CSV upload action, including the macOS file picker. Keep MCP and Aside out of this flow.
 
+The upload-csv route also verifies that the export came from the pending/submission list and contains every newly uploaded basename. The manage-page all-uploaded export can be active-only and omit pending files. CSV downloads that open a macOS Save dialog are saved with an explicit timestamped filename before local validation.
+
 ## Codex Plugin Install
 
 Install the public plugin with:
@@ -56,6 +58,15 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs
 ```
 
 The installer registers `~/plugins/imagen-design-hub` in `~/.agents/plugins/marketplace.json`.
+Restart Codex or reopen the plugin picker, then confirm the `Imagen Design Hub` plugin is visible.
+
+To remove the marketplace entry without deleting the checkout:
+
+```bash
+node ~/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs
+```
+
+After unregistering, move or delete `~/plugins/imagen-design-hub` if you no longer need the local checkout, then restart Codex or reopen the plugin picker.
 
 ## Auto Update
 

@@ -103,10 +103,7 @@ For hidden transparency checks, scan for transparent or very-low-alpha component
 ChatGPT native transparent output is often 1024 px and low DPI. Treat it as source, not final.
 
 1. Preserve source downloads in `assets/source-aside-chatgpt/`.
-2. Run the project Photopea runner when one exists. For `miricanvas-design`, prefer:
-   ```bash
-   node src/cli.mjs photopea-runner --run outputs/<run-id>
-   ```
+2. If the active project explicitly provides a Photopea runner command, use that project's documented command. The plugin bundle does not ship `src/cli.mjs`.
 3. If no project runner exists, create or use the bundled runner pattern with `../../scripts/write_photopea_runner.py`.
 4. Final PNGs should satisfy the local DesignHub convention unless the user says otherwise:
    - PNG with alpha

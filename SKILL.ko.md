@@ -267,11 +267,8 @@ DesignHub/MiriCanvas PNG 요소 작업:
 
 1. imagegen source는 `assets/source-imagegen/`에 둔다.
 2. helper alpha 출력은 `assets/raw/`에 둔다.
-3. 프로젝트 runner가 있으면 먼저 실행한다.
-   ```bash
-   node src/cli.mjs photopea-runner --run outputs/<run-id>
-   ```
-4. 없으면 번들 runner를 만든다.
+3. 현재 프로젝트가 Photopea runner 명령을 명시적으로 제공하면 그 프로젝트 문서의 명령을 사용한다. 플러그인 번들에는 `src/cli.mjs`가 포함되어 있지 않다.
+4. 프로젝트 runner가 없으면 번들 runner를 만든다.
    ```bash
    python scripts/write_photopea_runner.py \
      --raw-dir "outputs/<run-id>/assets/raw" \
@@ -462,11 +459,7 @@ JPG 배경, SVG 요소, GIF 요소도 generic name은 피한다. topic slug와 t
 - 이 경로는 초기 alpha이므로 upload-ready라고 부르기 전에 투명도 품질, edge halo, playback 안정성을 눈으로 확인한다.
 - CSV `contentType`이 `GIF`이고 CSV basename이 최종 GIF basename과 확장자 없이 일치한다.
 
-프로젝트가 적용 가능한 검증 명령을 제공하면 실행한다.
-
-```bash
-node src/cli.mjs validate --run outputs/<run-id>
-```
+현재 프로젝트가 적용 가능한 검증 명령을 제공하면 그 프로젝트 명령을 실행한다. 플러그인 번들에는 `src/cli.mjs`가 포함되어 있지 않다.
 
 ## 복잡한 투명도 경계
 

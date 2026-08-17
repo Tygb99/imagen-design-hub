@@ -27,13 +27,14 @@ description: MiriCanvas 또는 DesignHub 요소 파일이 업로드 준비된 �
 
 1. 사용자가 외부 DesignHub action을 명시적으로 확인한 경우에만, 확인된 live surface로 준비된 image/vector/GIF 파일을 업로드한다.
 2. DesignHub가 `10 of 10 uploaded` 같은 업로드 완료 상태를 보일 때까지 기다린 뒤 업로드 완료로 본다.
-3. 같은 확인된 live surface로 파일 업로드 후 DesignHub가 제공하는 CSV를 다운로드한다.
-4. 다운로드한 CSV를 `fileName`과 `uniqueId`의 source of truth로 취급한다.
-5. 준비한 metadata를 다운로드한 행에 병합하되 `uniqueId`를 삭제하거나, 불필요하게 재정렬하거나, 다시 만들지 않는다.
-6. 병합 CSV는 새 batch 행만이 아니라 다운로드한 DesignHub CSV의 모든 행을 유지한다.
-7. 로컬 프로젝트 계약이 quote-all CSV를 요구하면 CSV는 UTF-8 without BOM, 모든 field quote 상태로 유지한다.
-8. 사용자가 해당 외부 action을 명시적으로 확인한 경우에만, 확인된 live surface로 병합 CSV를 다시 업로드한다.
-9. CSV 업로드 후 DesignHub 완료 메시지나 배너를 확인한다. 처리된 행 수를 기록하고, 파일 업로드, CSV 업로드, 최종 심사 제출을 구분한다.
+3. 파일 업로드 후 제출 예정/대상 목록으로 이동해 그 화면의 CSV 다운로드 컨트롤을 사용한다. 관리 페이지의 `업로드된 모든 콘텐츠` export에 pending 파일이 포함된다고 가정하지 않는다.
+4. macOS 저장 대화상자가 나타나면 timestamp가 붙은 명시적 파일명으로 저장한 뒤 로컬에서 CSV를 검사한다.
+5. 선택한 다운로드 CSV에 새로 업로드한 모든 basename이 있고 각 `uniqueId`가 비어 있지 않은지 확인한 뒤, 그 CSV를 `fileName`과 `uniqueId`의 source of truth로 취급한다.
+6. 준비한 metadata를 다운로드한 행에 병합하되 `uniqueId`를 삭제하거나, 불필요하게 재정렬하거나, 다시 만들지 않는다.
+7. 병합 CSV는 새 batch 행만이 아니라 다운로드한 DesignHub CSV의 모든 행을 유지한다.
+8. 로컬 프로젝트 계약이 quote-all CSV를 요구하면 CSV는 UTF-8 without BOM, 모든 field quote 상태로 유지한다.
+9. 사용자가 해당 외부 action을 명시적으로 확인한 경우에만, 확인된 live surface로 병합 CSV를 다시 업로드한다.
+10. CSV 업로드 후 DesignHub 완료 메시지나 배너를 확인한다. 처리된 행 수를 기록하고, 파일 업로드, CSV 업로드, 최종 심사 제출을 구분한다.
 
 파일 등록 후 로컬 preupload CSV를 바로 올리지 않는다. DesignHub는 파일 업로드 후에만 `uniqueId`를 부여하므로, 올바른 흐름은 항상 현재 DesignHub CSV를 다운로드하고, 그 전체 파일에 병합한 뒤, 병합한 전체 CSV를 업로드하는 것이다.
 
@@ -79,3 +80,12 @@ Background
 - DesignHub가 성공 처리 행 수를 표시했거나 오류 메시지를 그대로 캡처했다.
 - DesignHub가 예상 업로드 수와 CSV 처리 행 수를 보고했다.
 - 파일 업로드, CSV 업로드, 최종 심사 제출이 실제로 일어났는지 분명히 보고한다.
+
+## 이번 실행에서 확인한 함정
+
+2026-08-17 실행에서 다음 실패 지점을 확인했다.
+
+- 관리 페이지의 `업로드된 모든 콘텐츠 CSV 다운로드`는 active/manage 행만 포함했다. 이번에는 189행이었고 새 파일이 없었다. 제출 예정 목록의 `CSV를 다운로드`는 pending 전체 275행과 새로 업로드한 4개 basename을 포함했다. 선택한 export에 새 basename이 모두 있고 행 수가 대상 목록과 같은지 반드시 확인한다.
+- DesignHub CSV 다운로드는 macOS 저장 대화상자를 열 수 있다. `.com.google.Chrome.*` 임시 파일이 읽을 수 있는 CSV여도 최종 저장 산출물로 간주하지 않는다. timestamp 파일명으로 저장한 뒤 실제 저장 경로와 헤더·행 수를 검사한다.
+- macOS 파일 선택기는 Finder처럼 보이거나 Chrome의 `열기` 상태로 나타날 수 있다. 전환마다 active app state를 다시 조회한다. Go To Folder로 정확한 폴더/파일 경로를 지정하고, 목표 파일의 selected 표시와 `열기` 버튼 활성화를 확인한다. 무조건 `Cmd+A`를 누르면 폴더가 선택되거나 아무 일도 일어나지 않을 수 있다.
+- 파일 업로드 성공 또는 275행 CSV 처리 완료는 심사 승인과 다르다. 피사체가 보이는 JPG를 `Background`로 올리면 Background 심사 기준에서 거절될 수 있으므로 파일 업로드, CSV 처리, 최종 심사 제출을 별도 상태로 보고한다.

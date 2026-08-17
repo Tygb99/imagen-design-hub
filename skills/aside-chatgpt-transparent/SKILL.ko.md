@@ -103,10 +103,7 @@ checkerboard, white, dark 배경 검수 sheet를 만든다. 전체 보기와 확
 ChatGPT native transparent 출력은 보통 1024px와 낮은 DPI다. source로 취급하고 final로 보지 않는다.
 
 1. source 다운로드는 `assets/source-aside-chatgpt/`에 보존한다.
-2. 프로젝트 Photopea runner가 있으면 먼저 실행한다. `miricanvas-design`에서는 다음을 우선한다.
-   ```bash
-   node src/cli.mjs photopea-runner --run outputs/<run-id>
-   ```
+2. 현재 프로젝트가 Photopea runner 명령을 명시적으로 제공하면 그 프로젝트 문서의 명령을 사용한다. 플러그인 번들에는 `src/cli.mjs`가 포함되어 있지 않다.
 3. 프로젝트 runner가 없으면 `../../scripts/write_photopea_runner.py`의 번들 runner 패턴을 사용한다.
 4. 사용자가 달리 말하지 않았다면 최종 PNG는 로컬 DesignHub 관례를 만족해야 한다.
    - alpha가 있는 PNG

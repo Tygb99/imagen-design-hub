@@ -267,11 +267,8 @@ For DesignHub/MiriCanvas PNG element runs:
 
 1. Keep imagegen sources in `assets/source-imagegen/`.
 2. Keep helper alpha outputs in `assets/raw/`.
-3. Run the project runner when one exists:
-   ```bash
-   node src/cli.mjs photopea-runner --run outputs/<run-id>
-   ```
-4. Otherwise create the bundled runner:
+3. If the active project explicitly provides a Photopea runner command, use that project's documented command. The plugin bundle does not ship `src/cli.mjs`.
+4. If no project runner exists, create the bundled runner:
    ```bash
    python scripts/write_photopea_runner.py \
      --raw-dir "outputs/<run-id>/assets/raw" \
@@ -462,11 +459,7 @@ Run validation suited to the route.
 - Because this route is early alpha, transparency quality, edge halos, and playback smoothness must be checked by eye before calling it upload-ready.
 - CSV `contentType` is `GIF`, and CSV basenames match final GIF basenames without extensions.
 
-If the project provides a validation command, run it when it applies:
-
-```bash
-node src/cli.mjs validate --run outputs/<run-id>
-```
+If the active project provides a validation command, run that project command when it applies. The plugin bundle does not ship `src/cli.mjs`.
 
 ## Complex Transparency Boundary
 
