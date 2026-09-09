@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.4.3",
-  "description": "Codex plugin installer for MiriCanvas and DesignHub asset workflows.",
+  "version": "0.5.0",
+  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "license": "MIT",
   "homepage": "https://tygb99.github.io/imagen-design-hub/",
   "repository": {
@@ -13,7 +13,8 @@
     "codex-plugin",
     "miricanvas",
     "designhub",
-    "imagegen"
+    "imagegen",
+    "sprite-gen"
   ],
   "bin": {
     "imagen-design-hub": "./bin/install.mjs"

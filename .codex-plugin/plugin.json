@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.4.3",
-  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, Aside/ChatGPT native transparent PNGs, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, Photopea finishing, keyword cleanup, and PNG fringe QA.",
+  "version": "0.5.0",
+  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -13,46 +13,38 @@
     "miricanvas",
     "designhub",
     "imagegen",
-    "image-gen",
-    "aside",
     "chatgpt",
     "native-transparent",
     "png-element",
-    "fringe-cleanup",
     "jpg-background",
     "svg",
     "gif",
-    "csv"
+    "csv",
+    "sprite-gen"
   ],
   "skills": "./skills/",
-  "hooks": [
-    "./hooks/session-start-auto-update.json"
-  ],
   "interface": {
     "displayName": "Imagen Design Hub",
-    "shortDescription": "Prepare DesignHub PNG, ChatGPT transparent, JPG, SVG, GIF, and CSV assets.",
-    "longDescription": "Route MiriCanvas DesignHub work into focused flows for PNG elements, Aside/ChatGPT native transparent PNG batches, JPG backgrounds, SVG beta elements, GIF beta elements, and post-upload CSV metadata. The plugin defaults generation work to the installed $image-gen skill for chroma-key routes, uses Aside when the user wants logged-in ChatGPT native transparent output, reuses the copied chroma-key helper for PNG elements, adds magenta-fringe QA plus hidden-alpha QA on dark backgrounds, and always uses Computer Use for live DesignHub upload, CSV download, and merged CSV upload actions, including macOS file-picker steps.",
+    "shortDescription": "PNG recommendations, native transparency, sprite-gen GIFs and DesignHub CSV.",
+    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Keep JPG, SVG and Computer Use upload/CSV routes.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
-      "Image generation routing",
-      "image-gen skill workflow",
-      "Aside ChatGPT transparent PNG workflow",
-      "File preparation",
-      "Magenta fringe QA",
-      "Breeze outline QA",
-      "Hidden alpha QA",
-      "CSV metadata",
-      "Mac Aside generation guidance",
-      "Computer Use DesignHub upload/download",
-      "Auto-update"
+      "PNG element recommendations",
+      "Native transparent PNG generation",
+      "Alpha-preserving finishing",
+      "sprite-gen GIF animation",
+      "Motion and alpha QA",
+      "JPG and SVG assets",
+      "DesignHub CSV",
+      "Computer Use upload"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
-      "Use $image-gen to prepare PNG elements for DesignHub.",
-      "Use aside-chatgpt-transparent when the user asks for Aside or ChatGPT native transparent PNG generation.",
-      "Run png-element chroma cleanup and fringe QA.",
-      "Always use Computer Use for live DesignHub file upload, CSV download, and merged CSV upload, including macOS file-picker steps."
+      "Recommend 3-5 PNG element concepts with subject, style, use case and buyer-facing keywords.",
+      "Use built-in image_gen for genuinely transparent PNGs; preserve native alpha and inspect checkerboard, white and dark composites.",
+      "Use the installed sprite-gen skill for GIF candidates, check its version and inspect actual animation playback.",
+      "Use Computer Use for authorized DesignHub uploads and CSV roundtrips, preserving downloaded uniqueId values."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

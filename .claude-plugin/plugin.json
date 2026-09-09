@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.4.3",
-  "description": "MiriCanvas and DesignHub asset workflows for PNG elements, Aside/ChatGPT native transparent PNGs, JPG backgrounds, SVG/GIF beta routes, image-gen source creation, Photopea finishing, keyword cleanup, and PNG fringe QA.",
+  "version": "0.5.0",
+  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -13,16 +13,14 @@
     "miricanvas",
     "designhub",
     "imagegen",
-    "image-gen",
-    "aside",
     "chatgpt",
     "native-transparent",
     "png-element",
-    "fringe-cleanup",
     "jpg-background",
     "svg",
     "gif",
-    "csv"
+    "csv",
+    "sprite-gen"
   ],
   "skills": "./skills/",
   "hooks": "./hooks/claude-session-start-auto-update.json"

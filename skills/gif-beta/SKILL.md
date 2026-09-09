@@ -1,43 +1,25 @@
 ---
 name: gif-beta
-description: Use for MiriCanvas or DesignHub GIF element beta work: animated illustration assets, looping sticker-like motion, GIF encode checks, transparency review, and GIF CSV rows.
+description: Create DesignHub GIF candidates through the installed sprite-gen component-row pipeline, motion QA and GIF metadata.
 ---
 
-# Imagen Design Hub: GIF Beta
+# GIF with sprite-gen
 
-Use this route when the user says `gif(beta)`, GIF element, animated sticker, looping illustration, motion badge, or moving icon-like art.
+[Korean](SKILL.ko.md)
 
-This route is beta. Treat outputs as candidates until validation and manual playback review pass.
+Read the installed sprite-gen SKILL.md and resolve its actual path. Integration target: 2.0.3. Do not copy the engine or assume a developer's home path.
 
-Shared reference: read `../../SKILL.md` and `../../references/designhub-element-guide-map.md` when official file specs or route boundaries matter.
+1. Inspect and lock a complete base. Prepare a new run with short readable states. For smooth glass illustration, disable pixel-unfake.
+2. Use sprite-gen's venv and request-generated prompts: prepare → gen → extract → compose-atlas → preview → compose-gif. Version 2.0.3 rows still require chroma-key sources; native PNG support does not change that contract.
+3. Generate through Codex with the request's frame count, references, spacing and subject-safe key. Never substitute duplicated stills or locally drawn motion.
+4. Preserve raw rows, frames, atlas, runtime manifest, GIF and QA reports. Compose through run-dir so curation is honored.
+5. Inspect every frame and actual playback: motion, identity, scale, clipping, loop seam and ghosting. Regenerate a failing row.
+6. Open the Korean curation view and provide its URL unless an unattended batch was requested.
 
-## Core Rules
+GIF has palette-limited color and binary transparency; it cannot preserve PNG's continuous partial alpha. Keep RGBA sources and report glass-translucency loss. The image model generates still frames, not a native animated GIF.
 
-- Use frame files or an animation source. Preserve the source frames separately.
-- The final GIF must visibly animate. A still image saved as GIF is not enough.
-- Keep the subject clear, fully visible, and stable across the loop.
-- Remove or preserve transparency as appropriate for the element; inspect edge halos and flicker on multiple backgrounds.
-- Do not convert filmed/video footage into a DesignHub GIF element. Route filmed footage to the gated MP4 video path and confirm permission first.
+Check hardware encoding support first. If there is no hardware GIF palette/LZW encoder, use sprite-gen's CPU writer and state why.
 
-## Output Contract
+Verify real animated GIF, multiple distinct frames, intended looping, 700–1920 px per side, under 25 MB, and checkerboard/white/dark playback. Confirm current official DesignHub acceptance rules before submission.
 
-- Final files are `.gif`.
-- Minimum dimension is 700 px.
-- Maximum dimension is 1920 px.
-- File size is under 25 MB.
-- CSV rows use `contentType` value `GIF`.
-- CSV `fileName` is the basename only, without `.gif`.
-- `uniqueId` stays blank unless it came from a DesignHub-downloaded CSV after upload.
-- Keywords must be 20 to 25 unique buyer-facing terms.
-
-## Validation
-
-Before calling a GIF candidate ready:
-
-- file is a real GIF and visibly animated
-- dimensions and file size pass
-- playback loops as intended
-- subject remains uncropped and clear through all frames
-- checkerboard, white, and dark previews show no background flicker or severe edge halos
-- because this is beta, transparency quality and motion smoothness were checked by eye
-- external DesignHub upload/submission was not performed unless the user explicitly confirmed it
+CSV: extensionless fileName, contentType GIF, default tier Premium, 20–25 unique buyer-facing keywords, and no invented uniqueId. Follow [shared rules](../../SKILL.md) and [upload-csv](../upload-csv/SKILL.md). Report candidate quality separately from upload/review status.

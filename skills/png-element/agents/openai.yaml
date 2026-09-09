@@ -1,10 +1,4 @@
 interface:
   display_name: "Imagen Design Hub: PNG Element"
-  short_description: "DesignHub PNG element route with image-gen, chroma cleanup, Photopea, and fringe QA"
-  search_terms:
-    - "png-element"
-    - "png요소"
-    - "transparent PNG"
-    - "image-gen"
-    - "magenta fringe"
-  default_prompt: "Use $imagen-design-hub:png-element to prepare upload-ready DesignHub PNG elements with $image-gen, chroma cleanup, Photopea, and fringe QA."
+  short_description: "Recommend PNG elements and create native transparent assets"
+  default_prompt: "Use $imagen-design-hub:png-element to recommend useful PNG concepts, generate native transparent images with built-in image_gen, preserve partial alpha, finish size and DPI locally, and validate metadata."

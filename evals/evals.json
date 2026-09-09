@@ -21,26 +21,14 @@
     },
     {
       "id": 4,
-      "prompt": "미리캔버스 DesignHub에 올릴 투명 PNG 요소로 글래스모피즘 물방울 6개 만들어줘. imagegen으로 만들고 헬퍼로 배경제거한 다음 Photopea로 350DPI 처리해줘.",
-      "expected_output": "Routes to png-element, uses the installed $image-gen skill for flat chroma-key source images, preserves sources, runs scripts/chroma_key.py into assets/raw, applies magenta-fringe decontamination when the key and subject colors allow it, uses Photopea/project runner for assets/processed, creates upload-safe unique PNG basenames and matching CSV, and validates alpha, size, DPI, dark/white/checker previews, keywords, and CSV alignment.",
-      "files": []
-    },
-    {
-      "id": 5,
-      "prompt": "이 캐릭터 스티커를 투명 배경 PNG로 만들고 싶어. 초록색 옷이라 배경색은 겹치지 않게 골라서 생성하고 로컬 helper로 배경 제거까지 해줘.",
-      "expected_output": "Chooses a non-green key color such as magenta, prompts $image-gen to avoid that key color in the subject, runs the bundled chroma_key.py helper, decontaminates magenta cast only when the subject has no real pink/purple/magenta details, checks alpha/corners/fringes on dark/white/checker previews, and saves non-destructively.",
+      "prompt": "DesignHub 글래스모피즘 물방울 PNG 요소 6개를 투명 배경으로 생성하고 350 DPI로 준비해줘.",
+      "expected_output": "Use built-in image_gen once per native transparent element. Preserve source alpha, finish a separate copy locally, validate size/DPI and checker/white/dark composites, and prepare PNG element metadata. No mandatory chroma, Aside or Photopea.",
       "files": []
     },
     {
       "id": 6,
       "prompt": "투명한 유리컵 제품컷을 native transparent로 바로 뽑아줘. 가능하면 배경제거 없이.",
-      "expected_output": "Recognizes glass/native transparency as complex, explains the built-in chroma-key default versus CLI native transparency fallback, and asks for confirmation before switching to CLI/API.",
-      "files": []
-    },
-    {
-      "id": 7,
-      "prompt": "이 스킬을 Windows PC PowerShell에서 써야 해. 투명 PNG helper랑 Photopea runner 명령을 윈도우 경로로 안내해줘.",
-      "expected_output": "Provides Windows PowerShell-safe commands using py -3 or python, ./scripts/... paths, backtick line continuations, quoted portable output paths, and avoids Bash-only environment-variable fallback syntax while keeping the transparent PNG DesignHub route distinct from SVG and GIF routes.",
+      "expected_output": "Use built-in image_gen with native transparency, preserve glass partial alpha, measure exterior alpha and inspect three backgrounds. Do not require an API key or chroma extraction.",
       "files": []
     },
     {
@@ -52,19 +40,19 @@
     {
       "id": 9,
       "prompt": "DesignHub GIF 요소로 움직이는 반짝이 스티커 6개 만들어줘. 영상 말고 일러스트 애니메이션으로.",
-      "expected_output": "Routes to gif-element, builds or preserves frame/animation sources, encodes animated GIFs rather than still GIFs or MP4 footage, verifies playback, loop stability, removed/transparent background, 700-1920 px bounds, under-25MB size, and writes metadata with extensionless fileName and contentType GIF.",
-      "files": []
-    },
-    {
-      "id": 10,
-      "prompt": "aside로 ChatGPT에서 native transparent 태극기 PNG 요소 10개를 1장씩 만들고 2분 기다렸다가 다운로드해. 로컬에서 검수하고 Photopea 후처리랑 키워드 CSV까지 만들어줘.",
-      "expected_output": "Routes to aside-chatgpt-transparent, uses Aside/ChatGPT one image at a time with a generation wait window, downloads native RGBA sources, preserves originals, validates alpha on checkerboard/white/dark previews including hidden transparent holes and factual flag criteria, finishes processed PNGs through Photopea at 350 DPI and 2500px+ size, writes PNG element metadata with 20-25 buyer-facing keywords, and does not perform DesignHub upload or final submission without explicit confirmation.",
+      "expected_output": "Read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, open curation, and report GIF binary-alpha limits.",
       "files": []
     },
     {
       "id": 11,
       "prompt": "ChatGPT 투명 PNG로 나온 캐릭터 4번이 흰 배경에선 괜찮은데 어두운 배경에서 괘 사이가 뚫려 보여. 교체 또는 수리 기준까지 포함해서 검수해줘.",
-      "expected_output": "Uses the aside-chatgpt-transparent QA rules for native transparent sources, inspects dark-background and zoomed detail previews, scans for interior transparent/low-alpha components, preserves before files, repairs only localized alpha defects with a manifest or replaces structurally/factually wrong images, regenerates Photopea processed outputs, and reports before/after hashes plus validation evidence.",
+      "expected_output": "Route native PNG alpha QA to png-element. Inspect dark and light composites and internal holes; preserve original and regenerate structurally wrong output without blanket alpha/color removal.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "PNG 요소로 뭘 만들면 좋을까?",
+      "expected_output": "Recommend 3-5 concrete PNG concepts with subject, style, use case and buyer-facing keywords.",
       "files": []
     }
   ]

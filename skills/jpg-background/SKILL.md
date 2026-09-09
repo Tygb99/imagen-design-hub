@@ -1,6 +1,6 @@
 ---
 name: jpg-background
-description: Use for MiriCanvas or DesignHub JPG background assets: imagegen backgrounds, natural textures, full-bleed non-subject images, JPG conversion, and Background CSV rows.
+description: "Use for MiriCanvas or DesignHub JPG background assets: imagegen backgrounds, natural textures, full-bleed non-subject images, JPG conversion, and Background CSV rows."
 ---
 
 # Imagen Design Hub: JPG Background

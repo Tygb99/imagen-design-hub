@@ -1,6 +1,6 @@
 ---
 name: svg-beta
-description: Use for MiriCanvas or DesignHub SVG element beta work: simple vector illustrations, color-editable elements, SVG cleanup, validation, and SVG element CSV rows.
+description: "Use for MiriCanvas or DesignHub SVG element beta work: simple vector illustrations, color-editable elements, SVG cleanup, validation, and SVG element CSV rows."
 ---
 
 # Imagen Design Hub: SVG Beta
