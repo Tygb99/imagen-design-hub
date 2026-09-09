@@ -1,223 +1,52 @@
-# imagen-design-hub
+# imagen-design-hub 0.5.0
 
-[English README](README.md)
+[English](README.md)
 
-[![GitHub stars](https://img.shields.io/github/stars/Tygb99/imagen-design-hub?style=social)](https://github.com/Tygb99/imagen-design-hub/stargazers)
+PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 알파를 검수한 뒤 DesignHub 메타데이터를 준비한다.
 
-`image_gen`, 로컬 source art, vector export, animation 파일로 MiriCanvas / DesignHub 산출물을 준비하는 Codex 스킬입니다.
+## 경로
 
-다섯 가지 주요 경로를 다룹니다.
+- PNG 추천·네이티브 투명: [png-element](skills/png-element/SKILL.ko.md)
+- GIF 후보: [gif-beta](skills/gif-beta/SKILL.ko.md), 설치된 sprite-gen 2.0.3 사용
+- 전체 배경: [jpg-background](skills/jpg-background/SKILL.md)
+- 실제 벡터: [svg-beta](skills/svg-beta/SKILL.md)
+- Computer Use 업로드·CSV: [upload-csv](skills/upload-csv/SKILL.ko.md)
 
-1. **JPG 배경 요소**: built-in `image_gen`으로 자연스러운 배경 이미지를 만들고, source PNG를 보존한 뒤, 최종 JPG와 `contentType=Background` CSV를 만듭니다.
-2. **투명 PNG 요소**: 단색 크로마키 배경으로 생성하고, 번들 헬퍼로 배경을 제거한 뒤, 필요하면 Photopea로 업로드용 PNG를 마무리하고 메타데이터를 만듭니다.
-3. **Aside / ChatGPT native transparent PNG 요소**: 로그인된 ChatGPT에서 1장씩 생성하고, native RGBA source를 다운로드한 뒤, checker/white/dark 배경에서 alpha를 검수하고, Photopea로 마무리해 키워드/CSV를 만듭니다.
-4. **SVG 요소**: 단순 vector 일러스트를 SVG cleanup, 색상 수 검사, `contentType=SVG element` 경로로 보냅니다.
-5. **GIF 요소**: 움직이는 일러스트 frame을 GIF encode/playback 검사와 `contentType=GIF` 경로로 보냅니다.
+## 0.5.0 변경
 
-이 스킬은 source, final, review sheet, prompt log, CSV를 분리해서 DesignHub 업로드 전에 배치를 검수할 수 있게 합니다.
+PNG 기본 경로를 내장 image_gen 네이티브 투명으로 바꿨다. 크로마키 강제·일괄 색 번짐 제거·별도 Aside 투명 스킬을 삭제했다. 부분 알파를 보존하고 체크보드·흰색·어두운 배경을 검수한다. Photopea는 선택 사항이며 수동 편집용 runner는 유지한다.
 
-## 플러그인 스킬 분리
+GIF는 sprite-gen의 component-row 생성·추출을 쓴다. 현재 행 생성 계약은 크로마키다. GIF의 이진 투명도와 제한된 팔레트 때문에 유리 반투명이 RGBA PNG와 같을 수 없다. 원본 프레임을 보존하고 실제 동작을 검수한다.
 
-개인 플러그인은 여섯 개의 좁은 스킬 엔트리를 제공합니다.
+[Images 2.5 공식 발표](https://openai.com/index/introducing-chatgpt-images-2-5/)에 Codex·투명 배경 지원이 명시돼 있다. 도구 제공 여부로 세부 모델을 단정하지 않는다.
 
-- `png-element`: PNG 요소, 크로마키 제거, Photopea 마무리, `contentType=PNG element`.
-- `aside-chatgpt-transparent`: Aside/ChatGPT native transparent PNG 생성, 다운로드 검수, 어두운 배경 alpha 검사, Photopea 마무리, keyword CSV 행.
-- `jpg-background`: JPG 배경과 `contentType=Background`.
-- `svg-beta`: SVG 요소 후보. 시각 검증 전까지는 beta 경로로 둡니다.
-- `gif-beta`: GIF 요소 후보. playback과 투명도 검증 전까지는 beta 경로로 둡니다.
-- `upload-csv`: macOS 파일 선택기를 포함해 Computer Use로 DesignHub 파일 업로드, CSV 다운로드, 병합 CSV 업로드를 진행하고 `uniqueId`를 보존하는 단계. 이 흐름의 live action에는 MCP와 Aside를 사용하지 않는다.
+## 설치·업데이트
 
-## 최근 운영에서 배운 점
+저장소를 복제하고 번들 설치기로 로컬 마켓플레이스에 등록한다.
 
-- 바람, breeze, 공기 흐름, 안개, 부드러운 motion line처럼 반투명한 PNG 효과는 배경색 테스트만으로 부족하다. chroma 색이 효과 안에 끼면 배경 제거 전에 의도적인 밝은색/중립색 outline 또는 stroke를 넣어 효과를 살리고, 체크보드, 흰색, 어두운 preview에서 검증한다.
-- ChatGPT native transparent 출력은 흰 배경에서 깨진 alpha가 숨어 보일 수 있다. 이미지를 통과시키기 전에 checkerboard, white, dark preview를 보고 내부 투명 구멍을 검사한다.
-- DesignHub 상태는 파일 업로드, CSV 다운로드, `uniqueId` 병합, CSV 업로드, 최종 심사 제출을 분리해서 보고한다. 사용자가 별도로 요청하지 않으면 최종 심사 제출은 누르지 않는다.
-- DesignHub 파일 업로드, CSV 다운로드, CSV 업로드 같은 live action은 macOS 파일 선택기를 포함해 모두 Computer Use로 수행한다. 이 흐름에서는 MCP와 Aside를 사용하지 않는다.
-
-`upload-csv` 경로는 선택한 CSV가 제출 예정/대상 목록에서 나온 것인지, 새로 업로드한 basename을 모두 포함하는지도 확인한다. 관리 페이지의 `업로드된 모든 콘텐츠` export는 active-only일 수 있어 pending 파일이 빠질 수 있다. CSV 다운로드가 macOS 저장 대화상자를 열면 timestamp 파일명으로 먼저 저장한 뒤 로컬 검증을 진행한다.
-
-## Codex 플러그인 설치
-
-공개 플러그인은 다음 명령으로 설치합니다.
-
-```bash
-npx github:Tygb99/imagen-design-hub
+```sh
+git clone https://github.com/Tygb99/imagen-design-hub.git
+cd imagen-design-hub
+node scripts/register_marketplace.mjs
 ```
 
-비대화형 설치:
+이미 등록된 플러그인은 원본을 업데이트한 뒤 자신의 마켓플레이스 이름으로 재설치한다. 이 컴퓨터에서는 다음 명령을 쓴다.
 
-```bash
-npx --yes github:Tygb99/imagen-design-hub
+```sh
+codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-npx 없이 수동 설치:
-
-```bash
-git clone https://github.com/Tygb99/imagen-design-hub.git ~/plugins/imagen-design-hub
-node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs
-```
-
-설치 스크립트는 `~/plugins/imagen-design-hub`를 `~/.agents/plugins/marketplace.json`에 등록합니다.
-Codex를 재시작하거나 플러그인 선택기를 다시 열고 `Imagen Design Hub`가 보이는지 확인합니다.
-
-체크아웃 파일은 삭제하지 않고 marketplace 등록만 해제하려면 다음을 실행합니다.
-
-```bash
-node ~/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs
-```
-
-등록 해제 후 더 이상 로컬 체크아웃이 필요하지 않으면 `~/plugins/imagen-design-hub`를 다른 위치로 옮기거나 삭제한 뒤 Codex를 재시작하거나 플러그인 선택기를 다시 엽니다.
-
-## 자동 업데이트
-
-플러그인은 Codex 새 세션 시작 시 업데이트를 확인하는 `SessionStart` hook을 포함합니다.
-
-- 자동 업데이트는 git checkout으로 설치한 경우에만 동작합니다.
-- hook은 `git fetch`와 `git pull --ff-only`를 사용합니다.
-- 로컬 변경사항이 있으면 덮어쓰지 않고 업데이트를 건너뜁니다.
-- 단순 복사 설치본은 건드리지 않습니다. 업데이트를 받으려면 git 기반 설치 스크립트로 다시 설치하세요.
-
-## 공개 페이지 Preview
-
-- Main page: <https://tygb99.github.io/imagen-design-hub/>
-- 브랜치 preview 목록: <https://tygb99.github.io/imagen-design-hub/branches/>
-- 브랜치 URL 패턴: `https://tygb99.github.io/imagen-design-hub/branches/<branch-slug>/`
-
-브랜치 slug는 브랜치 이름을 소문자로 바꾸고 `/` 같은 구분자를 `-`로 바꾼 값입니다. 예를 들어 `codex/clean-landing-reference`는 `/branches/codex-clean-landing-reference/`에 공개됩니다.
+새 작업에서 갱신된 스킬을 읽는다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
 
 ## 의존성
 
-이미지 생성 필수:
+- PNG 생성: Codex 내장 image_gen, API 키 불필요
+- 로컬 마무리: Python·Pillow
+- GIF: 설치된 sprite-gen과 전용 venv, 해당 버전 SKILL.md
+- DesignHub 실시간 조작: Computer Use
+- 설치·갱신: Node 18+·Git
+- 필요한 수동 편집 또는 명시적 요청: Photopea
 
-- built-in `image_gen` 도구를 사용할 수 있는 Codex 또는 agent 런타임.
+[작업 규칙](SKILL.ko.md), [키워드 지침](references/keyword-generation.ko.md), [형식 가이드](references/designhub-element-guide-map.ko.md)를 읽는다. 원본과 파생본을 분리하고 업로드 파일명·다운로드 uniqueId 대응을 유지한다.
 
-로컬 처리 필수:
-
-- Python 3.10 이상.
-- Pillow.
-- 크로마키 헬퍼용 NumPy.
-
-필요할 때만 Python 의존성을 설치합니다.
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Windows PowerShell에서는 스킬 디렉터리에서 다음처럼 실행합니다.
-
-```powershell
-py -3 -m pip install -r requirements.txt
-```
-
-업로드용 PNG 요소 필수:
-
-- Chromium 계열 브라우저의 Photopea.
-- 현재 프로젝트에 더 강한 Photopea runner가 없다면 번들된 `scripts/write_photopea_runner.py` runner 생성기.
-
-SVG/GIF 요소 작업 필수:
-
-- SVG 산출물용 실제 vector editor/export 경로.
-- animation playback, 투명도, 크기, 용량을 확인할 GIF encoder/player.
-
-## 저장소 구조
-
-- `SKILL.md`: 라우팅과 검증 지침.
-- `SKILL.ko.md`: 한국어 스킬 지침.
-- `skills/aside-chatgpt-transparent/`: Aside/ChatGPT native transparent PNG 경로.
-- `src/imagegen_chroma_cutout/`: 호환성을 위해 기존 패키지명을 유지한 재사용 Python 구현.
-- `scripts/chroma_key.py`: 프로젝트 helper에서 복사한 primary edge-connected 크로마키 alpha 헬퍼.
-- `scripts/remove_chroma_key.py`: legacy soft-matte 크로마키 헬퍼. 명시적인 비교나 fallback 때만 사용.
-- `scripts/write_photopea_runner.py`: 번들 Photopea runner 생성기.
-- `scripts/prepare_designhub_unique_upload.py`: PNG 요소 배치용 업로드 안전 basename/CSV 헬퍼.
-- `assets/photopea_runner.html`: 번들 Photopea runner용 브라우저 템플릿.
-- `evals/evals.json`: 라우팅 테스트 프롬프트.
-- `references/designhub-element-guide-map.ko.md`: 공식 DesignHub 요소 가이드 링크 맵과 타입 규칙 요약.
-
-## DesignHub JPG 배경 경로
-
-수영장 물빛, 종이 질감, 빛반사, 자연스러운 패턴처럼 generated bitmap 품질이 중요한 배경은 imagegen을 우선합니다.
-
-권장 로컬 구조:
-
-```text
-outputs/<run-id>/assets/source-imagegen-batch/
-outputs/<run-id>/assets/background-jpg-imagegen/
-outputs/<run-id>/metadata/
-outputs/<run-id>/review/
-outputs/<run-id>/logs/
-```
-
-배경 JPG CSV 규칙:
-
-- `fileName`: basename만 사용하고 `.jpg`는 제거
-- `uniqueId`: DesignHub가 준 값이 아니면 빈칸
-- `tier`: `Premium`
-- `contentType`: `Background`
-
-## 투명 PNG 요소 경로
-
-PNG 요소는 `scripts/chroma_key.py`와 Photopea 경로를 사용합니다. DesignHub PNG 요소 작업에서는 built-in `.system/imagegen`의 `remove_chroma_key.py` helper를 사용하지 않습니다.
-
-```bash
-python scripts/chroma_key.py \
-  --input source.png \
-  --output final-alpha.png \
-  --background "#8000ff" \
-  --tolerance 48 \
-  --scope edge \
-  --dpi 350
-```
-
-Windows PowerShell:
-
-```powershell
-py -3 ./scripts/chroma_key.py `
-  --input "./source.png" `
-  --output "./final-alpha.png" `
-  --background "#8000ff" `
-  --tolerance 48 `
-  --scope edge `
-  --dpi 350
-```
-
-DesignHub/MiriCanvas 업로드용 PNG라면 Photopea runner를 만들거나 프로젝트 runner를 사용합니다.
-
-```bash
-python scripts/write_photopea_runner.py \
-  --raw-dir outputs/<run-id>/assets/raw \
-  --processed-dir outputs/<run-id>/assets/processed \
-  --out outputs/<run-id>/photopea/runner.html
-```
-
-## SVG와 GIF 요소 경로
-
-SVG는 명확한 피사체, 완전히 제거된 배경, 5개 이하 색상을 가진 단순하고 색상 변경 가능한 vector 일러스트에 사용합니다. raster 이미지만 embed한 SVG는 제출하지 않습니다.
-
-GIF는 명확한 피사체와 제거된 배경을 가진 움직이는 일러스트/아트 요소에 사용합니다. 정지 이미지를 GIF로 저장한 것만으로는 부족하며, 촬영 footage는 권한이 필요한 MP4 동영상 경로입니다.
-
-CSV 규칙:
-
-- SVG: `contentType=SVG element`, 확장자 없는 `fileName`.
-- GIF: `contentType=GIF`, 확장자 없는 `fileName`.
-
-공식 요소 가이드 페이지 맵, 파일 규격, 조합 요소 경계는 `references/designhub-element-guide-map.ko.md`를 참고합니다.
-
-Windows PowerShell:
-
-```powershell
-py -3 ./scripts/write_photopea_runner.py `
-  --raw-dir "outputs/<run-id>/assets/raw" `
-  --processed-dir "outputs/<run-id>/assets/processed" `
-  --out "outputs/<run-id>/photopea/runner.html"
-```
-
-## DesignHub 키워드 규칙
-
-- 구매자 검색어 중심의 키워드 20~25개를 사용합니다.
-- 중복을 제거합니다.
-- `Photopea`, `API`, `imagegen`, `PNG`, `JPG`, `SVG`, `GIF`, `MP4`, `2D`, `350DPI`, run ID, `DesignHub`, `MiriCanvas`, `CSV`, `Premium`, `클립아트`, `디자인소스` 같은 제작/파일/관리/채움말은 제거합니다.
-- `elementName`은 짧고 사람이 읽는 제목으로 둡니다.
-
-## 라이선스
-
-MIT. 원문은 [LICENSE](LICENSE), 한국어 번역은 [LICENSE.ko.md](LICENSE.ko.md)를 참고하세요.
+MIT: [LICENSE](LICENSE).

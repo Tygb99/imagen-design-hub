@@ -1,223 +1,52 @@
-# imagen-design-hub
+# imagen-design-hub 0.5.0
 
-[한국어 README](README.ko.md)
+[한국어](README.ko.md)
 
-[![GitHub stars](https://img.shields.io/github/stars/Tygb99/imagen-design-hub?style=social)](https://github.com/Tygb99/imagen-design-hub/stargazers)
+Recommend useful PNG elements and create native transparent assets with Codex. Finish dimensions and DPI locally, inspect alpha, and prepare DesignHub metadata.
 
-Codex skill for preparing MiriCanvas / DesignHub assets with `image_gen`, local source art, vector exports, and animation files.
+## Routes
 
-It covers five common routes:
+- PNG recommendations and native transparency: [png-element](skills/png-element/SKILL.md).
+- Animated GIF candidates: [gif-beta](skills/gif-beta/SKILL.md), using installed sprite-gen 2.0.3.
+- Full-bleed backgrounds: [jpg-background](skills/jpg-background/SKILL.md).
+- True vector elements: [svg-beta](skills/svg-beta/SKILL.md).
+- Computer Use upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md).
 
-1. **JPG background elements**: generate natural bitmap backgrounds with built-in `image_gen`, preserve source PNGs, convert to validated JPG, and write DesignHub CSV rows with `contentType=Background`.
-2. **Transparent PNG elements**: generate on a flat chroma-key background, remove the key with the bundled helper, finish upload-ready PNGs through Photopea when needed, and write matching DesignHub metadata.
-3. **Aside / ChatGPT native transparent PNG elements**: generate one image at a time through logged-in ChatGPT, download native RGBA sources, inspect alpha on checker/white/dark backgrounds, finish through Photopea, and write keywords/CSV.
-4. **SVG elements**: route simple vector illustrations through SVG cleanup, color-count checks, and `contentType=SVG element`.
-5. **GIF elements**: route animated illustration frames through GIF encode/playback checks and `contentType=GIF`.
+## Version 0.5.0
 
-The skill intentionally keeps source files, final files, review sheets, prompt logs, and CSVs separated so a DesignHub batch can be audited before upload.
+Native transparent image_gen is the PNG default. Mandatory chroma keying, blanket fringe cleanup and the separate Aside transparency skill have been removed. Preserve intentional partial alpha; inspect checkerboard, white and dark previews. Photopea is optional, and its runner remains for manual editing workflows.
 
-## Plugin Skill Split
+GIF uses sprite-gen's own component-row generation and extraction. Its current row contract still uses chroma sources. GIF has binary transparency and a limited palette, so glass translucency cannot match RGBA PNG exactly. Keep original frames and inspect actual motion before reporting success.
 
-The personal plugin exposes six focused skill entrypoints:
+[Images 2.5 announcement](https://openai.com/index/introducing-chatgpt-images-2-5/) confirms Codex and transparent-background support. Exact backend model variants must not be inferred from tool availability.
 
-- `png-element`: PNG elements, chroma-key removal, Photopea finishing, and `contentType=PNG element`.
-- `aside-chatgpt-transparent`: Aside/ChatGPT native transparent PNG generation, download QA, dark-background alpha inspection, Photopea finishing, and keyword CSV rows.
-- `jpg-background`: JPG backgrounds and `contentType=Background`.
-- `svg-beta`: SVG element candidates, kept as a beta route until visual validation passes.
-- `gif-beta`: GIF element candidates, kept as a beta route until playback and transparency validation pass.
-- `upload-csv`: use Computer Use for DesignHub file upload, CSV download, and merged CSV upload, including the macOS file picker, while preserving `uniqueId` values. MCP and Aside are not live-action routes for this flow.
+## Install or update
 
-## Recent Production Lessons
+Clone this repository to your plugin directory and register its local marketplace with the supplied installer:
 
-- For semi-transparent PNG effects such as wind, breeze, air flow, mist, or soft motion lines, background-color tests alone are not enough. If chroma color leaks into the effect, regenerate or add an intentional light/neutral outline or stroke around the effect before background removal, then validate on checkerboard, white, and dark previews.
-- For native transparent ChatGPT outputs, white backgrounds can hide broken alpha. Inspect checkerboard, white, and dark previews, and scan for interior transparent holes before accepting the image.
-- Keep DesignHub state transitions separate: file upload, CSV download, `uniqueId` merge, CSV upload, and final review submission are different states. Do not click final review submission unless the user explicitly asks for that separate step.
-- Use Computer Use for every live DesignHub upload, CSV download, and CSV upload action, including the macOS file picker. Keep MCP and Aside out of this flow.
-
-The upload-csv route also verifies that the export came from the pending/submission list and contains every newly uploaded basename. The manage-page all-uploaded export can be active-only and omit pending files. CSV downloads that open a macOS Save dialog are saved with an explicit timestamped filename before local validation.
-
-## Codex Plugin Install
-
-Install the public plugin with:
-
-```bash
-npx github:Tygb99/imagen-design-hub
+```sh
+git clone https://github.com/Tygb99/imagen-design-hub.git
+cd imagen-design-hub
+node scripts/register_marketplace.mjs
 ```
 
-Non-interactive install:
+For an already registered local plugin, update the source, then reinstall with Codex using the marketplace name returned by your personal marketplace. This machine uses:
 
-```bash
-npx --yes github:Tygb99/imagen-design-hub
+```sh
+codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Manual install without npx:
-
-```bash
-git clone https://github.com/Tygb99/imagen-design-hub.git ~/plugins/imagen-design-hub
-node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs
-```
-
-The installer registers `~/plugins/imagen-design-hub` in `~/.agents/plugins/marketplace.json`.
-Restart Codex or reopen the plugin picker, then confirm the `Imagen Design Hub` plugin is visible.
-
-To remove the marketplace entry without deleting the checkout:
-
-```bash
-node ~/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs
-```
-
-After unregistering, move or delete `~/plugins/imagen-design-hub` if you no longer need the local checkout, then restart Codex or reopen the plugin picker.
-
-## Auto Update
-
-The plugin includes a `SessionStart` hook that checks for updates when Codex starts a new session.
-
-- Auto-update only runs for git checkout installs.
-- The hook uses `git fetch` and `git pull --ff-only`.
-- If local changes are present, the hook skips the update instead of overwriting them.
-- Copy-only installs are left untouched; reinstall with the git-based installer to receive updates.
-
-## Public Page Previews
-
-- Main page: <https://tygb99.github.io/imagen-design-hub/>
-- Branch preview index: <https://tygb99.github.io/imagen-design-hub/branches/>
-- Branch URL pattern: `https://tygb99.github.io/imagen-design-hub/branches/<branch-slug>/`
-
-Branch slugs are lowercase branch names with `/` and other separators converted to `-`. For example, `codex/clean-landing-reference` is published at `/branches/codex-clean-landing-reference/`.
+Start a new task after reinstall to load updated skills. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 
-Required for image generation:
+- Codex built-in image_gen for PNG generation; no API key required.
+- Python and Pillow for local finishing.
+- Installed sprite-gen and its own venv for GIFs; follow its versioned SKILL.md.
+- Computer Use for live DesignHub operations.
+- Node 18+ and Git for installer/update scripts.
+- Photopea only when manual editing is needed or requested.
 
-- Codex or another agent runtime that can use the built-in `image_gen` tool.
+Read [the workflow](SKILL.md), [keyword guidance](references/keyword-generation.md), and [format guide](references/designhub-element-guide-map.md). Keep originals and write derived outputs separately. Upload filenames and downloaded uniqueId values must remain aligned.
 
-Required for local processing:
-
-- Python 3.10 or newer.
-- Pillow.
-- NumPy for the chroma-key helper.
-
-Install Python dependencies only when needed:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-On Windows PowerShell, run from the skill directory and use:
-
-```powershell
-py -3 -m pip install -r requirements.txt
-```
-
-Required for upload-ready PNG elements:
-
-- Photopea in a Chromium-family browser.
-- The bundled `scripts/write_photopea_runner.py` runner generator, unless the current project has a stronger Photopea runner.
-
-Required for SVG/GIF element work:
-
-- A true vector editor/export path for SVG assets.
-- A GIF encoder/player for animation playback, transparency, size, and file-size checks.
-
-## Repository Layout
-
-- `SKILL.md`: routing and validation instructions.
-- `SKILL.ko.md`: Korean version of the skill instructions.
-- `skills/aside-chatgpt-transparent/`: Aside/ChatGPT native transparent PNG route.
-- `src/imagegen_chroma_cutout/`: reusable Python implementation kept under the old package name for compatibility.
-- `scripts/chroma_key.py`: primary edge-connected chroma-key to alpha helper copied from the project helper.
-- `scripts/remove_chroma_key.py`: legacy soft-matte chroma-key helper; use only for explicit comparison or fallback.
-- `scripts/write_photopea_runner.py`: bundled Photopea runner generator.
-- `scripts/prepare_designhub_unique_upload.py`: upload-safe basename/CSV helper for PNG element batches.
-- `assets/photopea_runner.html`: browser template for the bundled Photopea runner.
-- `evals/evals.json`: routing test prompts.
-- `references/designhub-element-guide-map.md`: official DesignHub element-guide link map and summarized type rules.
-
-## DesignHub Background JPG Route
-
-Use imagegen for natural backgrounds such as pool water, paper textures, light reflections, realistic patterns, and other bitmap backgrounds where generated visual quality matters.
-
-Expected local layout:
-
-```text
-outputs/<run-id>/assets/source-imagegen-batch/
-outputs/<run-id>/assets/background-jpg-imagegen/
-outputs/<run-id>/metadata/
-outputs/<run-id>/review/
-outputs/<run-id>/logs/
-```
-
-CSV rules for background JPGs:
-
-- `fileName`: basename only, no `.jpg`
-- `uniqueId`: blank unless DesignHub provided it
-- `tier`: `Premium`
-- `contentType`: `Background`
-
-## Transparent PNG Element Route
-
-Use `scripts/chroma_key.py` and the Photopea route for PNG elements. Do not use the built-in `.system/imagegen` `remove_chroma_key.py` helper for DesignHub PNG-element runs.
-
-```bash
-python scripts/chroma_key.py \
-  --input source.png \
-  --output final-alpha.png \
-  --background "#8000ff" \
-  --tolerance 48 \
-  --scope edge \
-  --dpi 350
-```
-
-Windows PowerShell:
-
-```powershell
-py -3 ./scripts/chroma_key.py `
-  --input "./source.png" `
-  --output "./final-alpha.png" `
-  --background "#8000ff" `
-  --tolerance 48 `
-  --scope edge `
-  --dpi 350
-```
-
-For DesignHub/MiriCanvas upload-ready PNGs, generate or use a Photopea runner:
-
-```bash
-python scripts/write_photopea_runner.py \
-  --raw-dir outputs/<run-id>/assets/raw \
-  --processed-dir outputs/<run-id>/assets/processed \
-  --out outputs/<run-id>/photopea/runner.html
-```
-
-## SVG And GIF Element Routes
-
-Use SVG for simple, color-changeable vector illustrations with a clear subject, fully removed background, and five or fewer colors. Do not submit an SVG that only embeds a raster image.
-
-Use GIF for animated illustration/art elements with a clear subject and removed background. A still image saved as GIF is not enough, and filmed footage belongs to the gated MP4 video route.
-
-CSV rules:
-
-- SVG: `contentType=SVG element`, extensionless `fileName`.
-- GIF: `contentType=GIF`, extensionless `fileName`.
-
-See `references/designhub-element-guide-map.md` for the official element-guide page map, file specs, and combination-element boundaries.
-
-Windows PowerShell:
-
-```powershell
-py -3 ./scripts/write_photopea_runner.py `
-  --raw-dir "outputs/<run-id>/assets/raw" `
-  --processed-dir "outputs/<run-id>/assets/processed" `
-  --out "outputs/<run-id>/photopea/runner.html"
-```
-
-## DesignHub Keyword Rules
-
-- Use 20 to 25 comma-separated buyer-facing keywords.
-- Remove duplicates.
-- Remove production, file, admin, and filler terms such as `Photopea`, `API`, `imagegen`, `PNG`, `JPG`, `SVG`, `GIF`, `MP4`, `2D`, `350DPI`, run IDs, `DesignHub`, `MiriCanvas`, `CSV`, `Premium`, `clipart`, `design source`, and similar terms.
-- Keep `elementName` short and human-readable.
-
-## License
-
-MIT. See [LICENSE](LICENSE). Korean translation: [LICENSE.ko.md](LICENSE.ko.md).
+MIT license: [LICENSE](LICENSE).
