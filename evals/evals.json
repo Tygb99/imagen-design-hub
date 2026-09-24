@@ -40,7 +40,7 @@
     {
       "id": 9,
       "prompt": "DesignHub GIF 요소로 움직이는 반짝이 스티커 6개 만들어줘. 영상 말고 일러스트 애니메이션으로.",
-      "expected_output": "Read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, open curation, and report GIF binary-alpha limits.",
+      "expected_output": "Route to gif, read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, offer optional curation, and report GIF binary-alpha limits.",
       "files": []
     },
     {

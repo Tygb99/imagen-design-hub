@@ -9,7 +9,7 @@
       "name": "imagen-design-hub",
       "source": "./",
       "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
-      "version": "0.5.0"
+      "version": "0.5.1"
     }
   ],
   "description": "Tygb99 personal plugins (imagen-design-hub)"

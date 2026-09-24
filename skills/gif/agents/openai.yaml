@@ -1,0 +1,4 @@
+interface:
+  display_name: "Imagen Design Hub: GIF"
+  short_description: "Animate assets with sprite-gen and inspect GIF quality"
+  default_prompt: "Use $imagen-design-hub:gif with the installed sprite-gen skill: check its version, generate component rows, compose a transparent GIF, review actual motion, and offer the optional curation view."

@@ -1,0 +1,17 @@
+{
+  "cell": {
+    "width": 768,
+    "height": 768,
+    "safe_margin_x": 36,
+    "safe_margin_y": 36
+  },
+  "states": {
+    "wave": {
+      "frames": 4,
+      "fps": 4,
+      "loop": true,
+      "action": "The winter snowman gently raises one twig arm, waves once, and returns to the starting pose. Keep the blue scarf, carrot nose, face, and body consistent; no detached snowflakes or motion lines."
+    }
+  },
+  "style": "Match the supplied snowman reference exactly: polished winter illustration, soft snow shading, blue knitted scarf, no pixel art."
+}

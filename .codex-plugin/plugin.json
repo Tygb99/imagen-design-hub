@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "author": {
     "name": "Tygb99",
@@ -41,8 +41,7 @@
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
-      "Recommend 3-5 PNG element concepts with subject, style, use case and buyer-facing keywords.",
-      "Use built-in image_gen for genuinely transparent PNGs; preserve native alpha and inspect checkerboard, white and dark composites.",
+      "Recommend 3-5 PNG concepts, then generate native-alpha PNGs with image_gen and inspect light, dark and checkerboard views.",
       "Use the installed sprite-gen skill for GIF candidates, check its version and inspect actual animation playback.",
       "Use Computer Use for authorized DesignHub uploads and CSV roundtrips, preserving downloaded uniqueId values."
     ],
