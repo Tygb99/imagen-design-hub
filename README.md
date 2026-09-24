@@ -1,4 +1,4 @@
-# imagen-design-hub 0.5.0
+# imagen-design-hub 0.5.1
 
 [한국어](README.ko.md)
 
@@ -7,12 +7,14 @@ Recommend useful PNG elements and create native transparent assets with Codex. F
 ## Routes
 
 - PNG recommendations and native transparency: [png-element](skills/png-element/SKILL.md).
-- Animated GIF candidates: [gif-beta](skills/gif-beta/SKILL.md), using installed sprite-gen 2.0.3.
+- Animated GIF candidates: [gif](skills/gif/SKILL.md), integration verified with sprite-gen 2.7.0.
 - Full-bleed backgrounds: [jpg-background](skills/jpg-background/SKILL.md).
 - True vector elements: [svg-beta](skills/svg-beta/SKILL.md).
 - Computer Use upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md).
 
-## Version 0.5.0
+## Version 0.5.1
+
+The GIF route is now `gif` (no beta suffix). The documented sprite-gen row pipeline is verified against 2.7.0. The 0.5.0 native transparent PNG workflow remains the default for PNG elements.
 
 Native transparent image_gen is the PNG default. Mandatory chroma keying, blanket fringe cleanup and the separate Aside transparency skill have been removed. Preserve intentional partial alpha; inspect checkerboard, white and dark previews. Photopea is optional, and its runner remains for manual editing workflows.
 
@@ -22,21 +24,24 @@ GIF uses sprite-gen's own component-row generation and extraction. Its current r
 
 ## Install or update
 
-Clone this repository to your plugin directory and register its local marketplace with the supplied installer:
+Clone the repository at the personal marketplace's expected path, then register and install it:
 
 ```sh
-git clone https://github.com/Tygb99/imagen-design-hub.git
-cd imagen-design-hub
-node scripts/register_marketplace.mjs
+git clone https://github.com/Tygb99/imagen-design-hub.git "$HOME/plugins/imagen-design-hub"
+node "$HOME/plugins/imagen-design-hub/scripts/register_marketplace.mjs"
+codex plugin list
+codex plugin add imagen-design-hub@<marketplace-name-shown-by-list>
 ```
 
-For an already registered local plugin, update the source, then reinstall with Codex using the marketplace name returned by your personal marketplace. This machine uses:
+If `codex plugin list` shows no local marketplace, run `codex plugin marketplace add "$HOME"` once, then list again.
+
+For an already registered local plugin, update the source, then reinstall with Codex using the marketplace name shown by `codex plugin list`. This machine uses:
 
 ```sh
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Start a new task after reinstall to load updated skills. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
+Verify the listed version is 0.5.1 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 
