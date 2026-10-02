@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, and upload CSV metadata.
 ---
 
-# Imagen Design Hub 0.6.0
+# Imagen Design Hub 0.6.1
 
 [Korean](SKILL.ko.md)
 
@@ -12,7 +12,7 @@ Start with PNG element recommendations when the user asks what to create: sugges
 ## Routes
 
 - Transparent PNG: [png-element](skills/png-element/SKILL.md). Use Codex built-in image_gen with a genuinely transparent background; preserve native alpha.
-- JPG background: [jpg-background](skills/jpg-background/SKILL.md). Full-bleed backgrounds, source PNG preserved, final RGB JPG and `Background` CSV.
+- JPG background: [jpg-background](skills/jpg-background/SKILL.md). Subjectless graphics or balanced patterns without a standout subject, source PNG preserved, final RGB JPG and `Background` CSV. Route real or strongly photorealistic images to `Photo`.
 - SVG: [svg-beta](skills/svg-beta/SKILL.md). True vectors, not embedded raster images.
 - GIF: [gif](skills/gif/SKILL.md). Use the installed sprite-gen component-row pipeline, then inspect actual playback.
 - Upload and metadata: [upload-csv](skills/upload-csv/SKILL.md). Aside with direct file selection first, native file picker as fallback; local tools for CSV merging.

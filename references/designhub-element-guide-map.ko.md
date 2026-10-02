@@ -1,6 +1,6 @@
 # DesignHub 요소 가이드 맵
 
-2026-06-25 KST 기준으로 확인했다. MiriCanvas DesignHub 요소 작업 시 로컬 링크 맵으로 사용한다. 공식 페이지의 요약 지도이며, 공식 페이지 자체를 대체하지 않는다.
+배경·JPG 파일 규격·사진 타입 상세·AI 제출 기준은 2026-10-02 KST에 재확인했다. 그 외 링크의 확인일은 2026-06-25다. MiriCanvas DesignHub 요소 작업 시 로컬 링크 맵으로 사용한다. 공식 페이지의 요약 지도이며, 공식 페이지 자체를 대체하지 않는다.
 
 ## 핵심 요소 페이지
 
@@ -17,7 +17,7 @@
 
 | 타입 | URL | 실무 기준 |
 | --- | --- | --- |
-| 배경 | https://slashpage.com/designhub-guide/ndvwx728377exm3z6jpg | 문서 배경으로 쓰이는 사각형 이미지. 실사 사진이나 피사체 중심 일러스트가 아니다. |
+| 배경 | https://slashpage.com/designhub-guide/ndvwx728377exm3z6jpg | 피사체 없는 그래픽 또는 특정 피사체가 돋보이지 않는 조화로운 패턴. 실사·실사풍은 Photo, 중심 피사체 일러스트는 단일 요소로 분리한다. |
 | 배경 제거 사진 | https://slashpage.com/designhub-guide/36nj8v2wkqq6z25ykq9z | 실사 또는 실사에 가까운 피사체 사진에서 배경을 완전히 제거한 타입. |
 | PNG 요소 | https://slashpage.com/designhub-guide/91kwev26v88q12y46jpg | 배경이 완전히 제거된 그림/아트/일러스트. 3D나 그라데이션은 PNG로 보낸다. |
 | SVG 요소 | https://slashpage.com/designhub-guide/7vgjr4m1nqqkk2dwpy86 | 배경 제거된 단순 벡터 일러스트. 색상은 5개 이하. |

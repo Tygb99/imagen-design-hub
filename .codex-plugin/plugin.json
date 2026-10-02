@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "author": {
     "name": "Tygb99",
@@ -26,7 +26,7 @@
   "interface": {
     "displayName": "Imagen Design Hub",
     "shortDescription": "PNG recommendations, native transparency, sprite-gen GIFs and DesignHub CSV.",
-    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Keep JPG, SVG and Aside upload/CSV routes.",
+    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Prepare JPG graphic backgrounds or balanced patterns, distinguish Photo content, and keep SVG and Aside upload/CSV routes.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [

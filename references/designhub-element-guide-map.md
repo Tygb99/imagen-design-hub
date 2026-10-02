@@ -1,6 +1,6 @@
 # DesignHub Element Guide Map
 
-Checked on 2026-06-25 KST. Use this as the local link map for MiriCanvas DesignHub element work. It is a summarized guide map, not a replacement for the official pages.
+Background, JPG file specifications, Photo type details, and AI submission requirements rechecked on 2026-10-02 KST; other links retain the 2026-06-25 check date. Use this as the local link map for MiriCanvas DesignHub element work. It is a summarized guide map, not a replacement for the official pages.
 
 ## Core Element Pages
 
@@ -17,7 +17,7 @@ Checked on 2026-06-25 KST. Use this as the local link map for MiriCanvas DesignH
 
 | Type | URL | Practical rule |
 | --- | --- | --- |
-| Background | https://slashpage.com/designhub-guide/ndvwx728377exm3z6jpg | Rectangular document background, not a real photo or subject-focused illustration. |
+| Background | https://slashpage.com/designhub-guide/ndvwx728377exm3z6jpg | Subjectless graphic or harmonious pattern with no standout subject. Real/strongly photorealistic images belong to Photo; focal illustrations must be separated into elements. |
 | Background-removed photo | https://slashpage.com/designhub-guide/36nj8v2wkqq6z25ykq9z | Real or highly realistic photo subject with background fully removed. |
 | PNG element | https://slashpage.com/designhub-guide/91kwev26v88q12y46jpg | Illustration/art subject with background fully removed; use PNG for 3D or gradients. |
 | SVG element | https://slashpage.com/designhub-guide/7vgjr4m1nqqkk2dwpy86 | Simple vector illustration, background removed, 5 colors or fewer. |

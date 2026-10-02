@@ -1,4 +1,4 @@
-# imagen-design-hub 0.6.0
+# imagen-design-hub 0.6.1
 
 [한국어](README.ko.md)
 
@@ -8,15 +8,17 @@ Recommend useful PNG elements and create native transparent assets with Codex. F
 
 - PNG recommendations and native transparency: [png-element](skills/png-element/SKILL.md).
 - Animated GIF candidates: [gif](skills/gif/SKILL.md), following the installed sprite-gen version.
-- Full-bleed backgrounds: [jpg-background](skills/jpg-background/SKILL.md).
+- Graphic backgrounds and balanced patterns: [jpg-background](skills/jpg-background/SKILL.md), with official Background/Photo type checks.
 - True vector elements: [svg-beta](skills/svg-beta/SKILL.md).
 - Aside upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md), using `setInputFiles()` first and the native file picker as fallback.
 
-## Version 0.6.0
+## Version 0.6.1
 
-Removed the retired browser editor and its runner. Generate native transparent PNGs with image_gen, then trim, resize and save DPI with Pillow or an existing local processor. GIFs follow the installed sprite-gen version and its own environment.
+Updated JPG guidance against the official [Background guide](https://slashpage.com/designhub-guide/ndvwx728377exm3z6jpg): use subjectless graphics or harmonious patterns with no standout subject. Route photographs and strongly photorealistic images to Photo; separate focal illustrations into elements instead of submitting a finished poster as Background. JPG conversion does not fix a type mismatch.
 
-Native transparent image_gen is the PNG default. Preserve intentional partial alpha and source files.
+The JPG skill now distinguishes official file limits from local DPI targets, preserves downloaded CSV rows and IDs, and verifies the generative-AI flag for generated submissions. Replaced conflicting natural/photorealistic-background guidance in the routes, reference map, landing page, and evaluation cases.
+
+Native transparent image_gen is the PNG default. Preserve intentional partial alpha and source files; use Pillow or an existing local processor for trim, dimensions and DPI.
 
 GIF uses sprite-gen's own component-row generation and extraction. Its current row contract still uses chroma sources. GIF has binary transparency and a limited palette, so glass translucency cannot match RGBA PNG exactly. Keep original frames and inspect actual motion before reporting success.
 
@@ -41,7 +43,7 @@ For an already registered local plugin, update the source, then reinstall with C
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Verify the listed version is 0.6.0 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
+Verify the listed version is 0.6.1 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 

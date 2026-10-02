@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG 요소, sprite-gen GIF, 업로드 CSV를 처리합니다.
 ---
 
-# Imagen Design Hub 0.6.0
+# Imagen Design Hub 0.6.1
 
 [English](SKILL.md)
 
@@ -12,7 +12,7 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 ## 경로
 
 - 투명 PNG: [png-element](skills/png-element/SKILL.ko.md). 내장 image_gen에 실제 투명 배경을 요청하고 원본 알파를 보존한다.
-- JPG 배경: [jpg-background](skills/jpg-background/SKILL.md). 화면을 채우는 배경, RGB JPG, Background CSV.
+- JPG 배경: [jpg-background](skills/jpg-background/SKILL.ko.md). 피사체 없는 그래픽 또는 특정 피사체가 돋보이지 않는 조화로운 패턴, 원본 PNG 보존, RGB JPG, Background CSV. 실사·실사풍 이미지는 Photo로 구분한다.
 - SVG: [svg-beta](skills/svg-beta/SKILL.md). 실제 벡터 요소.
 - GIF: [gif](skills/gif/SKILL.ko.md). 설치된 sprite-gen의 component-row 파이프라인과 실제 재생 검수.
 - 업로드: [upload-csv](skills/upload-csv/SKILL.ko.md). Aside의 파일 직접 지정을 우선하고 실패하면 파일 선택 창을 사용한다. CSV 병합은 로컬 도구.
