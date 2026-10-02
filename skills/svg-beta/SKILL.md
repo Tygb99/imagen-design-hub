@@ -25,7 +25,7 @@ Shared reference: read `../../SKILL.md` and `../../references/designhub-element-
 
 - Final files are `.svg`.
 - Maximum dimension is 6000 px.
-- File size is under 150 MB.
+- File size is under 0.15 MB.
 - CSV rows use `contentType` value `SVG element`.
 - CSV `fileName` is the basename only, without `.svg`.
 - `uniqueId` stays blank unless it came from a DesignHub-downloaded CSV after upload.

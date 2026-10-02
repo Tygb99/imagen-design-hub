@@ -58,7 +58,7 @@ Checked on 2026-06-25 KST. Use this as the local link map for MiriCanvas DesignH
 | Photo | JPG | 120 | 2500 | 9800 | 50 MB |
 | Photo(Cut-out) | PNG | 120 | 2500 | 9800 | 50 MB |
 | PNG element | PNG | 120 | 700 | 9800 | 50 MB |
-| SVG element | SVG | 72 | none listed | 6000 | 150 MB |
+| SVG element | SVG | 72 | none listed | 6000 | 0.15 MB |
 | GIF | GIF | 72 | 700 | 1920 | 25 MB |
 | Background | JPG | 120 | 2500 | 9800 | 50 MB |
 | Video | MP4 | none listed | none listed | none listed | 120 MB / 30 seconds |
