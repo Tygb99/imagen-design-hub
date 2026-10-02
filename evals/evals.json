@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "미리캔버스 오늘 챌린지 배경 요소야. 수영장 바닥, 물결 또는 수면 배경을 imagegen으로 12개 만들고 JPG로 저장해줘. CSV도 같이 만들어줘.",
-      "expected_output": "Routes to background-jpg, uses built-in image_gen once per variant, preserves source PNGs in the workspace, converts final files to JPG, makes a contact sheet, and writes DesignHub metadata with extensionless fileName, blank uniqueId, tier Premium, contentType Background, and 20-25 buyer-facing keywords.",
+      "expected_output": "Routes to jpg-background, uses built-in image_gen once per variant, preserves source PNGs in the workspace, converts final files to JPG, makes a contact sheet, and writes DesignHub metadata with extensionless fileName, blank uniqueId, tier Premium, contentType Background, and 20-25 buyer-facing keywords.",
       "files": []
     },
     {
@@ -22,31 +22,25 @@
     {
       "id": 4,
       "prompt": "DesignHub 글래스모피즘 물방울 PNG 요소 6개를 투명 배경으로 생성하고 350 DPI로 준비해줘.",
-      "expected_output": "Use built-in image_gen once per native transparent element. Preserve source alpha, finish a separate copy locally, validate size/DPI and checker/white/dark composites, and prepare PNG element metadata. No mandatory chroma, Aside or Photopea.",
+      "expected_output": "Use built-in image_gen once per native transparent element. Preserve source alpha, finish a separate copy locally, validate size/DPI, and prepare PNG element metadata. No mandatory chroma or browser generation.",
       "files": []
     },
     {
       "id": 6,
       "prompt": "투명한 유리컵 제품컷을 native transparent로 바로 뽑아줘. 가능하면 배경제거 없이.",
-      "expected_output": "Use built-in image_gen with native transparency, preserve glass partial alpha, measure exterior alpha and inspect three backgrounds. Do not require an API key or chroma extraction.",
+      "expected_output": "Use built-in image_gen with native transparency, preserve glass partial alpha and finish size/DPI locally. Do not require an API key or chroma extraction.",
       "files": []
     },
     {
       "id": 8,
       "prompt": "미리캔버스 DesignHub에 올릴 색상 변경 가능한 단순 말풍선 SVG 요소 10개를 만들고 CSV도 준비해줘.",
-      "expected_output": "Routes to svg-element, uses a true vector source/export path instead of raster-only imagegen output, keeps each design simple with five or fewer colors, removes backgrounds, validates SVG XML/viewBox/no embedded raster/no external scripts, and writes metadata with extensionless fileName, blank or DesignHub-provided uniqueId, tier Premium, contentType SVG element, and buyer-facing keywords.",
+      "expected_output": "Routes to svg-beta, uses a true vector source/export path instead of raster-only imagegen output, keeps each design simple with five or fewer colors, removes backgrounds, validates SVG XML/viewBox/no embedded raster/no external scripts, and writes metadata with extensionless fileName, blank or DesignHub-provided uniqueId, tier Premium, contentType SVG element, and buyer-facing keywords.",
       "files": []
     },
     {
       "id": 9,
       "prompt": "DesignHub GIF 요소로 움직이는 반짝이 스티커 6개 만들어줘. 영상 말고 일러스트 애니메이션으로.",
       "expected_output": "Route to gif, read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, offer optional curation, and report GIF binary-alpha limits.",
-      "files": []
-    },
-    {
-      "id": 11,
-      "prompt": "ChatGPT 투명 PNG로 나온 캐릭터 4번이 흰 배경에선 괜찮은데 어두운 배경에서 괘 사이가 뚫려 보여. 교체 또는 수리 기준까지 포함해서 검수해줘.",
-      "expected_output": "Route native PNG alpha QA to png-element. Inspect dark and light composites and internal holes; preserve original and regenerate structurally wrong output without blanket alpha/color removal.",
       "files": []
     },
     {

@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG 요소, sprite-gen GIF, 업로드 CSV를 처리합니다.
 ---
 
-# Imagen Design Hub 0.5.1
+# Imagen Design Hub 0.6.0
 
 [English](SKILL.md)
 
@@ -15,17 +15,17 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 - JPG 배경: [jpg-background](skills/jpg-background/SKILL.md). 화면을 채우는 배경, RGB JPG, Background CSV.
 - SVG: [svg-beta](skills/svg-beta/SKILL.md). 실제 벡터 요소.
 - GIF: [gif](skills/gif/SKILL.ko.md). 설치된 sprite-gen의 component-row 파이프라인과 실제 재생 검수.
-- 업로드: [upload-csv](skills/upload-csv/SKILL.ko.md). 실시간 DesignHub 조작은 Computer Use, CSV 병합은 로컬 도구.
+- 업로드: [upload-csv](skills/upload-csv/SKILL.ko.md). Aside의 파일 직접 지정을 우선하고 실패하면 파일 선택 창을 사용한다. CSV 병합은 로컬 도구.
 
 ## 네이티브 투명 배경
 
 [Images 2.5 공식 발표](https://openai.com/index/introducing-chatgpt-images-2-5/)에서 Codex와 투명 배경 지원을 확인했다. 네이티브 투명을 먼저 요청한다. 반환 증거 없이 세부 모델을 Flare/Sunburst라고 단정하지 않는다.
 
-요소 하나당 원본 하나를 생성하고 assets/source-imagegen/에 보존한다. 후처리본은 분리한다. RGBA 모드뿐 아니라 완전 투명 외부 픽셀과 체크보드·흰색·어두운 배경을 확인한다. 유리·안개·머리카락·발광의 의도된 부분 알파를 보존한다. 보라색/초록색 전체나 낮은 알파를 일괄 제거하지 않는다.
+요소 하나당 원본 하나를 생성하고 assets/source-imagegen/에 보존한다. 후처리본은 분리한다. 유리·안개·머리카락·발광의 의도된 부분 알파를 보존한다.
 
-크로마키 강제, 일괄 색 번짐 제거 레시피, 별도 Aside 투명 생성 경로는 폐기한다. 브라우저 생성은 명시적 요청에만 사용한다. 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
+브라우저 생성은 명시적 요청에만 사용한다. 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
 
-트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 필요한 수동 편집이나 명시적 요청에만 Photopea를 쓴다. 번들 Photopea·고유 파일명 도구는 유지한다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
+트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
 
 ## 산출물·메타데이터
 
@@ -39,4 +39,8 @@ contentType은 PNG element, GIF, SVG element, Background, Photo, Photo(Cut-out) 
 
 ## 검증
 
-시그니처·크기·DPI·알파 분포·피사체 경계·용량·CSV 대응을 검사한다. PNG와 GIF 프레임을 체크보드·흰색·어두운 배경에서 확인하고 GIF는 실제 재생한다. 원본과 실패 후보를 보존하며 경로·생성 출처·측정값·품질 한계·외부 작업 여부를 보고한다.
+시그니처·크기·DPI·피사체 경계·용량·CSV 대응을 검사한다. GIF는 실제 재생으로 움직임을 확인한다. 원본과 실패 후보를 보존하며 경로·생성 출처·측정값·품질 한계·외부 작업 여부를 보고한다.
+
+## 플러그인 업데이트
+
+현재 작업 방식과 맞지 않는 지침은 교체하거나 삭제한다. 경로별 스킬·번역·README·manifest 프롬프트·소개 페이지·참고 문서·평가 기준을 함께 맞추고, 새 규칙을 추가하면서 폐기된 규칙을 남기지 않는다. 리소스를 삭제하기 전에는 사용처를 확인한다. 실행은 현재 진입 문서와 경로별 스킬을 따르며, 과거 기록은 증거이지 현재 지침이 아니다.

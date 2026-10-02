@@ -12,7 +12,7 @@ Shared reference: read `../../SKILL.md` and `../../references/designhub-element-
 ## Core Rules
 
 - Use built-in `image_gen`.
-- Do not request transparency, checkerboard, cutout, chroma key, or Photopea alpha processing.
+- Do not request transparency, checkerboard, cutout, chroma key.
 - Prompt for a full-bleed square or rectangular background with no dominant subject.
 - Avoid people, logos, watermarks, UI captures, text, frames, borders, and single foreground objects.
 - Preserve imagegen source PNGs separately before conversion.

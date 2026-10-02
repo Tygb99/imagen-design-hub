@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "author": {
     "name": "Tygb99",
@@ -26,7 +26,7 @@
   "interface": {
     "displayName": "Imagen Design Hub",
     "shortDescription": "PNG recommendations, native transparency, sprite-gen GIFs and DesignHub CSV.",
-    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Keep JPG, SVG and Computer Use upload/CSV routes.",
+    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Keep JPG, SVG and Aside upload/CSV routes.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
@@ -34,16 +34,16 @@
       "Native transparent PNG generation",
       "Alpha-preserving finishing",
       "sprite-gen GIF animation",
-      "Motion and alpha QA",
+      "Motion QA",
       "JPG and SVG assets",
       "DesignHub CSV",
-      "Computer Use upload"
+      "Aside upload"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
-      "Recommend 3-5 PNG concepts, then generate native-alpha PNGs with image_gen and inspect light, dark and checkerboard views.",
+      "Recommend 3-5 PNG concepts, then generate native-alpha PNGs with image_gen and finish size and DPI locally.",
       "Use the installed sprite-gen skill for GIF candidates, check its version and inspect actual animation playback.",
-      "Use Computer Use for authorized DesignHub uploads and CSV roundtrips, preserving downloaded uniqueId values."
+      "Use Aside for authorized DesignHub uploads and CSV roundtrips; prefer setInputFiles and preserve downloaded uniqueId values."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

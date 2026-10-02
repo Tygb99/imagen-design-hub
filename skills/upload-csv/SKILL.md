@@ -1,6 +1,6 @@
 ---
 name: upload-csv
-description: Use after MiriCanvas or DesignHub element files are ready for upload and the next step requires Computer Use to operate the live DesignHub surface for file upload, CSV metadata download, uniqueId preservation, metadata merge, and merged CSV re-upload.
+description: Upload prepared DesignHub assets or process existing pending items through Aside, preserve assigned uniqueId values during CSV metadata registration, and submit for review when authorized.
 ---
 
 # Imagen Design Hub: Upload Then CSV
@@ -9,32 +9,33 @@ description: Use after MiriCanvas or DesignHub element files are ready for uploa
 
 Use this route when the user says `요소 업로드후 csv업로드`, `uplode-csv`, `upload-csv`, DesignHub upload CSV, metadata upload, CSV merge, uniqueId preservation, or post-upload DesignHub metadata.
 
-This skill is for the post-file-upload metadata phase. It should not silently submit a DesignHub review.
+Start with prepared files or the user's existing pending items. Upload, metadata registration, and review submission each require authorization covering the selected items and destination; existing authorization remains valid.
 
 Shared reference: read `../../SKILL.md` for route-specific `contentType` values and keyword rules.
 
-## Mandatory Live Surface
+## Browser and file selection
 
-Every live DesignHub UI action in this route must use Computer Use.
-
-- Use Computer Use for the DesignHub page, file upload controls, CSV download controls, macOS file picker/file explorer, and CSV re-upload controls.
-- Do not use MCP, Aside MCP CLI, `aside-browser`, Chrome-only automation, hidden browser automation, direct HTTP calls, hidden APIs, or terminal-only shortcuts for the live DesignHub actions in this route.
-- Local CSV merging, row validation, encoding checks, and file inspections may still use normal filesystem and terminal tools.
-- Uploading files and transmitting CSV metadata to DesignHub require explicit user confirmation before the live action if that confirmation has not already been provided for the specific files and destination.
-- Never click final review submission unless the user explicitly asks for that separate external submission step.
+- Prefer Aside REPL for DesignHub. Read the installed Aside skill and its current guide before use, attach the relevant existing tab, and inspect the current page to identify controls.
+- Prefer the observed file-input locator's `setInputFiles()` for image/vector/GIF files and merged CSVs. For large batches, target 1,000 file paths per batch, reducing the batch to the live upload limit or a lower user-requested size. This is an operational batch size, not a claim about DesignHub's maximum.
+- If direct file selection is unavailable or fails, use the browser's native file picker through Computer Use. Recheck selection before pressing Open. Do not switch browsers unless needed and consistent with the user's choice.
+- Use browser download handling for CSV exports; complete a native save dialog through Computer Use only when one appears. Verify the completed download before merging.
+- Local CSV merging and file checks may use filesystem tools. Function availability and file selection do not prove that DesignHub accepted the upload; verify its completion state.
+- Retry failed items at most twice after the initial attempt, then skip them and continue. If an upload or submission response is unclear, inspect current state before retrying to avoid duplicates.
 
 ## Required Sequence
 
-1. Use the confirmed live surface to upload the prepared image/vector/GIF files only when the user has explicitly confirmed the external DesignHub action.
-2. Wait for DesignHub's upload completion state, such as `10 of 10 uploaded`, before treating the upload as complete.
-3. Navigate to the relevant pending/submission list and use its CSV download control after file upload. Do not assume the manage-page "all uploaded content" export contains pending files.
-4. Complete any macOS save dialog with an explicit timestamped filename, then inspect the saved CSV locally.
+1. Confirm the target files or existing pending items and the authorized actions. Upload prepared files through Aside; skip file upload when processing items already registered on DesignHub. Keep unrelated items outside the selection.
+2. For new uploads, wait for DesignHub's upload completion state, such as `10 of 10 uploaded`, before treating the upload as complete.
+3. Navigate to the relevant pending/submission list and use its CSV download control. Do not assume the manage-page "all uploaded content" export contains pending files.
+4. Verify the completed CSV download and inspect it locally. If a save dialog appears, save with an explicit timestamped filename.
 5. Treat the downloaded CSV as the source of truth for `fileName` and `uniqueId` only after confirming that every newly uploaded basename is present and has a non-empty `uniqueId`.
 6. Merge prepared metadata into the downloaded rows without dropping, reordering unnecessarily, or regenerating `uniqueId`.
 7. Keep every row from the downloaded DesignHub CSV, not just the new batch rows.
 8. Keep the CSV UTF-8 without BOM and quote all fields when the local project contract requires quote-all CSV.
-9. Use the confirmed live surface to re-upload the merged CSV only when the user has explicitly confirmed that external action.
+9. Re-upload the merged CSV through Aside within the existing authorization. Do not repeat an approval request already covering these items and this destination.
 10. Verify the DesignHub completion message or banner after CSV upload. Record the processed row count, and distinguish file upload, CSV upload, and final review submission.
+11. Check the generative-AI flag for AI-generated assets and save it without overwriting individual names or keywords. Verify the saved state.
+12. When review submission is authorized, submit only the intended items in groups allowed by the current page. Verify that they moved from pending to review waiting. File-selection batch size does not determine review capacity.
 
 Do not upload a local preupload CSV directly after files are registered. DesignHub assigns `uniqueId` values only after the file upload, so the correct flow is always download the current DesignHub CSV, merge into that full file, and upload the merged full CSV.
 
@@ -60,7 +61,7 @@ Do not write `JPG background`; use `Background`.
 - `uniqueId` must be preserved from the downloaded DesignHub CSV.
 - `tier` defaults to `Premium` unless the user says otherwise.
 - `keywords` must be 20 to 25 unique buyer-facing terms.
-- Remove production/admin terms such as `Photopea`, `imagegen`, `PNG`, `JPG`, `SVG`, `GIF`, `CSV`, `Premium`, `DesignHub`, `MiriCanvas`, run IDs, and dates unless the user explicitly requires one.
+- Remove production/admin terms such as `imagegen`, `PNG`, `JPG`, `SVG`, `GIF`, `CSV`, `Premium`, `DesignHub`, `MiriCanvas`, run IDs, and dates unless the user explicitly requires one.
 
 ## Validation
 
@@ -75,17 +76,8 @@ Before reporting ready:
 - keyword counts are 20 to 25 per row
 - CSV encoding is UTF-8 without BOM
 - every field is quoted if the local project contract requires quote-all CSV
-- live DesignHub file upload, CSV download, and CSV upload were all performed through Computer Use, including macOS file-picker/file-explorer steps
-- MCP and Aside were not used for the live DesignHub actions in this route
+- the selected files, assigned IDs, and destination match the authorized batch
+- the generative-AI flag was saved for AI-generated assets
 - DesignHub displayed a successful processed-row count or an error message was captured verbatim
 - DesignHub reported the expected upload count and CSV processed-row count
 - state clearly whether file upload, CSV upload, or final review submission actually happened
-
-## Operational Traps
-
-The 2026-08-17 run exposed these failure modes:
-
-- The manage-page "all uploaded content" CSV contained only active/manage rows (189 in that run). The submission-list `CSV를 다운로드` export contained the pending full set (275 rows) and the four newly uploaded basenames. Always verify that the chosen export contains every new basename and that its row count matches the target submission list.
-- A DesignHub CSV download can open a macOS Save dialog. A `.com.google.Chrome.*` temporary file may be a readable CSV but is not the final saved artifact. Complete the Save dialog with a timestamped filename, then locate and inspect the saved file.
-- The macOS picker can appear under Finder-like or Chrome `열기` state. Re-query the active app after each transition. Use Go To Folder to reach the exact directory or file, verify the target filename is selected and the Open button is enabled, and do not rely on blind `Cmd+A`; it can select folders or do nothing.
-- A successful file upload or 275-row CSV processing banner is not approval. Background JPGs with visible subjects can still fail the Background review rule. Keep file upload, CSV processing, and final review submission as separate reported states.

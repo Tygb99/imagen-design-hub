@@ -66,7 +66,7 @@ asset과 맞는 경우 아래 클러스터를 우선 고려한다.
 `keywords`와 `elementName`에서 제작, 파일, 관리, 플랫폼 용어를 제거한다.
 
 ```text
-Photopea, API, 프롬프트, imagegen, 배경제거, PNG, JPG, SVG, GIF, MP4,
+API, 프롬프트, imagegen, 배경제거, PNG, JPG, SVG, GIF, MP4,
 2D, 350DPI, 투명배경, run ID, 날짜, DesignHub, MiriCanvas,
 CSV, Premium, 클립아트, 디자인소스, 배경소스, 꾸밈요소
 ```

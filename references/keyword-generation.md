@@ -66,7 +66,7 @@ Prioritize clusters that match common template and element demand:
 Remove production, file, admin, and platform terms from `keywords` and `elementName`, including:
 
 ```text
-Photopea, API, prompt, imagegen, background removal, PNG, JPG, SVG, GIF, MP4,
+API, prompt, imagegen, background removal, PNG, JPG, SVG, GIF, MP4,
 2D, 350DPI, transparent background, run IDs, dates, DesignHub, MiriCanvas,
 CSV, Premium, clipart, design source, background source, decoration element
 ```

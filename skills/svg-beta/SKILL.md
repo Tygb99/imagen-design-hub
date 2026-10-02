@@ -16,7 +16,7 @@ Shared reference: read `../../SKILL.md` and `../../references/designhub-element-
 - Use a true vector source: hand-authored SVG, vector-editor export, or traced/rebuilt vector art.
 - Do not submit raster art renamed to `.svg`.
 - Do not embed bitmap payloads as the main artwork.
-- Keep the illustration simple with 5 or fewer visible colors.
+- Keep the illustration simple with 5 or fewer visible colors across fills and strokes. Count white and black; exclude transparent and none values.
 - Remove rectangular artboards and background shapes unless the shape itself is the reusable element.
 - Avoid scripts, external links, `foreignObject`, hidden watermarks, stray off-artboard objects, and text artifacts from unknown fonts.
 - Export with a sensible tight `viewBox`.
@@ -40,6 +40,5 @@ Before calling an SVG candidate ready:
 - no scripts, external links, or `foreignObject`
 - `viewBox` and dimensions are present and within limits
 - visible colors are 5 or fewer
-- checkerboard, white, and dark previews show no rectangular backdrop, clipping, cracks, or stray shapes
 - because this is beta, path quality and DesignHub suitability were checked by eye
 - external DesignHub upload/submission was not performed unless the user explicitly confirmed it

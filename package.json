@@ -1,6 +1,6 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
   "license": "MIT",
   "homepage": "https://tygb99.github.io/imagen-design-hub/",
@@ -21,6 +21,7 @@
   },
   "files": [
     ".codex-plugin/",
+    ".claude-plugin/",
     "assets/",
     "bin/",
     "evals/",
