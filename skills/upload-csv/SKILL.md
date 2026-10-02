@@ -37,6 +37,8 @@ Shared reference: read `../../SKILL.md` for route-specific `contentType` values 
 10. Verify the DesignHub completion message or banner after CSV upload. Record the processed row count, and distinguish file upload, CSV upload, and final review submission.
 11. Check the generative-AI flag for AI-generated assets and save it without overwriting individual names or keywords. Verify the saved state.
 12. When review submission is authorized, submit only the intended items in groups allowed by the current page. Verify that they moved from pending to review waiting. File-selection batch size does not determine review capacity.
+    - Review waiting holds at most 100 items at once (2026-10-02 screen: "64/100개 심사 중", "최대 36개의 단일 요소 또는 조합 요소를 제출할 수 있으며"). Before submitting, read the remaining slots (100 minus items in review) from that text and never select more than that.
+    - Even after uploading 1,000 files, submit only the remaining slots and leave the rest pending. Continue submitting in a later run once reviews finish and slots free up. If no slots remain, skip the submission step and record "no review slots".
 
 Do not upload a local preupload CSV directly after files are registered. DesignHub assigns `uniqueId` values only after the file upload, so the correct flow is always download the current DesignHub CSV, merge into that full file, and upload the merged full CSV.
 
