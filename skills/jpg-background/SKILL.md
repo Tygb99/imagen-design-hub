@@ -15,6 +15,7 @@ Shared reference: read `../../SKILL.md` and `../../references/designhub-element-
 - Do not request transparency, checkerboard, cutout, chroma key.
 - Prompt for a full-bleed square or rectangular background with no dominant subject.
 - Avoid people, logos, watermarks, UI captures, text, frames, borders, and single foreground objects.
+- When a batch requests a school notice, announcement, or poster, create its JPG as a separate subjectless background layer. Permission to include text in PNG, GIF, or SVG elements does not make a finished notice poster eligible as `Background`. Changing the extension to JPG does not resolve a content-type mismatch.
 - Preserve imagegen source PNGs separately before conversion.
 - Convert selected sources to JPG with RGB color and no alpha.
 
