@@ -17,6 +17,7 @@ Shared reference: read `../../SKILL.md` and `../../references/designhub-element-
 - Do not submit raster art renamed to `.svg`.
 - Do not embed bitmap payloads as the main artwork.
 - Keep the illustration simple with 5 or fewer visible colors across fills and strokes. Count white and black; exclude transparent and none values.
+- Before upload, convert every visible stroke to a filled outline path. Preserve the shape and color, and remove all `stroke` and `stroke-*` attributes, including `stroke="none"`. DesignHub's uploader rejects SVG stroke attributes; do not discard visible borders to bypass the error.
 - Remove rectangular artboards and background shapes unless the shape itself is the reusable element.
 - Avoid scripts, external links, `foreignObject`, hidden watermarks, stray off-artboard objects, and text artifacts from unknown fonts.
 - Export with a sensible tight `viewBox`.
@@ -40,5 +41,6 @@ Before calling an SVG candidate ready:
 - no scripts, external links, or `foreignObject`
 - `viewBox` and dimensions are present and within limits
 - visible colors are 5 or fewer
+- all borders are filled outline paths, with no `stroke` or `stroke-*` attributes
 - because this is beta, path quality and DesignHub suitability were checked by eye
 - external DesignHub upload/submission was not performed unless the user explicitly confirmed it
