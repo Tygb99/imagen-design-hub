@@ -1,4 +1,4 @@
-# imagen-design-hub 0.6.1
+# imagen-design-hub 0.6.2
 
 [한국어](README.ko.md)
 
@@ -11,6 +11,10 @@ Recommend useful PNG elements and create native transparent assets with Codex. F
 - Graphic backgrounds and balanced patterns: [jpg-background](skills/jpg-background/SKILL.md), with official Background/Photo type checks.
 - True vector elements: [svg-beta](skills/svg-beta/SKILL.md).
 - Aside upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md), using `setInputFiles()` first and the native file picker as fallback.
+
+## Version 0.6.2
+
+After 12 DesignHub rejections, added `scripts/designhub_preflight.py`: GIF all-frame crop with a 700 px recheck, a zero-margin PNG/GIF alpha check (alpha ≤ 8/255 counts as empty), and an upload stop for names in `records/designhub-rejected-elements.csv`; GIFs with only simple motion now need user confirmation.
 
 ## Version 0.6.1
 
@@ -43,7 +47,7 @@ For an already registered local plugin, update the source, then reinstall with C
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Verify the listed version is 0.6.1 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
+Verify the listed version is 0.6.2 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 

@@ -1,4 +1,4 @@
-# imagen-design-hub 0.6.1
+# imagen-design-hub 0.6.2
 
 [English](README.md)
 
@@ -11,6 +11,10 @@ PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 
 - 그래픽 배경·조화로운 패턴: [jpg-background](skills/jpg-background/SKILL.ko.md), 공식 Background/Photo 타입 구분
 - 실제 벡터: [svg-beta](skills/svg-beta/SKILL.md)
 - Aside 업로드·CSV: [upload-csv](skills/upload-csv/SKILL.ko.md), `setInputFiles()` 우선·파일 선택 창 전환
+
+## 0.6.2 변경
+
+디자인허브 반려 12건을 반영해 `scripts/designhub_preflight.py`를 추가했다: GIF 전체 프레임 크롭과 700px 재확인, PNG·GIF 알파 기준 여백 0 검사(알파 8/255 이하는 빈칸), `records/designhub-rejected-elements.csv`에 있는 이름은 업로드 중단. 단순한 움직임만 있는 GIF는 내기 전에 사용자에게 묻는다.
 
 ## 0.6.1 변경
 
@@ -43,7 +47,7 @@ codex plugin add imagen-design-hub@<목록에 표시된 마켓플레이스 이�
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-목록의 버전이 0.6.1인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
+목록의 버전이 0.6.2인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
 
 ## 의존성
 
