@@ -26,6 +26,8 @@ description: Aside에서 준비된 DesignHub 파일을 업로드하거나 기존
 ## 필수 순서
 
 1. 대상 파일 또는 기존 제출 예정 항목과 승인 범위를 확인한다. 준비된 파일은 Aside로 업로드하고, 이미 등록된 항목을 처리할 때는 파일 업로드를 건너뛴다. 무관한 항목은 선택에서 제외한다.
+   - 새 파일을 올리기 전에 플러그인 루트에서 `python3 scripts/designhub_preflight.py rejected <올릴 파일 전부>`를 실행한다. 파일 이름(확장자·대소문자 무시)을 [거부 요소 목록](../../records/designhub-rejected-elements.csv)과 비교한다. STOP(종료 코드 1)이 나오면 멈추고, 겹치는 파일은 올리지 않으며 겹친 목록을 보고한다. 거부된 그림의 이름만 바꾼 사본도 재제출이므로, 고유 이름 도우미로 이름을 바꾼 파일은 원본 이름도 함께 넣는다. 새로 거부된 요소는 사유 코드와 함께 그 목록에 추가한다.
+   - PNG·GIF는 `python3 scripts/designhub_preflight.py margin <파일들>`도 통과해야 한다([png-element](../png-element/SKILL.ko.md), [gif](../gif/SKILL.ko.md) 참고). FAIL이면 그 파일은 올리지 않는다.
 2. 새 파일을 업로드했다면 DesignHub가 `10 of 10 uploaded` 같은 업로드 완료 상태를 보일 때까지 기다린 뒤 업로드 완료로 본다.
 3. 제출 예정/대상 목록으로 이동해 그 화면의 CSV 다운로드 컨트롤을 사용한다. 관리 페이지의 `업로드된 모든 콘텐츠` export에 pending 파일이 포함된다고 가정하지 않는다.
 4. CSV 다운로드 완료를 확인하고 로컬에서 검사한다. 저장 대화상자가 나타나면 timestamp가 붙은 명시적 파일명으로 저장한다.
@@ -80,6 +82,7 @@ Background
 - CSV encoding은 UTF-8 without BOM이다.
 - 로컬 프로젝트 계약이 quote-all CSV를 요구하면 모든 field가 quote되어 있다.
 - 선택한 파일·부여된 ID·목적지가 승인된 작업 묶음과 일치한다.
+- 업로드 전에 거부 이름 검사가 OK, PNG·GIF 여백 검사가 PASS를 출력했다.
 - AI로 생성한 소재의 생성형 AI 표시가 저장되었다.
 - DesignHub가 성공 처리 행 수를 표시했거나 오류 메시지를 그대로 캡처했다.
 - DesignHub가 예상 업로드 수와 CSV 처리 행 수를 보고했다.

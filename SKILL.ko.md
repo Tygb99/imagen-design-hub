@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG 요소, sprite-gen GIF, 업로드 CSV를 처리합니다.
 ---
 
-# Imagen Design Hub 0.6.1
+# Imagen Design Hub 0.6.2
 
 [English](SKILL.md)
 
@@ -25,7 +25,7 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 
 브라우저 생성은 명시적 요청에만 사용한다. 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
 
-트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
+트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. `scripts/designhub_preflight.py`는 PNG·GIF를 그림 경계로 자르고, 올리기 전 투명 여백이 남은 파일을 실패시키며, `records/designhub-rejected-elements.csv`에 있는 이름을 멈춘다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
 
 ## 산출물·메타데이터
 

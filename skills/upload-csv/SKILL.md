@@ -26,6 +26,8 @@ Shared reference: read `../../SKILL.md` for route-specific `contentType` values 
 ## Required Sequence
 
 1. Confirm the target files or existing pending items and the authorized actions. Upload prepared files through Aside; skip file upload when processing items already registered on DesignHub. Keep unrelated items outside the selection.
+   - Before uploading new files, run `python3 scripts/designhub_preflight.py rejected <every file to upload>` from this plugin's root. It compares basenames, ignoring extension and case, with [the rejected-element list](../../records/designhub-rejected-elements.csv). If it prints STOP (exit 1), stop: do not upload any matching file, and report the matches. A renamed copy of a rejected image is still a resubmission, so also pass the source names of files renamed by the unique-name helper. Add each new rejection to that list with its reason code.
+   - PNG and GIF files must also pass `python3 scripts/designhub_preflight.py margin <files>` (see [png-element](../png-element/SKILL.md) and [gif](../gif/SKILL.md)); a FAIL stops that file.
 2. For new uploads, wait for DesignHub's upload completion state, such as `10 of 10 uploaded`, before treating the upload as complete.
 3. Navigate to the relevant pending/submission list and use its CSV download control. Do not assume the manage-page "all uploaded content" export contains pending files.
 4. Verify the completed CSV download and inspect it locally. If a save dialog appears, save with an explicit timestamped filename.
@@ -80,6 +82,7 @@ Before reporting ready:
 - CSV encoding is UTF-8 without BOM
 - every field is quoted if the local project contract requires quote-all CSV
 - the selected files, assigned IDs, and destination match the authorized batch
+- the rejected-name check printed OK and PNG/GIF margin checks printed PASS before upload
 - the generative-AI flag was saved for AI-generated assets
 - DesignHub displayed a successful processed-row count or an error message was captured verbatim
 - DesignHub reported the expected upload count and CSV processed-row count

@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, and upload CSV metadata.
 ---
 
-# Imagen Design Hub 0.6.1
+# Imagen Design Hub 0.6.2
 
 [Korean](SKILL.ko.md)
 
@@ -25,7 +25,7 @@ Generate one source per standalone PNG element. Preserve source files under `ass
 
 Browser generation is optional only when explicitly requested; native PNG creation does not require Aside, another login, or an API key.
 
-PNG finishing uses Pillow or an existing project processor for trim, size and DPI. The bundled unique-name helper remains available.
+PNG finishing uses Pillow or an existing project processor for trim, size and DPI. The bundled unique-name helper remains available. `scripts/designhub_preflight.py` crops PNG and GIF files to their visible bounds, fails any file with a transparent margin before upload, and stops names listed in `records/designhub-rejected-elements.csv`.
 
 Sprite-gen's animation row pipeline still uses its own chroma extraction. This is a GIF-specific dependency, not a reason to key native PNGs. Read the installed sprite-gen version and its docs; do not copy its engine into this plugin.
 
