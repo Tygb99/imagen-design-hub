@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.6.2",
-  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
+  "version": "0.7.0",
+  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, DesignHub CSV metadata, and collections of approved elements.",
   "license": "MIT",
   "homepage": "https://tygb99.github.io/imagen-design-hub/",
   "repository": {
@@ -14,7 +14,8 @@
     "miricanvas",
     "designhub",
     "imagegen",
-    "sprite-gen"
+    "sprite-gen",
+    "collection"
   ],
   "bin": {
     "imagen-design-hub": "./bin/install.mjs"

@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.6.2",
-  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, and DesignHub CSV metadata.",
+  "version": "0.7.0",
+  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, DesignHub CSV metadata, and collections of approved elements.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -20,13 +20,14 @@
     "svg",
     "gif",
     "csv",
-    "sprite-gen"
+    "sprite-gen",
+    "collection"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Imagen Design Hub",
-    "shortDescription": "PNG recommendations, native transparency, sprite-gen GIFs and DesignHub CSV.",
-    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Prepare JPG graphic backgrounds or balanced patterns, distinguish Photo content, and keep SVG and Aside upload/CSV routes.",
+    "shortDescription": "PNG, JPG, SVG, GIF, DesignHub CSV and collections.",
+    "longDescription": "Recommend useful PNG concepts, generate native transparent images with Codex image_gen, preserve alpha and finish locally. Create GIF candidates using the installed sprite-gen component-row workflow and motion QA. Prepare JPG graphic backgrounds or balanced patterns, distinguish Photo content, and keep SVG and Aside upload/CSV routes. Group approved public PNG, SVG, or GIF elements into DesignHub collections after checking current limits and existing membership; register or edit names and keywords and verify saved IDs and contents.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
@@ -37,13 +38,15 @@
       "Motion QA",
       "JPG and SVG assets",
       "DesignHub CSV",
-      "Aside upload"
+      "Aside upload",
+      "DesignHub collections"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
       "Recommend 3-5 PNG concepts, then generate native-alpha PNGs with image_gen and finish size and DPI locally.",
       "Use the installed sprite-gen skill for GIF candidates, check its version and inspect actual animation playback.",
-      "Use Aside for authorized DesignHub uploads and CSV roundtrips; prefer setInputFiles and preserve downloaded uniqueId values."
+      "Use Aside for authorized DesignHub uploads and CSV roundtrips; prefer setInputFiles and preserve downloaded uniqueId values.",
+      "Use the collection skill to check current DesignHub limits and membership, group approved public elements, register Korean names and 25 keywords, and verify saved collections without duplicating existing ones."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

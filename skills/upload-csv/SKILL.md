@@ -13,6 +13,8 @@ Start with prepared files or the user's existing pending items. Upload, metadata
 
 Shared reference: read `../../SKILL.md` for route-specific `contentType` values and keyword rules.
 
+If the user also requests collections, continue with [collection](../collection/SKILL.md) once the target elements are confirmed approved and public. Review submission alone does not authorize collection creation.
+
 ## Browser and file selection
 
 - Prefer Aside REPL for DesignHub. Read the installed Aside skill and its current guide before use, attach the relevant existing tab, and inspect the current page to identify controls.

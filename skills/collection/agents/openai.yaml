@@ -1,0 +1,4 @@
+interface:
+  display_name: "Imagen Design Hub: 컬렉션"
+  short_description: "승인 요소를 묶고 컬렉션 제목·키워드 등록과 저장 상태를 확인합니다"
+  default_prompt: "$imagen-design-hub:collection으로 현재 한도와 기존 소속을 확인하고, 승인·공개된 요소를 주제와 스타일별로 묶어 컬렉션을 등록해줘. 한국어 제목과 키워드 25개를 넣고 저장된 ID와 구성을 확인해줘."

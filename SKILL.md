@@ -1,9 +1,9 @@
 ---
 name: imagen-design-hub
-description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, and upload CSV metadata.
+description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, upload CSV metadata, and collections of approved elements.
 ---
 
-# Imagen Design Hub 0.6.2
+# Imagen Design Hub 0.7.0
 
 [Korean](SKILL.ko.md)
 
@@ -16,6 +16,7 @@ Start with PNG element recommendations when the user asks what to create: sugges
 - SVG: [svg-beta](skills/svg-beta/SKILL.md). True vectors, not embedded raster images.
 - GIF: [gif](skills/gif/SKILL.md). Use the installed sprite-gen component-row pipeline, then inspect actual playback.
 - Upload and metadata: [upload-csv](skills/upload-csv/SKILL.md). Aside with direct file selection first, native file picker as fallback; local tools for CSV merging.
+- Collections: [collection](skills/collection/SKILL.md). Check live limits and existing membership, group approved public elements, register or edit names and keywords, and verify saved IDs and contents.
 
 ## Native transparency
 

@@ -1152,7 +1152,7 @@
           <h1>Codex 플러그인으로<br><span class="accent-word">바뀐 제작<br class="mobile-only"> 파이프라인</span></h1>
           <p class="hero-copy">
             npx 한 줄로 설치하고 Codex 시작 때 업데이트를 확인합니다.
-            PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV 스킬을 필요한 순간에만 불러옵니다.
+            PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV, 컬렉션 스킬을 필요한 순간에만 불러옵니다.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#install">설치 명령 보기</a>
@@ -1169,7 +1169,7 @@
             <span>GitHub npx installer</span>
             <span>Marketplace registration</span>
             <span>SessionStart auto-update</span>
-            <span>5 focused skills</span>
+            <span>6 focused skills</span>
           </div>
         </div>
 
@@ -1246,9 +1246,9 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 <span class="badge badge-coral">04</span>
                 <div>
                   <h3>분리된 엔트리포인트</h3>
-                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, upload-csv가 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
+                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, upload-csv, collection이 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
                 </div>
-                <span class="format-note">5 skills</span>
+                <span class="format-note">6 skills</span>
               </article>
             </div>
           </div>
@@ -1258,9 +1258,9 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
       <section id="features" class="section">
         <div class="section-inner">
           <p class="section-kicker">Core features</p>
-          <h2 class="section-title">다섯 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
+          <h2 class="section-title">여섯 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
           <p class="section-lead">
-            배경, 투명 PNG, 벡터, 애니메이션, CSV 업로드는 실패 지점이 다릅니다.
+            배경, 투명 PNG, 벡터, 애니메이션, CSV 업로드, 컬렉션 등록을 각각 처리합니다.
             플러그인 방식은 각 route를 좁게 나누고, 실제 제출 표면에 맞는 규칙만 불러옵니다.
           </p>
 
@@ -1321,6 +1321,19 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 </ul>
               </div>
             </article>
+
+            <article class="feature-card">
+              <div class="feature-body">
+                <span class="badge badge-teal">COLLECTION</span>
+                <h3>collection</h3>
+                <p>승인·공개된 요소를 주제와 스타일별로 묶고 컬렉션 제목과 검색 키워드를 등록합니다.</p>
+                <ul class="feature-list">
+                  <li>현재 한도와 기존 컬렉션 소속 확인</li>
+                  <li>같은 타입의 관련 요소를 중복 없이 구성</li>
+                  <li>저장된 컬렉션 ID·요소 수·키워드 확인</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1330,7 +1343,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
           <p class="section-kicker">Workflow</p>
           <h2 class="section-title">설치, 라우팅, CSV 왕복을 분리합니다.</h2>
           <p class="section-lead">
-            플러그인은 설치와 업데이트를 맡고, 각 스킬은 파일 생성과 검증만 좁게 처리합니다.
+            플러그인은 설치와 업데이트를 맡고, 각 스킬은 생성·업로드·컬렉션 작업을 처리합니다.
             DesignHub 업로드 후에는 내려받은 CSV를 기준으로 uniqueId를 보존합니다.
           </p>
 
@@ -1343,7 +1356,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
             <article class="workflow-step">
               <strong>02 / ROUTE</strong>
               <h3>Load</h3>
-              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg-beta</code>, <code>gif</code>, <code>upload-csv</code>만 선택합니다.</p>
+              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg-beta</code>, <code>gif</code>, <code>upload-csv</code>, <code>collection</code>을 선택합니다.</p>
             </article>
             <article class="workflow-step">
               <strong>03 / ROUNDTRIP</strong>
@@ -1370,7 +1383,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <li>
                 <div>
                   <strong>요청에 맞는 스킬만 로드합니다.</strong>
-                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV 업로드 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
+                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV 업로드, 컬렉션 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
                 </div>
               </li>
               <li>
@@ -1432,6 +1445,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 <li><code>svg-beta</code> route</li>
                 <li><code>gif</code> route</li>
                 <li><code>upload-csv</code> route</li>
+                <li><code>collection</code> route</li>
               </ul>
             </article>
             <article class="spec-column">
@@ -1477,7 +1491,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
 
     <footer class="footer">
       <div class="footer-inner">
-        <div><strong>Imagen Design Hub</strong><br>Codex plugin for DesignHub JPG, PNG, SVG, GIF, and CSV asset production.</div>
+        <div><strong>Imagen Design Hub</strong><br>Codex plugin for DesignHub assets, CSV metadata, and collections.</div>
         <div class="footer-actions">
           <a class="button button-secondary" href="https://github.com/Tygb99/imagen-design-hub">Repository</a>
           <a class="star-link star-link-footer" href="https://github.com/Tygb99/imagen-design-hub/stargazers" aria-label="View GitHub stars for Imagen Design Hub">

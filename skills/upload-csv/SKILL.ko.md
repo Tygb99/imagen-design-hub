@@ -13,6 +13,8 @@ description: Aside에서 준비된 DesignHub 파일을 업로드하거나 기존
 
 공유 참고자료: route별 `contentType` 값과 keyword rule이 필요하면 `../../SKILL.ko.md`를 읽는다.
 
+컬렉션도 요청했다면 대상 요소의 승인·공개 상태를 확인한 뒤 [collection](../collection/SKILL.ko.md)으로 이어간다. 심사 제출 요청만으로 컬렉션 생성을 시작하지 않는다.
+
 ## 브라우저와 파일 지정
 
 - DesignHub는 Aside REPL을 우선한다. 설치된 Aside 스킬과 현재 가이드를 읽고, 해당하는 기존 탭에 연결한 뒤 현재 페이지를 확인해 컨트롤을 찾는다.
