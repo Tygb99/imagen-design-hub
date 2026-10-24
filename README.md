@@ -1,8 +1,8 @@
-# imagen-design-hub 0.6.2
+# imagen-design-hub 0.7.0
 
 [한국어](README.ko.md)
 
-Recommend useful PNG elements and create native transparent assets with Codex. Finish dimensions and DPI locally and prepare DesignHub metadata.
+Recommend useful PNG elements and create native transparent assets with Codex. Finish dimensions and DPI locally, prepare DesignHub metadata, and organize approved public elements into collections.
 
 ## Routes
 
@@ -11,6 +11,13 @@ Recommend useful PNG elements and create native transparent assets with Codex. F
 - Graphic backgrounds and balanced patterns: [jpg-background](skills/jpg-background/SKILL.md), with official Background/Photo type checks.
 - True vector elements: [svg-beta](skills/svg-beta/SKILL.md).
 - Aside upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md), using `setInputFiles()` first and the native file picker as fallback.
+- Collections: [collection](skills/collection/SKILL.md), for current limits, existing membership, eligible groups, names/keywords, registration, and saved-state checks.
+
+## Version 0.7.0
+
+Added the `collection` skill in English and Korean. It groups approved public elements by type and theme, balances groups within the live limits, preserves identifiers, avoids existing memberships and duplicate retries, and records saved collections separately from element CSV metadata. It also supports requested name/keyword edits through the existing collection.
+
+Example: “Use $imagen-design-hub:collection to organize my approved public elements into collections with Korean names and 25 keywords.”
 
 ## Version 0.6.2
 
@@ -47,7 +54,7 @@ For an already registered local plugin, update the source, then reinstall with C
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Verify the listed version is 0.6.2 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
+Verify the listed version is 0.7.0 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 

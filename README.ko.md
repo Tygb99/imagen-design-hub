@@ -1,8 +1,8 @@
-# imagen-design-hub 0.6.2
+# imagen-design-hub 0.7.0
 
 [English](README.md)
 
-PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비한다.
+PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비하며 승인·공개 요소를 컬렉션으로 묶는다.
 
 ## 경로
 
@@ -11,6 +11,13 @@ PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 
 - 그래픽 배경·조화로운 패턴: [jpg-background](skills/jpg-background/SKILL.ko.md), 공식 Background/Photo 타입 구분
 - 실제 벡터: [svg-beta](skills/svg-beta/SKILL.md)
 - Aside 업로드·CSV: [upload-csv](skills/upload-csv/SKILL.ko.md), `setInputFiles()` 우선·파일 선택 창 전환
+- 컬렉션: [collection](skills/collection/SKILL.ko.md), 현재 한도·기존 소속·요소 묶기·제목과 키워드·등록·저장 결과 확인
+
+## 0.7.0 변경
+
+한국어·영어 `collection` 스킬을 추가했다. 승인·공개 요소를 타입과 주제별로 묶고, 현재 한도 안에서 크기를 균등하게 나누며, 식별자 보존·기존 소속 확인·재시도 중복 방지·저장 결과 기록을 처리한다. 컬렉션 기록은 요소 CSV와 분리하며, 요청한 이름·키워드 수정은 기존 컬렉션에서 수행한다.
+
+사용 예: “$imagen-design-hub:collection으로 승인·공개된 요소를 컬렉션으로 묶고 한국어 제목과 키워드 25개를 등록해줘.”
 
 ## 0.6.2 변경
 
@@ -47,7 +54,7 @@ codex plugin add imagen-design-hub@<목록에 표시된 마켓플레이스 이�
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-목록의 버전이 0.6.2인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
+목록의 버전이 0.7.0인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
 
 ## 의존성
 
