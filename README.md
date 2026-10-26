@@ -37,6 +37,8 @@ GIF uses sprite-gen's own component-row generation and extraction. Its current r
 
 ## Install or update
 
+Codex CLI must already run in the terminal used below. Installing the desktop app or this plugin does not guarantee a `codex` command on PATH. On Windows, check `Get-Command codex -All` and `codex --version` first. See [image-generation diagnostics](references/image-generation-troubleshooting.md) for Windows setup and missing-tool recovery.
+
 Clone the repository at the personal marketplace's expected path, then register and install it:
 
 ```sh
@@ -58,7 +60,7 @@ Verify the listed version is 0.7.0 and start a new task after reinstall to load 
 
 ## Dependencies
 
-- Codex built-in image_gen for PNG generation; no API key required.
+- A Codex session exposing its native image tool with an eligible ChatGPT sign-in; no API key is required for that native path. Codex image generation is not available on the Free plan. Plugin installation alone does not enable it; see [requirements and diagnostics](references/image-generation-troubleshooting.md).
 - Python and Pillow for local finishing.
 - Installed sprite-gen and its own venv for GIFs; follow its versioned SKILL.md.
 - Aside REPL for DesignHub operations; Computer Use for native file-picker fallback when needed.

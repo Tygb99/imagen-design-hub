@@ -20,11 +20,15 @@ Start with PNG element recommendations when the user asks what to create: sugges
 
 ## Native transparency
 
+Before generation, check the tools actually exposed in this session, including deferred tools. `image_gen` may be a namespace or appear as `image_gen__imagegen`; use the actual native tool rather than checking a literal function name alone. Installing this plugin does not add the host tool. Codex Free-plan ChatGPT sign-ins do not include image generation; eligible ChatGPT-backed sessions can use it without an API key. Do not infer a plan from an absent tool.
+
+If the native tool is missing, stop generation and follow [image-generation diagnostics](references/image-generation-troubleshooting.md): distinguish CLI installation/path, CLI version, login method, plan, feature flag, provider and model. Report observed values separately from unknowns. Do not claim Windows or `codex exec` is categorically unsupported. Do not automatically switch to an API-key CLI or browser; use alternatives only on the user's explicit choice.
+
 [OpenAI's Images 2.5 announcement](https://openai.com/index/introducing-chatgpt-images-2-5/) confirms Codex availability and transparent-background support. Request native transparency first. Tool availability does not identify the exact backend variant; never claim Flare or Sunburst without returned evidence.
 
 Generate one source per standalone PNG element. Preserve source files under `assets/source-imagegen/`; write derived files separately. Preserve intentional partial alpha, especially glass, mist, hair, and glow.
 
-Browser generation is optional only when explicitly requested; native PNG creation does not require Aside, another login, or an API key.
+Browser generation is optional only when explicitly requested. When the native tool is available through the current ChatGPT sign-in, PNG creation does not require Aside, another login, or an API key.
 
 PNG finishing uses Pillow or an existing project processor for trim, size and DPI. The bundled unique-name helper remains available. `scripts/designhub_preflight.py` crops PNG and GIF files to their visible bounds, fails any file with a transparent margin before upload, and stops names listed in `records/designhub-rejected-elements.csv`.
 

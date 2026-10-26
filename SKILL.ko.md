@@ -20,11 +20,15 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 
 ## 네이티브 투명 배경
 
+생성 전에 지연 로딩 도구를 포함해 이 세션에 실제 제공된 도구를 확인한다. `image_gen`은 네임스페이스 또는 `image_gen__imagegen`처럼 표시될 수 있으므로 문자 그대로의 함수명 일치만으로 없다고 판단하지 말고 실제 제공된 이름으로 호출한다. 플러그인 설치가 호스트 도구를 추가하지는 않는다. Codex Free 플랜의 ChatGPT 로그인에는 이미지 생성이 포함되지 않으며 지원되는 ChatGPT 세션의 내장 경로에는 API 키가 필요 없다. 도구가 없다는 이유로 플랜을 단정하지 않는다.
+
+내장 도구가 없으면 생성을 멈추고 [이미지 생성 진단](references/image-generation-troubleshooting.ko.md)에 따라 CLI 설치·경로, CLI 버전, 로그인 방식·플랜, 기능 플래그, 제공자·모델을 구분한다. 관찰한 값과 추가 확인이 필요한 항목을 나누어 보고한다. Windows나 `codex exec`를 일괄 미지원으로 단정하지 않는다. API 키 CLI나 브라우저로 자동 전환하지 말고 사용자가 명시적으로 선택한 범위에서만 대안을 쓴다.
+
 [Images 2.5 공식 발표](https://openai.com/index/introducing-chatgpt-images-2-5/)에서 Codex와 투명 배경 지원을 확인했다. 네이티브 투명을 먼저 요청한다. 반환 증거 없이 세부 모델을 Flare/Sunburst라고 단정하지 않는다.
 
 요소 하나당 원본 하나를 생성하고 assets/source-imagegen/에 보존한다. 후처리본은 분리한다. 유리·안개·머리카락·발광의 의도된 부분 알파를 보존한다.
 
-브라우저 생성은 명시적 요청에만 사용한다. 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
+브라우저 생성은 명시적 요청에만 사용한다. 현재 ChatGPT 로그인에서 내장 도구가 제공되는 경우 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
 
 트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. `scripts/designhub_preflight.py`는 PNG·GIF를 그림 경계로 자르고, 올리기 전 투명 여백이 남은 파일을 실패시키며, `records/designhub-rejected-elements.csv`에 있는 이름을 멈춘다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
 

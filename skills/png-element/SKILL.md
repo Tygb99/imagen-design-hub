@@ -9,7 +9,7 @@ description: Recommend and create DesignHub native transparent PNG elements with
 
 Read [shared rules](../../SKILL.md). Recommendations contain 3–5 concrete concepts with subject, style, use case and buyer-facing keywords.
 
-1. Follow the installed imagegen skill; use built-in image_gen and explicitly request a genuinely transparent background, one asset per call.
+1. Check native image-tool availability using the shared rules, then follow the installed imagegen skill and request a genuinely transparent background, one asset per call. If no native tool is exposed, stop and follow [image-generation diagnostics](../../references/image-generation-troubleshooting.md); do not jump straight to an API-key fallback or assume the account is Free.
 2. Preserve returned originals under assets/source-imagegen/. Do not require a fresh child session, browser, API key, chroma key or background-removal pass.
 3. Finish a separate copy with Pillow or the project processor for size, DPI and file size. Trim with `python3 scripts/designhub_preflight.py crop <in.png> <out.png>` from this plugin's root; it keeps DPI.
 4. Prepare unique filenames and PNG element CSV with 20–25 buyer-facing keywords. Use [upload-csv](../upload-csv/SKILL.md) for authorized upload.

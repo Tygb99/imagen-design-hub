@@ -37,6 +37,8 @@ GIF는 sprite-gen의 component-row 생성·추출을 쓴다. 현재 행 생성 �
 
 ## 설치·업데이트
 
+아래 명령을 실행할 터미널에서 Codex CLI가 먼저 동작해야 한다. 데스크톱 앱이나 플러그인을 설치했다고 PATH의 `codex` 명령까지 생기지는 않는다. Windows에서는 `Get-Command codex -All`과 `codex --version`부터 확인한다. 설치·계정 조건·도구 미제공 시 조치는 [이미지 생성 진단](references/image-generation-troubleshooting.ko.md)을 따른다.
+
 개인 마켓플레이스가 가리키는 경로에 저장소를 복제한 뒤 등록·설치한다.
 
 ```sh
@@ -58,7 +60,7 @@ codex plugin add imagen-design-hub@tygb99-personal
 
 ## 의존성
 
-- PNG 생성: Codex 내장 image_gen, API 키 불필요
+- PNG 생성: 사용 가능한 내장 이미지 도구와 지원되는 ChatGPT 로그인. 이 네이티브 경로에는 API 키가 필요 없지만 Codex Free 플랜은 이미지 생성을 지원하지 않는다. 플러그인 설치만으로 활성화되지 않으므로 [조건·진단](references/image-generation-troubleshooting.ko.md)을 확인한다.
 - 로컬 마무리: Python·Pillow
 - GIF: 설치된 sprite-gen과 전용 venv, 해당 버전 SKILL.md
 - DesignHub 조작: Aside REPL, 필요한 파일 선택 창 전환은 Computer Use
