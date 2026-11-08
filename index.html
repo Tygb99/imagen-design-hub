@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Imagen Design Hub</title>
-  <meta name="description" content="Codex 플러그인 방식으로 설치하는 MiriCanvas DesignHub JPG, PNG, SVG, GIF, CSV 제작 워크플로우.">
+  <meta name="description" content="Images 2.6 기준 PNG·JPG·SVG와 sprite-gen GIF, DesignHub CSV·컬렉션을 준비하는 Codex 플러그인.">
   <meta property="og:title" content="Imagen Design Hub">
-  <meta property="og:description" content="npx 한 줄로 설치하고 Codex 플러그인으로 DesignHub JPG, PNG, SVG, GIF, CSV 워크플로우를 불러옵니다.">
+  <meta property="og:description" content="Images 2.6 생성·편집 지침과 sprite-gen GIF 제작을 DesignHub 규격·CSV·컬렉션까지 연결합니다.">
   <meta property="og:image" content="assets/imagegen-workflow-hero.png">
   <link rel="preload" as="image" href="assets/imagegen-workflow-hero.png">
   <style>
@@ -1152,7 +1152,7 @@
           <h1>Codex 플러그인으로<br><span class="accent-word">바뀐 제작<br class="mobile-only"> 파이프라인</span></h1>
           <p class="hero-copy">
             npx 한 줄로 설치하고 Codex 시작 때 업데이트를 확인합니다.
-            PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV, 컬렉션 스킬을 필요한 순간에만 불러옵니다.
+            Images 2.6 기준으로 PNG·JPG·SVG를 준비하고, GIF는 sprite-gen으로 제작합니다. CSV·컬렉션 스킬도 필요한 순간에 불러옵니다.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#install">설치 명령 보기</a>
@@ -1284,7 +1284,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <div class="feature-body">
                 <span class="badge badge-green">PNG</span>
                 <h3>png-element</h3>
-                <p>내장 image_gen으로 네이티브 투명 PNG를 생성하고, 부분 알파를 보존하며 크기·DPI·파일 용량을 확인합니다.</p>
+                <p>Images 2.6 지침에 따라 네이티브 투명 PNG를 생성하고, 참조 편집에서 피사체 형태와 부분 알파를 보존합니다.</p>
                 <ul class="feature-list">
                   <li>1개씩 개별 source 생성</li>
                   <li>피사체 내부 색 보존</li>
@@ -1298,10 +1298,10 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <div class="feature-media" aria-hidden="true"></div>
               <div class="feature-body">
                 <span class="badge badge-teal">SVG</span>
-                <h3>svg-beta</h3>
-                <p>색상 변경 가능한 단순 벡터 요소는 5색 이하, 실제 SVG, 배경 제거 기준으로 검수합니다.</p>
+                <h3>svg</h3>
+                <p>지원되는 SVG 내보내기나 벡터 원본으로 제작하고, 색상 변경 가능한 실제 벡터·5색 이하·배경 제거 기준으로 검수합니다.</p>
                 <ul class="feature-list">
-                  <li>vector source와 viewBox 확인</li>
+                  <li>사용 가능한 SVG 출력과 viewBox 확인</li>
                   <li>embedded raster, script, 외부 링크 차단</li>
                   <li>SVG element CSV 생성</li>
                 </ul>
@@ -1356,7 +1356,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
             <article class="workflow-step">
               <strong>02 / ROUTE</strong>
               <h3>Load</h3>
-              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg-beta</code>, <code>gif</code>, <code>upload-csv</code>, <code>collection</code>을 선택합니다.</p>
+              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg</code>, <code>gif</code>, <code>upload-csv</code>, <code>collection</code>을 선택합니다.</p>
             </article>
             <article class="workflow-step">
               <strong>03 / ROUNDTRIP</strong>
@@ -1442,7 +1442,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <ul class="spec-list">
                 <li><code>jpg-background</code> route</li>
                 <li><code>png-element</code> route</li>
-                <li><code>svg-beta</code> route</li>
+                <li><code>svg</code> route</li>
                 <li><code>gif</code> route</li>
                 <li><code>upload-csv</code> route</li>
                 <li><code>collection</code> route</li>

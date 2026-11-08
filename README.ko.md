@@ -1,17 +1,27 @@
-# imagen-design-hub 0.7.0
+# imagen-design-hub 0.9.0
 
-[English](README.md)
+[English](README.md) · [변경 이력](2026-11-08-15-44-22-CHANGELOG.ko.md)
 
-PNG 요소를 추천하고 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비하며 승인·공개 요소를 컬렉션으로 묶는다.
+PNG 요소를 추천하고 Images 2.6 생성·편집 지침에 따라 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비하며 승인·공개 요소를 컬렉션으로 묶는다.
 
 ## 경로
 
 - PNG 추천·네이티브 투명: [png-element](skills/png-element/SKILL.ko.md)
 - GIF 후보: [gif](skills/gif/SKILL.ko.md), 설치된 sprite-gen 버전 기준
 - 그래픽 배경·조화로운 패턴: [jpg-background](skills/jpg-background/SKILL.ko.md), 공식 Background/Photo 타입 구분
-- 실제 벡터: [svg-beta](skills/svg-beta/SKILL.md)
+- 실제 벡터: [svg](skills/svg/SKILL.ko.md)
 - Aside 업로드·CSV: [upload-csv](skills/upload-csv/SKILL.ko.md), `setInputFiles()` 우선·파일 선택 창 전환
 - 컬렉션: [collection](skills/collection/SKILL.ko.md), 현재 한도·기존 소속·요소 묶기·제목과 키워드·등록·저장 결과 확인
+
+## 0.9.0 변경
+
+로컬 벡터 제작 인수 테스트를 거쳐 `svg-beta`를 `svg`로 전환했다. `$imagen-design-hub:svg`로 사용한다. SVG 에이전트 설정을 추가하고 실제 벡터·색상·윤곽선·파일·메타데이터 검수는 유지한다. 별도 실사용 테스트에서는 내장 image_gen의 PNG를 4색 SVG로 변환해 파일 1개 업로드, CSV 101행 처리, AI 표시 저장, 해당 1개 심사 제출을 완료했다. 현재 심사 대기이며 승인은 아직이다. 사용자 선택에 따라 API 경로는 실행하지 않았고 도구가 정확한 백엔드 모델을 식별하지 않았다.
+
+[SVG 검수 보고서](records/2026-11-06-22-47-15-svg-qualification.ko.md) · [내장 생성·실제 제출 검증](records/2026-11-06-23-44-31-native-svg-live.ko.md)
+
+## 0.8.0 변경
+
+[Images 2.6](https://openai.com/index/introducing-images-2-6/) 기준으로 PNG·JPG 생성, 참조 편집, SVG 안내를 갱신했다. 편집 시 피사체 정체성과 알파를 보존하고 변형에는 검수한 기준 이미지를 재사용한다. [Images 2.6 옵션](references/2026-11-06-22-36-21-images-2-6.ko.md)은 선택적 API quality·complexity, 수정 위치 지정, SVG 내보내기를 설명한다. 실제 도구 명세를 먼저 확인하며 API 지원을 내장 Codex 도구 지원으로 가정하지 않는다. 플러그인이 API 클라이언트를 추가하지는 않는다. GIF는 sprite-gen을 유지하고 Free 미지원 진단과 DesignHub 제출 검수를 계속 적용한다.
 
 ## 0.7.0 변경
 
@@ -33,9 +43,11 @@ PNG 기본 경로는 내장 image_gen의 네이티브 투명 생성이다. 의�
 
 GIF는 sprite-gen의 component-row 생성·추출을 쓴다. 현재 행 생성 계약은 크로마키다. GIF의 이진 투명도와 제한된 팔레트 때문에 유리 반투명이 RGBA PNG와 같을 수 없다. 원본 프레임을 보존하고 실제 동작을 검수한다.
 
-[Images 2.5 공식 발표](https://openai.com/index/introducing-chatgpt-images-2-5/)에 Codex·투명 배경 지원이 명시돼 있다. 도구 제공 여부로 세부 모델을 단정하지 않는다.
+[Images 2.6 공식 발표](https://openai.com/index/introducing-images-2-6/)를 현재 생성·편집 기준으로 삼는다. 실제 모델 버전과 변형은 도구가 식별해 준 경우에만 기록한다.
 
 ## 설치·업데이트
+
+아래 명령을 실행할 터미널에서 Codex CLI가 먼저 동작해야 한다. 데스크톱 앱이나 플러그인을 설치했다고 PATH의 `codex` 명령까지 생기지는 않는다. Windows에서는 `Get-Command codex -All`과 `codex --version`부터 확인한다. 설치·계정 조건·도구 미제공 시 조치는 [이미지 생성 진단](references/image-generation-troubleshooting.ko.md)을 따른다.
 
 개인 마켓플레이스가 가리키는 경로에 저장소를 복제한 뒤 등록·설치한다.
 
@@ -54,11 +66,11 @@ codex plugin add imagen-design-hub@<목록에 표시된 마켓플레이스 이�
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-목록의 버전이 0.7.0인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
+목록의 버전이 0.9.0인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
 
 ## 의존성
 
-- PNG 생성: Codex 내장 image_gen, API 키 불필요
+- PNG 생성: 사용 가능한 내장 이미지 도구와 지원되는 ChatGPT 로그인. 이 네이티브 경로에는 API 키가 필요 없지만 Codex Free 플랜은 이미지 생성을 지원하지 않는다. 플러그인 설치만으로 활성화되지 않으므로 [조건·진단](references/image-generation-troubleshooting.ko.md)을 확인한다.
 - 로컬 마무리: Python·Pillow
 - GIF: 설치된 sprite-gen과 전용 venv, 해당 버전 SKILL.md
 - DesignHub 조작: Aside REPL, 필요한 파일 선택 창 전환은 Computer Use
