@@ -10,7 +10,7 @@
     {
       "id": 2,
       "prompt": "아까 HTML보다 imagegen 버전이 더 좋아. 그 스타일로 DesignHub 배경 JPG 후보를 더 뽑아줘.",
-      "expected_output": "Checks the referenced style for subjectless graphic or balanced-pattern Background eligibility rather than treating photorealism as background quality. Routes real or strongly photorealistic content to Photo; rejects focal rectangular illustrations as Background and separates objects where possible. Keeps new source PNGs and derived JPGs separate, validates files and type suitability, and reports folders and CSV within the existing authorization scope.",
+      "expected_output": "Checks the referenced style for subjectless graphic or balanced-pattern Background eligibility rather than treating photorealism as background quality. Routes real or strongly photorealistic content to Photo; rejects focal rectangular illustrations as Background and separates objects where possible. Keeps new source PNGs and derived JPGs separate, validates files and type suitability, and reports folders and CSV within the existing authorization scope. Reuses the accepted reference through supported image inputs for consistent palette and pattern density, and rechecks eligibility after edits.",
       "files": []
     },
     {
@@ -34,13 +34,13 @@
     {
       "id": 8,
       "prompt": "미리캔버스 DesignHub에 올릴 색상 변경 가능한 단순 말풍선 SVG 요소 10개를 만들고 CSV도 준비해줘.",
-      "expected_output": "Routes to svg-beta, uses a true vector source/export path instead of raster-only imagegen output, keeps each design simple with five or fewer colors, removes backgrounds, validates SVG XML/viewBox/no embedded raster/no external scripts, and writes metadata with extensionless fileName, blank or DesignHub-provided uniqueId, tier Premium, contentType SVG element, and buyer-facing keywords.",
+      "expected_output": "Routes to svg. Checks the live tool output formats; may use real Images 2.6 SVG output when exposed, or a vector source/editor for simple elements. Does not invent output_format for a raster-only native tool or silently use a paid API. Preserves the generated source, validates XML/viewBox/no embedded raster/no external scripts, keeps five or fewer colors, converts visible strokes to filled outlines and removes stroke attributes, and prepares extensionless fileName, blank or DesignHub-provided uniqueId, Premium, SVG element and 20-25 buyer-facing keywords.",
       "files": []
     },
     {
       "id": 9,
       "prompt": "DesignHub GIF 요소로 움직이는 반짝이 스티커 6개 만들어줘. 영상 말고 일러스트 애니메이션으로.",
-      "expected_output": "Route to gif, read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, offer optional curation, and report GIF binary-alpha limits.",
+      "expected_output": "Route to gif, read installed sprite-gen and use its component-row workflow; preserve raw rows and frames, compose atlas and GIF via run-dir, inspect actual motion and loop seam, verify 700-1920px and under 25MB, offer optional curation, and report GIF binary-alpha limits. Keeps sprite-gen as the GIF route even though Images 2.6 supports direct GIF output. Does not replace it with a direct GIF API call.",
       "files": []
     },
     {
@@ -66,6 +66,50 @@
       "prompt": "작은 별과 꽃 무늬가 균일하게 반복되는 조화로운 JPG 패턴 배경을 만들어줘. 중심 피사체는 없어.",
       "expected_output": "Allows a harmonious repeat pattern under Background when no particular subject stands out. Does not impose a blanket ban on recognizable motifs. Generates and checks the balanced pattern, preserves sources, validates JPG dimensions/DPI/file size, and prepares Background metadata matching the actual pattern.",
       "files": []
+    },
+    {
+      "id": 16,
+      "prompt": "이 유리컵 PNG의 손잡이만 파란색으로 바꾸고 같은 시리즈로 3개 준비해줘. 컵 모양과 투명도는 유지해줘.",
+      "expected_output": "Inspects the local or attached edit target, supplies it through the actual tool image-input mechanism, and reuses the accepted reference for variants. Changes only the requested handle color and preserves cup geometry, identity, composition and partial alpha. Saves originals and revisions separately, compares each edit and the final series, and does not claim the backend version without returned evidence.",
+      "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "Images 2.6로 PNG 만들어줘. 현재 내장 도구 인자는 prompt와 transparent_background뿐이야. 빠르게 만들고 싶어.",
+      "expected_output": "Uses the exposed native tool with supported arguments and an appropriately focused prompt. Does not invent model, quality, complexity, markup or output_format arguments, claim a selected backend variant, or switch to an API-key client for speed. Explains any unavailable requested control only as needed.",
+      "files": []
+    },
+    {
+      "id": 18,
+      "prompt": "API 경로를 선택했어. 지원되는 API 도구로 Images 2.6 단순 꽃 SVG를 만들고 DesignHub 후보로 준비해줘.",
+      "expected_output": "Uses a selected API client exposing Images 2.6 SVG generation: /v1/images/generations, a supported 2.6 model, output_format svg, n 1, and base64 decoding to UTF-8 SVG. Does not claim this plugin includes an API client. Preserves the returned original and validates real paths, five colors, outline conversion, no stroke attributes, tight viewBox, size and metadata before marking a candidate ready. Does not use the edit endpoint for SVG output.",
+      "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "업데이트된 Imagen Design Hub로 움직이는 캐릭터 GIF 하나 만들어줘.",
+      "expected_output": "Uses the installed sprite-gen skill and its current component-row contract with provider codex. Preserves rows and frames, composes and inspects real motion and loop seams, then applies DesignHub crop and size checks. Does not select direct Images 2.6 GIF output or an unrequested billed API.",
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "API로 편집할게. 원본과 같은 크기의 투명 PNG에 수정할 곳을 표시했어. 그 부분만 바꿔줘.",
+      "expected_output": "Uses markup on /v1/images/edits with the original as first input and a separate transparent PNG overlay matching its oriented dimensions. Describes the requested edit and invariants, does not combine markup with mask or prompt_rewriter, and checks identity, alpha and removal of annotation marks in the result. Preserves original and edited files.",
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Images 2.6가 모든 구독 등급에서 된다고 하니까 Codex Free 이미지 생성 미지원 안내는 지워도 되지?",
+      "expected_output": "Does not treat all subscription tiers as proof of Free-plan image access. Preserves the existing Free-plan diagnostics, checks actual session tools without inferring a plan from tool absence, and does not promise image generation merely because the plugin is installed.",
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "$imagen-design-hub:svg로 첨부된 원형 배지의 모양과 색, 테두리 두께를 유지해 DesignHub SVG와 CSV를 준비해줘.",
+      "expected_output": "Reads the supplied source, converts its 48-unit visible stroke into filled geometry without losing the border, then trims the original 1024x1024 artboard to the visible bounds (88,88,848,848) while retaining the artwork coordinates or an equivalent transformed viewBox. Does not keep empty source padding unless the user explicitly requests that canvas. Validates two visible colors, no stroke attributes, real SVG, file limits and matching metadata. Writes the exact six-column CSV header as UTF-8 without BOM even when no upload is requested.",
+      "files": [
+        "evals/fixtures/svg-outline-crop.json"
+      ]
     }
   ]
 }

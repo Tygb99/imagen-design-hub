@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.7.0",
-  "description": "Recommend and prepare native transparent PNG elements, JPG backgrounds, SVG, sprite-gen GIF animations, DesignHub CSV metadata, and collections of approved elements.",
+  "version": "0.9.0",
+  "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
   "license": "MIT",
   "homepage": "https://tygb99.github.io/imagen-design-hub/",
   "repository": {
@@ -32,8 +32,8 @@
     "scripts/",
     "skills/",
     "src/",
-    "DESIGN.md",
-    "DESIGN.ko.md",
+    "2026-11-06-22-36-21-DESIGN.md",
+    "2026-11-06-22-36-21-DESIGN.ko.md",
     "LICENSE",
     "LICENSE.ko.md",
     "README.md",
@@ -41,7 +41,9 @@
     "SKILL.md",
     "SKILL.ko.md",
     "index.html",
-    "requirements.txt"
+    "requirements.txt",
+    "2026-11-08-15-44-22-CHANGELOG.md",
+    "2026-11-08-15-44-22-CHANGELOG.ko.md"
   ],
   "engines": {
     "node": ">=18"

@@ -24,6 +24,8 @@ For a school notice, announcement, or poster batch, create the JPG as a separate
 
 ## Generation and File Checks
 
+Follow the shared Images 2.6 guidance. For a reference edit or matching pattern series, inspect and reuse the accepted reference, change only the requested details, and preserve the palette, layout and balanced motif density. Recheck Background eligibility after each edit. Use only exposed native-tool options; optional API controls are documented [separately](../../references/2026-11-06-22-36-21-images-2-6.md).
+
 1. Use built-in `image_gen` for an opaque, full-bleed rectangular or square graphic background or balanced pattern. Do not request cutouts or chroma key. Omit notice text, logos, watermarks, UI captures, and decorative frames from generated document backgrounds.
 2. Preserve the source PNG and the authored prompt under the current run. Convert a separate copy to RGB `.jpg`; do not overwrite sources or failed candidates.
 3. Check the actual JPEG signature, RGB mode, dimensions, DPI, file size, and visual eligibility. File validation alone does not establish content-type suitability or review approval.

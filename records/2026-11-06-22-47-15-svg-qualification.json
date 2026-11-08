@@ -1,0 +1,421 @@
+{
+  "status": "PASS",
+  "qualified_scope": "local vector authoring/editing, visible-outline conversion, tight SVG export and metadata preparation",
+  "version": "0.9.0",
+  "skill": "imagen-design-hub:svg",
+  "artifact_run": "svg-verification-2026-11-06-22-30-28",
+  "final_runs": [
+    "final-1",
+    "final-2"
+  ],
+  "assets": [
+    {
+      "run": "final-1",
+      "file": "flower.svg",
+      "dimensions": [
+        240.0,
+        400.0
+      ],
+      "viewBox": [
+        0.0,
+        0.0,
+        240.0,
+        400.0
+      ],
+      "colors": [
+        "#43845b",
+        "#ed8298",
+        "#f6cc60"
+      ],
+      "bytes": 465,
+      "shapes": 8,
+      "sha256": "c13562544e5a905ed4b5d62e733d154819abdf1bce1bf057e7c3c9379adc2044"
+    },
+    {
+      "run": "final-1",
+      "file": "round-badge.svg",
+      "dimensions": [
+        848.0,
+        848.0
+      ],
+      "viewBox": [
+        88.0,
+        88.0,
+        848.0,
+        848.0
+      ],
+      "colors": [
+        "#243d4f",
+        "#ffffff"
+      ],
+      "bytes": 228,
+      "shapes": 2,
+      "sha256": "e997c00e7a2a4dc2ea7ba146216b674e139150a5c8a2e99b307bfd1f0ad45887"
+    },
+    {
+      "run": "final-1",
+      "file": "speech-bubble.svg",
+      "dimensions": [
+        360.0,
+        280.0
+      ],
+      "viewBox": [
+        0.0,
+        0.0,
+        360.0,
+        280.0
+      ],
+      "colors": [
+        "#243d4f",
+        "#ffffff"
+      ],
+      "bytes": 383,
+      "shapes": 2,
+      "sha256": "aa850c284fdbe6ad4ec15704e8b73c88c44a4ce6848943b78a7c9a8a77ccbc06"
+    },
+    {
+      "run": "final-2",
+      "file": "flower.svg",
+      "dimensions": [
+        240.0,
+        400.0
+      ],
+      "viewBox": [
+        0.0,
+        0.0,
+        240.0,
+        400.0
+      ],
+      "colors": [
+        "#438653",
+        "#ef86a4",
+        "#f5ca58"
+      ],
+      "bytes": 476,
+      "shapes": 7,
+      "sha256": "78fea13dbb81a0475ddbcd10de0898e3bdd5bb666aa443033467a172b0e3d404"
+    },
+    {
+      "run": "final-2",
+      "file": "round-badge.svg",
+      "dimensions": [
+        848.0,
+        848.0
+      ],
+      "viewBox": [
+        88.0,
+        88.0,
+        848.0,
+        848.0
+      ],
+      "colors": [
+        "#243d4f",
+        "#ffffff"
+      ],
+      "bytes": 298,
+      "shapes": 2,
+      "sha256": "5b36db6e249890742fde6590c00a075f3ea151c4df972d8fa281b5d355faeb0c"
+    },
+    {
+      "run": "final-2",
+      "file": "speech-bubble.svg",
+      "dimensions": [
+        360.0,
+        260.0
+      ],
+      "viewBox": [
+        0.0,
+        0.0,
+        360.0,
+        260.0
+      ],
+      "colors": [
+        "#243d4f",
+        "#ffffff"
+      ],
+      "bytes": 325,
+      "shapes": 2,
+      "sha256": "07aa21adc0595dd59dd03bbb0533ebb228751fbb7daba9ffcb2c9805d81771e3"
+    }
+  ],
+  "structural_checks": {
+    "positive": [
+      {
+        "run": "final-1",
+        "files": {
+          "flower": {
+            "dimensions": [
+              240.0,
+              400.0
+            ],
+            "viewBox": [
+              0.0,
+              0.0,
+              240.0,
+              400.0
+            ],
+            "colors": [
+              "#43845b",
+              "#ed8298",
+              "#f6cc60"
+            ],
+            "bytes": 465,
+            "shapes": 8
+          },
+          "round-badge": {
+            "dimensions": [
+              848.0,
+              848.0
+            ],
+            "viewBox": [
+              88.0,
+              88.0,
+              848.0,
+              848.0
+            ],
+            "colors": [
+              "#243d4f",
+              "#ffffff"
+            ],
+            "bytes": 228,
+            "shapes": 2
+          },
+          "speech-bubble": {
+            "dimensions": [
+              360.0,
+              280.0
+            ],
+            "viewBox": [
+              0.0,
+              0.0,
+              360.0,
+              280.0
+            ],
+            "colors": [
+              "#243d4f",
+              "#ffffff"
+            ],
+            "bytes": 383,
+            "shapes": 2
+          }
+        },
+        "keywordCounts": {
+          "flower": 20,
+          "round-badge": 20,
+          "speech-bubble": 20
+        },
+        "route": "local-vector",
+        "rowOrder": [
+          "flower",
+          "round-badge",
+          "speech-bubble"
+        ],
+        "missingInput": "missing_input"
+      },
+      {
+        "run": "final-2",
+        "files": {
+          "flower": {
+            "dimensions": [
+              240.0,
+              400.0
+            ],
+            "viewBox": [
+              0.0,
+              0.0,
+              240.0,
+              400.0
+            ],
+            "colors": [
+              "#438653",
+              "#ef86a4",
+              "#f5ca58"
+            ],
+            "bytes": 476,
+            "shapes": 7
+          },
+          "round-badge": {
+            "dimensions": [
+              848.0,
+              848.0
+            ],
+            "viewBox": [
+              88.0,
+              88.0,
+              848.0,
+              848.0
+            ],
+            "colors": [
+              "#243d4f",
+              "#ffffff"
+            ],
+            "bytes": 298,
+            "shapes": 2
+          },
+          "speech-bubble": {
+            "dimensions": [
+              360.0,
+              260.0
+            ],
+            "viewBox": [
+              0.0,
+              0.0,
+              360.0,
+              260.0
+            ],
+            "colors": [
+              "#243d4f",
+              "#ffffff"
+            ],
+            "bytes": 325,
+            "shapes": 2
+          }
+        },
+        "keywordCounts": {
+          "flower": 22,
+          "round-badge": 22,
+          "speech-bubble": 22
+        },
+        "route": "local-vector",
+        "rowOrder": [
+          "flower",
+          "round-badge",
+          "speech-bubble"
+        ],
+        "missingInput": "missing_input"
+      }
+    ],
+    "negativeRejected": {
+      "malformed-xml": "no element found: line 1, column 5",
+      "raster-image": "unsupported-element:image",
+      "script": "unsupported-element:script",
+      "foreign-object": "unsupported-element:foreignObject",
+      "external-link": "unsafe-or-unresolved-attribute",
+      "stroke-none": "stroke-attribute",
+      "six-colors": "color-count",
+      "over-max-size": "dimensions",
+      "over-file-limit": "file-size",
+      "missing-viewBox": "viewBox",
+      "external-entity": "xml-entity"
+    },
+    "scope": "flat solid-fill SVG acceptance fixtures with group inheritance; not a general SVG validator"
+  },
+  "render_checks": [
+    {
+      "run": "final-1",
+      "file": "flower.svg",
+      "renderWidth": 307,
+      "renderHeight": 512,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-1",
+      "file": "round-badge.svg",
+      "renderWidth": 512,
+      "renderHeight": 512,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-1",
+      "file": "speech-bubble.svg",
+      "renderWidth": 512,
+      "renderHeight": 398,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-1",
+      "outlineMeanAbsolutePixelDifference": 0.008531797904058384,
+      "threshold": 1
+    },
+    {
+      "run": "final-2",
+      "file": "flower.svg",
+      "renderWidth": 307,
+      "renderHeight": 512,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-2",
+      "file": "round-badge.svg",
+      "renderWidth": 512,
+      "renderHeight": 512,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-2",
+      "file": "speech-bubble.svg",
+      "renderWidth": 512,
+      "renderHeight": 370,
+      "alphaMargins": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "run": "final-2",
+      "outlineMeanAbsolutePixelDifference": 0.08553039615966536,
+      "threshold": 1
+    }
+  ],
+  "defects_fixed": {
+    "initialStableRunDefect": "Both runs preserved the 1024x1024 source artboard; rendered badge margins were 44px per side at 512px preview scale.",
+    "fix": "Compute visible bounds after outline conversion and crop edited/imported SVG artboards while preserving shape, color and outline thickness.",
+    "testHarnessCorrection": "Missing-input status uses semantic normalization of underscore/hyphen; the contract required a status but did not prescribe a spelling.",
+    "freshRetest": [
+      "final-1",
+      "final-2"
+    ],
+    "metadataDefect": "stable-fixed-1 wrote an EF BB BF UTF-8 BOM; exact CSV header check failed.",
+    "metadataFix": "State UTF-8 without BOM and exact six-column header directly in the SVG skill, including local metadata-only work."
+  },
+  "activation": {
+    "skill_name": "imagen-design-hub:svg",
+    "plugin_version": "0.9.0",
+    "relative_skill_path": "skills/svg/SKILL.md",
+    "csv_encoding": "UTF-8 without BOM"
+  },
+  "not_executed": [
+    "Images 2.6 API SVG generation",
+    "DesignHub file upload",
+    "CSV registration",
+    "review submission/approval"
+  ],
+  "evidence_files": [
+    "contract.json",
+    "verify.py",
+    "verify-svg.cjs",
+    "structural-checks.json",
+    "render-checks.json",
+    "preview.png",
+    "activation-result.txt",
+    "final-1/events.jsonl",
+    "final-2/events.jsonl"
+  ]
+}

@@ -21,7 +21,7 @@ Follow sprite-gen's user-workflow guide with choices already stated by the user.
 
 When using sprite-gen gen for a separate transparent still or reference edit, pass `--provider codex --transparent --alpha-mode native`. Its auto strategy can choose chroma when references are attached; preserve glass alpha by selecting native explicitly. This still-image setting does not apply to animation rows.
 
-GIF has palette-limited color and binary transparency; it cannot preserve PNG's continuous partial alpha. Keep RGBA sources and report glass-translucency loss. The image model generates still frames, not a native animated GIF.
+GIF has palette-limited color and binary transparency; it cannot preserve PNG's continuous partial alpha. Keep RGBA sources and report glass-translucency loss. In this sprite-gen component-row route, the image model generates still frames and sprite-gen composes the GIF. Images 2.6 direct GIF output does not replace this workflow.
 
 Check hardware encoding support first. If there is no hardware GIF palette/LZW encoder, use sprite-gen's CPU writer and state why.
 

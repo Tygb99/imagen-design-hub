@@ -1,4 +1,4 @@
 interface:
   display_name: "Imagen Design Hub: PNG Element"
   short_description: "Recommend PNG elements and create native transparent assets"
-  default_prompt: "Use $imagen-design-hub:png-element to recommend useful PNG concepts, generate native transparent images with built-in image_gen, preserve partial alpha, finish size and DPI locally, and validate metadata."
+  default_prompt: "Use $imagen-design-hub:png-element to recommend useful PNG concepts, follow Images 2.6 guidance with the exposed native image tool, preserve identity and partial alpha across reference edits, finish size and DPI locally, and validate metadata."

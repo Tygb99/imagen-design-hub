@@ -9,6 +9,8 @@ description: Recommend and create DesignHub native transparent PNG elements with
 
 Read [shared rules](../../SKILL.md). Recommendations contain 3–5 concrete concepts with subject, style, use case and buyer-facing keywords.
 
+Follow the Images 2.6 baseline in the shared rules while using only options exposed by the actual native tool. For reference edits or a matching series, inspect the target first, reuse the accepted reference through supported image inputs, and name the change while preserving identity, geometry, palette and partial alpha. Preserve every source/revision separately. API quality, complexity and markup controls are optional only on an explicitly selected API path; see [controls](../../references/2026-11-06-22-36-21-images-2-6.md).
+
 1. Check native image-tool availability using the shared rules, then follow the installed imagegen skill and request a genuinely transparent background, one asset per call. If no native tool is exposed, stop and follow [image-generation diagnostics](../../references/image-generation-troubleshooting.md); do not jump straight to an API-key fallback or assume the account is Free.
 2. Preserve returned originals under assets/source-imagegen/. Do not require a fresh child session, browser, API key, chroma key or background-removal pass.
 3. Finish a separate copy with Pillow or the project processor for size, DPI and file size. Trim with `python3 scripts/designhub_preflight.py crop <in.png> <out.png>` from this plugin's root; it keeps DPI.

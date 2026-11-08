@@ -1,0 +1,64 @@
+{
+  "verified_at": "2026-11-06T23:44:31+09:00",
+  "plugin_version": "0.9.0",
+  "scope": "built-in image_gen PNG generation, real SVG conversion, DesignHub upload, CSV registration and one review submission",
+  "generation": {
+    "tool": "image_gen",
+    "format": "PNG",
+    "model_identifier_returned": false,
+    "api_selected": false,
+    "source_candidate": 3,
+    "vectorizer": "VTracer 1.0.0-alpha.4"
+  },
+  "asset": {
+    "fileName": "native-coral-tulip-ribbon-20261106232641.svg",
+    "uniqueId": "a259dd1d-1285-4b47-af37-245bc859f1e6",
+    "elementName": "노란 리본으로 묶은 분홍 튤립",
+    "bytes": 3720,
+    "colors": 4,
+    "paths": 6,
+    "dimensions": [
+      761,
+      1262.13
+    ],
+    "sha256": "7cd825e35f5f7aae82bf24e852f37202c7f1a524a03705a56cbbaa19b0cf188a",
+    "keyword_count": 25,
+    "tier": "Premium",
+    "contentType": "SVG element"
+  },
+  "designhub": {
+    "uploaded": 1,
+    "downloaded_csv_rows": 101,
+    "processed_csv_rows": 101,
+    "modified_csv_rows": 1,
+    "other_rows_unchanged": 100,
+    "all_assigned_ids_preserved": true,
+    "ai_flag_saved": true,
+    "ai_flag_verified_after_reload": true,
+    "review_submitted": 1,
+    "pending_before_upload": 100,
+    "pending_after_upload": 101,
+    "pending_final": 100,
+    "review_waiting_before": 0,
+    "review_waiting_final": 1,
+    "final_status": "review waiting",
+    "review_approved": false,
+    "waiting_url": "https://designhub.miricanvas.com/ko/element/waiting",
+    "submitted_at_displayed": "2026.11.6 23:43"
+  },
+  "artifact_directory": "/Users/tygb99/.codex/visualizations/2026/11/05/01a1a92c-7ec1-7d60-8095-3913449e8272/svg-live-2026-11-06-23-26-41",
+  "evidence": {
+    "csv_processing": "evidence/csv-complete.png",
+    "saved_metadata": "evidence/metadata-saved.png",
+    "saved_metadata_snapshot": "evidence/metadata-saved-snapshot.txt",
+    "submission_confirmation": "evidence/review-request.png",
+    "submission_success": "evidence/review-submitted.png",
+    "review_waiting": "evidence/review-waiting-content.png",
+    "review_waiting_snapshot": "evidence/review-waiting-snapshot.txt"
+  },
+  "limits": [
+    "Approval/publication not verified; item remains in review waiting.",
+    "The native tool did not identify its backend model.",
+    "The user selected built-in generation, so API output was not tested."
+  ]
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Imagen Design Hub: SVG"
+  short_description: "Create editable SVG elements and check DesignHub files"
+  default_prompt: "Use $imagen-design-hub:svg to create or edit true vector elements, preserve visible outlines as filled paths, check five colors and file limits, and prepare matching DesignHub CSV metadata."

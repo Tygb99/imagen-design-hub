@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, upload CSV metadata, and collections of approved elements.
 ---
 
-# Imagen Design Hub 0.7.0
+# Imagen Design Hub 0.9.0
 
 [Korean](SKILL.ko.md)
 
@@ -13,18 +13,22 @@ Start with PNG element recommendations when the user asks what to create: sugges
 
 - Transparent PNG: [png-element](skills/png-element/SKILL.md). Use Codex built-in image_gen with a genuinely transparent background; preserve native alpha.
 - JPG background: [jpg-background](skills/jpg-background/SKILL.md). Subjectless graphics or balanced patterns without a standout subject, source PNG preserved, final RGB JPG and `Background` CSV. Route real or strongly photorealistic images to `Photo`.
-- SVG: [svg-beta](skills/svg-beta/SKILL.md). True vectors, not embedded raster images.
+- SVG: [svg](skills/svg/SKILL.md). True vectors, including Images 2.6 SVG export when available through the selected tool; validate the resulting paths and DesignHub constraints.
 - GIF: [gif](skills/gif/SKILL.md). Use the installed sprite-gen component-row pipeline, then inspect actual playback.
 - Upload and metadata: [upload-csv](skills/upload-csv/SKILL.md). Aside with direct file selection first, native file picker as fallback; local tools for CSV merging.
 - Collections: [collection](skills/collection/SKILL.md). Check live limits and existing membership, group approved public elements, register or edit names and keywords, and verify saved IDs and contents.
 
-## Native transparency
+## Images 2.6 and native transparency
 
 Before generation, check the tools actually exposed in this session, including deferred tools. `image_gen` may be a namespace or appear as `image_gen__imagegen`; use the actual native tool rather than checking a literal function name alone. Installing this plugin does not add the host tool. Codex Free-plan ChatGPT sign-ins do not include image generation; eligible ChatGPT-backed sessions can use it without an API key. Do not infer a plan from an absent tool.
 
 If the native tool is missing, stop generation and follow [image-generation diagnostics](references/image-generation-troubleshooting.md): distinguish CLI installation/path, CLI version, login method, plan, feature flag, provider and model. Report observed values separately from unknowns. Do not claim Windows or `codex exec` is categorically unsupported. Do not automatically switch to an API-key CLI or browser; use alternatives only on the user's explicit choice.
 
-[OpenAI's Images 2.5 announcement](https://openai.com/index/introducing-chatgpt-images-2-5/) confirms Codex availability and transparent-background support. Request native transparency first. Tool availability does not identify the exact backend variant; never claim Flare or Sunburst without returned evidence.
+[OpenAI's Images 2.6 announcement](https://openai.com/index/introducing-images-2-6/) is the generation and editing baseline. Its [API guide](https://developers.openai.com/api/docs/guides/image-generation) documents transparent output, SVG export, markup-guided edits and complexity control. Request native transparency first. A product announcement does not identify this session's backend; record Images 2.6, Flare or Sunburst as the actual model only when returned evidence identifies it.
+
+Read the live tool schema before choosing options. The native image tool remains the default for PNG and JPG sources. API fields such as `model`, `quality`, `complexity`, `markup` and `output_format` are not automatically native-tool arguments. Use API-only features only when the user has explicitly selected the API path; this plugin does not add an API client or enable host capabilities. See [Images 2.6 controls](references/2026-11-06-22-36-21-images-2-6.md) when those controls are needed. Keep GIF production on the installed sprite-gen workflow; do not route it to direct GIF API output.
+
+For edits, inspect the original and reference it through the tool's supported image-input mechanism. Name the requested change and preserve subject identity, geometry, palette, composition and intentional alpha unless the user asks to change them. For a series, reuse the accepted reference and vary only the requested pose, expression or color. Save each revision separately and inspect both each edit and the final series.
 
 Generate one source per standalone PNG element. Preserve source files under `assets/source-imagegen/`; write derived files separately. Preserve intentional partial alpha, especially glass, mist, hair, and glow.
 

@@ -1,0 +1,14 @@
+{
+  "request": "원본 배지 모양과 색, 테두리 두께를 유지해 DesignHub SVG 요소로 준비해줘.",
+  "source_file": "round-badge.svg",
+  "source_svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"1024\" height=\"1024\" viewBox=\"0 0 1024 1024\"><circle cx=\"512\" cy=\"512\" r=\"400\" fill=\"#ffffff\" stroke=\"#243d4f\" stroke-width=\"48\"/></svg>",
+  "expected_visible_bounds": [
+    88,
+    88,
+    848,
+    848
+  ],
+  "expected_color_count": 2,
+  "expected_stroke_attributes": 0,
+  "scope": "local SVG editing, tight artboard export, and metadata; no API or external submission"
+}

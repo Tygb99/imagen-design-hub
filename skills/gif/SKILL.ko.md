@@ -21,7 +21,7 @@ sprite-gen의 user-workflow에 사용자가 이미 지정한 선택을 전달한
 
 sprite-gen gen으로 별도 투명 스틸이나 참조 편집을 할 때는 `--provider codex --transparent --alpha-mode native`를 명시한다. 참조 이미지가 있으면 auto가 크로마키를 선택할 수 있으므로 유리 alpha 보존에는 native를 직접 선택한다. 이 스틸 설정을 애니메이션 행에 적용하지 않는다.
 
-GIF는 제한된 팔레트와 이진 투명도여서 PNG의 연속 부분 알파를 보존하지 못한다. RGBA 원본을 남기고 유리의 반투명 손실을 알린다. 이미지 모델은 정지 프레임을 생성하며 네이티브 GIF 생성이 아니다.
+GIF는 제한된 팔레트와 이진 투명도여서 PNG의 연속 부분 알파를 보존하지 못한다. RGBA 원본을 남기고 유리의 반투명 손실을 알린다. 이 sprite-gen component-row 경로에서는 이미지 모델이 정지 프레임을 생성하고 sprite-gen이 GIF를 합성한다. Images 2.6의 직접 GIF 출력으로 이 절차를 대체하지 않는다.
 
 하드웨어 인코딩을 먼저 확인하고 GIF 팔레트/LZW 하드웨어 인코더가 없으면 이유를 밝히고 sprite-gen CPU 인코더를 사용한다.
 
