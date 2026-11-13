@@ -1,7 +1,7 @@
 {
   "verified_at": "2026-11-06T23:44:31+09:00",
   "plugin_version": "0.9.0",
-  "scope": "built-in image_gen PNG generation, real SVG conversion, DesignHub upload, CSV registration and one review submission",
+  "scope": "built-in image_gen PNG generation, real SVG conversion, DesignHub upload, CSV registration and one review submission, and approval of the submitted SVG",
   "generation": {
     "tool": "image_gen",
     "format": "PNG",
@@ -38,13 +38,23 @@
     "review_submitted": 1,
     "pending_before_upload": 100,
     "pending_after_upload": 101,
-    "pending_final": 100,
     "review_waiting_before": 0,
-    "review_waiting_final": 1,
-    "final_status": "review waiting",
-    "review_approved": false,
+    "final_status": "approved",
+    "review_approved": true,
     "waiting_url": "https://designhub.miricanvas.com/ko/element/waiting",
-    "submitted_at_displayed": "2026.11.6 23:43"
+    "submitted_at_displayed": "2026.11.6 23:43",
+    "status_after_submission": "review waiting",
+    "pending_after_submission": 100,
+    "review_waiting_after_submission": 1,
+    "approval_observation": {
+      "observed_on_kst": "2026-11-13",
+      "source": "user-provided DesignHub element management screenshot",
+      "registration_time_displayed": "2026.11.11 02:32",
+      "file_id_matches_submission": true,
+      "file_name_matches_submission": true,
+      "tier": "Premium",
+      "ai_flag_in_use": true
+    }
   },
   "artifact_directory": "/Users/tygb99/.codex/visualizations/2026/11/05/01a1a92c-7ec1-7d60-8095-3913449e8272/svg-live-2026-11-06-23-26-41",
   "evidence": {
@@ -54,10 +64,12 @@
     "submission_confirmation": "evidence/review-request.png",
     "submission_success": "evidence/review-submitted.png",
     "review_waiting": "evidence/review-waiting-content.png",
-    "review_waiting_snapshot": "evidence/review-waiting-snapshot.txt"
+    "review_waiting_snapshot": "evidence/review-waiting-snapshot.txt",
+    "review_approval": "evidence/2026-11-13-designhub-approval.png",
+    "review_approval_sha256": "a94e9bdea5f5014041287c191a18772e16df429d3974bf63e9625996c14d2fe8"
   },
   "limits": [
-    "Approval/publication not verified; item remains in review waiting.",
+    "Approval observed on 2026-11-13. Exact approval time and public availability were not verified.",
     "The native tool did not identify its backend model.",
     "The user selected built-in generation, so API output was not tested."
   ]

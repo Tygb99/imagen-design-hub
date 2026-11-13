@@ -1,6 +1,6 @@
 # imagen-design-hub 0.9.0
 
-[English](README.md) · [변경 이력](2026-11-08-15-44-22-CHANGELOG.ko.md)
+[English](README.md) · [변경 이력](2026-11-13-22-10-33-CHANGELOG.ko.md)
 
 PNG 요소를 추천하고 Images 2.6 생성·편집 지침에 따라 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비하며 승인·공개 요소를 컬렉션으로 묶는다.
 
@@ -15,9 +15,9 @@ PNG 요소를 추천하고 Images 2.6 생성·편집 지침에 따라 Codex로 �
 
 ## 0.9.0 변경
 
-로컬 벡터 제작 인수 테스트를 거쳐 `svg-beta`를 `svg`로 전환했다. `$imagen-design-hub:svg`로 사용한다. SVG 에이전트 설정을 추가하고 실제 벡터·색상·윤곽선·파일·메타데이터 검수는 유지한다. 별도 실사용 테스트에서는 내장 image_gen의 PNG를 4색 SVG로 변환해 파일 1개 업로드, CSV 101행 처리, AI 표시 저장, 해당 1개 심사 제출을 완료했다. 현재 심사 대기이며 승인은 아직이다. 사용자 선택에 따라 API 경로는 실행하지 않았고 도구가 정확한 백엔드 모델을 식별하지 않았다.
+로컬 벡터 제작 인수 테스트를 거쳐 `svg-beta`를 `svg`로 전환했다. `$imagen-design-hub:svg`로 사용한다. SVG 에이전트 설정을 추가하고 실제 벡터·색상·윤곽선·파일·메타데이터 검수는 유지한다. 별도 실사용 테스트에서는 내장 image_gen의 PNG를 4색 SVG로 변환해 파일 1개 업로드, CSV 101행 처리, AI 표시 저장, 해당 1개 심사 제출을 완료했다. 2026-11-13에 확인한 DesignHub 화면에서 같은 SVG의 승인과 Premium 라이선스·생성형 AI 표시 유지가 확인됐다. 사용자 선택에 따라 API 경로는 실행하지 않았고 도구가 정확한 백엔드 모델을 식별하지 않았다.
 
-[SVG 검수 보고서](records/2026-11-06-22-47-15-svg-qualification.ko.md) · [내장 생성·실제 제출 검증](records/2026-11-06-23-44-31-native-svg-live.ko.md)
+[SVG 검수 보고서](records/2026-11-06-22-47-15-svg-qualification.ko.md) · [내장 생성·DesignHub 승인 검증](records/2026-11-13-22-10-33-native-svg-live.ko.md)
 
 ## 0.8.0 변경
 

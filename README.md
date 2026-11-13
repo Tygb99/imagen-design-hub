@@ -1,6 +1,6 @@
 # imagen-design-hub 0.9.0
 
-[한국어](README.ko.md) · [Changelog](2026-11-08-15-44-22-CHANGELOG.md)
+[한국어](README.ko.md) · [Changelog](2026-11-13-22-10-33-CHANGELOG.md)
 
 Recommend useful PNG elements and create native transparent assets with Codex, following Images 2.6 generation and editing guidance. Finish dimensions and DPI locally, prepare DesignHub metadata, and organize approved public elements into collections.
 
@@ -15,9 +15,9 @@ Recommend useful PNG elements and create native transparent assets with Codex, f
 
 ## Version 0.9.0
 
-Promoted `svg-beta` to `svg` after local vector-production acceptance testing. Use `$imagen-design-hub:svg`. Added SVG agent metadata and kept the same vector, color, outline, file and metadata checks. A separate live test used built-in image_gen, converted its PNG into a four-color SVG, uploaded one file, processed all 101 CSV rows, saved the AI flag and submitted that one item for review. Its status is review waiting; approval is pending. The user selected the native tool, so the API route was not run and the backend model was not identified by the tool.
+Promoted `svg-beta` to `svg` after local vector-production acceptance testing. Use `$imagen-design-hub:svg`. Added SVG agent metadata and kept the same vector, color, outline, file and metadata checks. A separate live test used built-in image_gen, converted its PNG into a four-color SVG, uploaded one file, processed all 101 CSV rows, saved the AI flag and submitted that one item for review. A DesignHub screenshot reviewed on 2026-11-13 confirmed that the same SVG was approved, with its Premium license and generative AI label retained. The user selected the native tool, so the API route was not run and the backend model was not identified by the tool.
 
-[SVG qualification report](records/2026-11-06-22-47-15-svg-qualification.md) · [Native generation and live submission](records/2026-11-06-23-44-31-native-svg-live.md)
+[SVG qualification report](records/2026-11-06-22-47-15-svg-qualification.md) · [Native generation and DesignHub approval](records/2026-11-13-22-10-33-native-svg-live.md)
 
 ## Version 0.8.0
 
