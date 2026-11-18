@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Imagen Design Hub</title>
-  <meta name="description" content="Images 2.6 기준 PNG·JPG·SVG와 sprite-gen GIF, DesignHub CSV·컬렉션을 준비하는 Codex 플러그인.">
+  <meta name="description" content="Images 2.6 기준 PNG·JPG·SVG와 템플릿 부품, sprite-gen GIF, DesignHub CSV·컬렉션을 준비하는 Codex 플러그인.">
   <meta property="og:title" content="Imagen Design Hub">
   <meta property="og:description" content="Images 2.6 생성·편집 지침과 sprite-gen GIF 제작을 DesignHub 규격·CSV·컬렉션까지 연결합니다.">
   <meta property="og:image" content="assets/imagegen-workflow-hero.png">
@@ -1152,7 +1152,7 @@
           <h1>Codex 플러그인으로<br><span class="accent-word">바뀐 제작<br class="mobile-only"> 파이프라인</span></h1>
           <p class="hero-copy">
             npx 한 줄로 설치하고 Codex 시작 때 업데이트를 확인합니다.
-            Images 2.6 기준으로 PNG·JPG·SVG를 준비하고, GIF는 sprite-gen으로 제작합니다. CSV·컬렉션 스킬도 필요한 순간에 불러옵니다.
+            Images 2.6 기준으로 PNG·JPG·SVG를 준비하고, GIF는 sprite-gen으로 제작합니다. 템플릿 부품·CSV·컬렉션 스킬도 필요한 순간에 불러옵니다.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href="#install">설치 명령 보기</a>
@@ -1246,9 +1246,9 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 <span class="badge badge-coral">04</span>
                 <div>
                   <h3>분리된 엔트리포인트</h3>
-                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, upload-csv, collection이 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
+                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, template-fit, upload-csv, collection이 독립 스킬로 로드되어 필요한 문맥만 씁니다.</p>
                 </div>
-                <span class="format-note">6 skills</span>
+                <span class="format-note">7 skills</span>
               </article>
             </div>
           </div>
@@ -1258,9 +1258,9 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
       <section id="features" class="section">
         <div class="section-inner">
           <p class="section-kicker">Core features</p>
-          <h2 class="section-title">여섯 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
+          <h2 class="section-title">일곱 개의 플러그인 스킬로 필요한 작업만 로드합니다.</h2>
           <p class="section-lead">
-            배경, 투명 PNG, 벡터, 애니메이션, CSV 업로드, 컬렉션 등록을 각각 처리합니다.
+            배경, 투명 PNG, 템플릿 부품, 벡터, 애니메이션, CSV 업로드, 컬렉션 등록을 각각 처리합니다.
             플러그인 방식은 각 route를 좁게 나누고, 실제 제출 표면에 맞는 규칙만 불러옵니다.
           </p>
 
@@ -1334,6 +1334,19 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 </ul>
               </div>
             </article>
+
+            <article class="feature-card">
+              <div class="feature-body">
+                <span class="badge badge-teal">TEMPLATE FIT</span>
+                <h3>template-fit</h3>
+                <p>키워드 하나로 남이 만든 템플릿에 끼워 넣기 좋은 투명 PNG 부품 묶음을 계획하고 만듭니다.</p>
+                <ul class="feature-list">
+                  <li>가장자리 패널·위쪽 띠·구석·열린 테두리 위주</li>
+                  <li>플랫 또는 사진풍, 주색 1개와 보조색 1~2개</li>
+                  <li>긴 변 2.5배 이하 비율 검사, 좌우 짝은 한쪽만</li>
+                </ul>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -1356,7 +1369,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
             <article class="workflow-step">
               <strong>02 / ROUTE</strong>
               <h3>Load</h3>
-              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg</code>, <code>gif</code>, <code>upload-csv</code>, <code>collection</code>을 선택합니다.</p>
+              <p>요청에 맞춰 <code>png-element</code>, <code>jpg-background</code>, <code>svg</code>, <code>gif</code>, <code>template-fit</code>, <code>upload-csv</code>, <code>collection</code>을 선택합니다.</p>
             </article>
             <article class="workflow-step">
               <strong>03 / ROUNDTRIP</strong>
@@ -1383,7 +1396,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
               <li>
                 <div>
                   <strong>요청에 맞는 스킬만 로드합니다.</strong>
-                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, CSV 업로드, 컬렉션 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
+                  <p>PNG 추천·네이티브 투명 PNG, JPG, SVG, GIF, 템플릿 부품, CSV 업로드, 컬렉션 route가 분리되어 과한 문맥 없이 정확한 규칙을 적용합니다.</p>
                 </div>
               </li>
               <li>
@@ -1445,6 +1458,7 @@ node ~/plugins/imagen-design-hub/scripts/register_marketplace.mjs</code></pre>
                 <li><code>svg</code> route</li>
                 <li><code>gif</code> route</li>
                 <li><code>upload-csv</code> route</li>
+                <li><code>template-fit</code> route</li>
                 <li><code>collection</code> route</li>
               </ul>
             </article>

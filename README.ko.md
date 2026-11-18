@@ -1,6 +1,6 @@
-# imagen-design-hub 0.9.0
+# imagen-design-hub 0.10.0
 
-[English](README.md) · [변경 이력](2026-11-13-22-10-33-CHANGELOG.ko.md)
+[English](README.md) · [변경 이력](2026-11-18-11-35-17-CHANGELOG.ko.md)
 
 PNG 요소를 추천하고 Images 2.6 생성·편집 지침에 따라 Codex로 네이티브 투명 소재를 생성한다. 로컬에서 크기·DPI를 맞추고 DesignHub 메타데이터를 준비하며 승인·공개 요소를 컬렉션으로 묶는다.
 
@@ -11,7 +11,16 @@ PNG 요소를 추천하고 Images 2.6 생성·편집 지침에 따라 Codex로 �
 - 그래픽 배경·조화로운 패턴: [jpg-background](skills/jpg-background/SKILL.ko.md), 공식 Background/Photo 타입 구분
 - 실제 벡터: [svg](skills/svg/SKILL.ko.md)
 - Aside 업로드·CSV: [upload-csv](skills/upload-csv/SKILL.ko.md), `setInputFiles()` 우선·파일 선택 창 전환
+- 템플릿에 어울리는 요소: [template-fit](skills/template-fit/SKILL.ko.md), 키워드 하나로 남의 템플릿에 끼워 넣을 투명 PNG 부품 묶음
 - 컬렉션: [collection](skills/collection/SKILL.ko.md), 현재 한도·기존 소속·요소 묶기·제목과 키워드·등록·저장 결과 확인
+
+## 0.10.0 변경
+
+`template-fit` 스킬을 영어·한국어로 추가했다. 키워드 하나를 주면 남이 만든 템플릿에 끼워 넣기 좋은 투명 PNG 부품 묶음을 계획한다. 60% 이상은 가장자리 패널·위쪽 띠·구석 장식·열린 테두리·아래 띠·흩뿌림 묶음 같은 부품, 나머지는 작은 단품이고 장면을 꽉 채운 그림은 만들지 않는다. 그림체는 플랫 벡터풍이나 사진처럼 사실적인 재질로, 색은 템플릿 주류 계열에서 주색 1개와 보조색 1~2개로 정하고, 좌우 짝은 한쪽만 만들며, 이름·검색어에 쓰임새(테두리·구석 장식·띠)를 넣는다. 생성과 후처리는 `png-element`를 그대로 따른다. 내장 도구 원본은 크기가 그때그때 다르고(실측 긴 변 약 1400~2200px) 더 긴 띠는 잘라낸 짧은 변이 700px 밑으로 떨어지므로(시험에서 첫 시도 4개 중 3개가 2.9~4.6배라 다시 만들었다) `designhub_preflight.py ratio --max-ratio 2.5`를 추가했다.
+
+예시: 「$imagen-design-hub:template-fit으로 남의 템플릿에 어울리는 월계관 부품 20개 만들어줘.」
+
+[조사·시험 기록](records/2026-11-18-11-35-17-template-fit.ko.md)
 
 ## 0.9.0 변경
 
@@ -66,7 +75,7 @@ codex plugin add imagen-design-hub@<목록에 표시된 마켓플레이스 이�
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-목록의 버전이 0.9.0인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
+목록의 버전이 0.10.0인지 확인하고 새 작업에서 갱신된 스킬을 읽는다. 제거할 때는 `codex plugin remove imagen-design-hub@<마켓플레이스 이름>` 실행 후 `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`를 실행한다. npm 패키지 설치는 필요 없다. 기존 자동 업데이트는 깨끗한 원본 체크아웃만 fast-forward하며 로컬 편집을 보존한다. 로컬 수정·재설치는 공개 배포나 GitHub push가 아니다.
 
 ## 의존성
 
