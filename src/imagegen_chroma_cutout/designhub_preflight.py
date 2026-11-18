@@ -3,6 +3,7 @@
 margin   - fail unless the visible subject touches all four edges (PNG or GIF).
 crop     - crop a PNG or every GIF frame to the union of visible pixels.
 rejected - fail when an upload name matches a previously rejected element.
+ratio    - fail when the visible subject's long side exceeds a multiple of its short side.
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ from PIL import Image, ImageSequence
 # widen a plain getbbox() trim, which leaves a visible margin around the subject.
 DEFAULT_ALPHA_THRESHOLD = 8
 DEFAULT_MIN_SHORT_SIDE = 700
+DEFAULT_MAX_RATIO = 2.5
 DEFAULT_REJECTED_RECORDS = (
     Path(__file__).resolve().parents[2] / "records" / "designhub-rejected-elements.csv"
 )
@@ -151,6 +153,27 @@ def check_rejected(args: argparse.Namespace) -> int:
     return 0
 
 
+def check_ratio(args: argparse.Namespace) -> int:
+    failed = 0
+    for raw in args.files:
+        path = Path(raw)
+        bounds = measure(path, args.alpha_threshold)
+        if bounds.box is None:
+            print(f"FAIL {path} - no visible pixels")
+            failed += 1
+            continue
+        left, top, right, bottom = bounds.box
+        width, height = right - left, bottom - top
+        ratio = max(width, height) / min(width, height)
+        ok = ratio <= args.max_ratio
+        print(
+            f"{'PASS' if ok else 'FAIL'} {path} visible={width}x{height} ratio={ratio:.2f} "
+            f"max={args.max_ratio:g}" + ("" if ok else " - too elongated; regenerate a shorter shape")
+        )
+        failed += not ok
+    return 1 if failed else 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -175,6 +198,12 @@ def build_parser() -> argparse.ArgumentParser:
     rejected.add_argument("names", nargs="+", help="Upload file paths or CSV fileName values.")
     rejected.add_argument("--records", default=str(DEFAULT_REJECTED_RECORDS))
     rejected.set_defaults(handler=check_rejected)
+
+    ratio = commands.add_parser("ratio", help="Fail when the visible long side exceeds --max-ratio times the short side.")
+    ratio.add_argument("files", nargs="+")
+    ratio.add_argument("--max-ratio", type=float, default=DEFAULT_MAX_RATIO)
+    ratio.add_argument("--alpha-threshold", type=int, default=DEFAULT_ALPHA_THRESHOLD)
+    ratio.set_defaults(handler=check_ratio)
     return parser
 
 

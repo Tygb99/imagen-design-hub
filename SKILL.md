@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: Recommend and prepare DesignHub native transparent PNG elements, JPG backgrounds, SVG elements, sprite-gen GIF animations, upload CSV metadata, and collections of approved elements.
 ---
 
-# Imagen Design Hub 0.9.0
+# Imagen Design Hub 0.10.0
 
 [Korean](SKILL.ko.md)
 
@@ -16,6 +16,7 @@ Start with PNG element recommendations when the user asks what to create: sugges
 - SVG: [svg](skills/svg/SKILL.md). True vectors, including Images 2.6 SVG export when available through the selected tool; validate the resulting paths and DesignHub constraints.
 - GIF: [gif](skills/gif/SKILL.md). Use the installed sprite-gen component-row pipeline, then inspect actual playback.
 - Upload and metadata: [upload-csv](skills/upload-csv/SKILL.md). Aside with direct file selection first, native file picker as fallback; local tools for CSV merging.
+- Template-fit parts: [template-fit](skills/template-fit/SKILL.md). Turn one keyword into transparent PNG parts that fit other people's templates: edge panels, top bands, corners, open frames, trims, scatter clusters and small props, with style, color, ratio and naming rules.
 - Collections: [collection](skills/collection/SKILL.md). Check live limits and existing membership, group approved public elements, register or edit names and keywords, and verify saved IDs and contents.
 
 ## Images 2.6 and native transparency
@@ -34,7 +35,7 @@ Generate one source per standalone PNG element. Preserve source files under `ass
 
 Browser generation is optional only when explicitly requested. When the native tool is available through the current ChatGPT sign-in, PNG creation does not require Aside, another login, or an API key.
 
-PNG finishing uses Pillow or an existing project processor for trim, size and DPI. The bundled unique-name helper remains available. `scripts/designhub_preflight.py` crops PNG and GIF files to their visible bounds, fails any file with a transparent margin before upload, and stops names listed in `records/designhub-rejected-elements.csv`.
+PNG finishing uses Pillow or an existing project processor for trim, size and DPI. The bundled unique-name helper remains available. `scripts/designhub_preflight.py` crops PNG and GIF files to their visible bounds, fails any file with a transparent margin before upload, stops names listed in `records/designhub-rejected-elements.csv`, and its `ratio` command fails a visible subject whose long side exceeds a set multiple of its short side.
 
 Sprite-gen's animation row pipeline still uses its own chroma extraction. This is a GIF-specific dependency, not a reason to key native PNGs. Read the installed sprite-gen version and its docs; do not copy its engine into this plugin.
 

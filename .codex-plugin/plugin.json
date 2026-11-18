@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.9.0",
-  "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
+  "version": "0.10.0",
+  "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, template-fit PNG part bundles, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -21,13 +21,14 @@
     "gif",
     "csv",
     "sprite-gen",
-    "collection"
+    "collection",
+    "template-fit"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Imagen Design Hub",
-    "shortDescription": "PNG, JPG, SVG, GIF, DesignHub CSV and collections.",
-    "longDescription": "Follow Images 2.6 guidance for native transparent PNGs, graphic JPG backgrounds, reference edits and validated SVG output. Use only controls exposed by the actual tool; API quality, complexity, markup and SVG export require an explicitly selected API path. Preserve alpha and sources, finish locally and inspect results. Keep GIF generation on the installed sprite-gen workflow with motion QA. Prepare DesignHub CSV metadata, authorized Aside uploads and collections of approved public elements.",
+    "shortDescription": "PNG, JPG, SVG, GIF, template parts, DesignHub CSV and collections.",
+    "longDescription": "Follow Images 2.6 guidance for native transparent PNGs, graphic JPG backgrounds, reference edits and validated SVG output. Use only controls exposed by the actual tool; API quality, complexity, markup and SVG export require an explicitly selected API path. Preserve alpha and sources, finish locally and inspect results. Turn one keyword into transparent PNG parts that fit other people's templates: edge panels, top bands, corners, open frames and trims with a ratio check. Keep GIF generation on the installed sprite-gen workflow with motion QA. Prepare DesignHub CSV metadata, authorized Aside uploads and collections of approved public elements.",
     "developerName": "Tygb99",
     "category": "Design",
     "capabilities": [
@@ -39,7 +40,8 @@
       "JPG and SVG assets",
       "DesignHub CSV",
       "Aside upload",
-      "DesignHub collections"
+      "DesignHub collections",
+      "Template-fit part bundles"
     ],
     "websiteURL": "https://tygb99.github.io/imagen-design-hub/",
     "defaultPrompt": [
@@ -47,7 +49,8 @@
       "Use the SVG skill to check real SVG output support and validate vectors; use API-only quality, complexity, markup or SVG controls only on an explicitly selected API path.",
       "Use the installed sprite-gen skill for GIF candidates, check its version and inspect actual animation playback.",
       "Use Aside for authorized DesignHub uploads and CSV roundtrips; prefer setInputFiles and preserve downloaded uniqueId values.",
-      "Use the collection skill to check current DesignHub limits and membership, group approved public elements, register Korean names and 25 keywords, and verify saved collections without duplicating existing ones."
+      "Use the collection skill to check current DesignHub limits and membership, group approved public elements, register Korean names and 25 keywords, and verify saved collections without duplicating existing ones.",
+      "Use $imagen-design-hub:template-fit to turn one keyword into transparent PNG parts that fit other people's MiriCanvas templates: mostly edge panels, top bands, corners, open frames and trims, flat or photorealistic, ratio at most 2.5, no text."
     ],
     "brandColor": "#8000ff",
     "composerIcon": "./assets/imagegen-workflow-hero.png",

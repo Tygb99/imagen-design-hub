@@ -110,6 +110,12 @@
       "files": [
         "evals/fixtures/svg-outline-crop.json"
       ]
+    },
+    {
+      "id": 23,
+      "prompt": "$imagen-design-hub:template-fit로 「월계관」 키워드 요소 5개를 남의 미리캔버스 템플릿에 어울리게 만들어줘. 업로드는 하지 마.",
+      "expected_output": "Writes a concept table before generating. At least 3 of 5 items are part shapes (corner half-wreath, open wreath with an empty center, edge sprig panel, top garland band or bottom trim), the rest small single props, and no full scene. Each prompt asks for a transparent background with no text, numbers or logos, flat vector or photorealistic style, one main and one or two support colors from mainstream template palettes, and a long side at most 2.5x the short side; mirrored pairs are made one side only. Generates one source per element through png-element, preserves sources, finishes copies, and passes crop, margin and `designhub_preflight.py ratio --max-ratio 2.5`. Names and keywords include the use (frame, corner ornament, band). Does not upload or submit for review.",
+      "files": []
     }
   ]
 }

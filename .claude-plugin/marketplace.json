@@ -8,8 +8,8 @@
     {
       "name": "imagen-design-hub",
       "source": "./",
-      "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
-      "version": "0.9.0"
+      "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, template-fit PNG part bundles, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
+      "version": "0.10.0"
     }
   ],
   "description": "Tygb99 personal plugins (imagen-design-hub)"

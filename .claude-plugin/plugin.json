@@ -1,7 +1,7 @@
 {
   "name": "imagen-design-hub",
-  "version": "0.9.0",
-  "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
+  "version": "0.10.0",
+  "description": "Prepare Images 2.6-based PNG/JPG and validated SVG elements, template-fit PNG part bundles, sprite-gen GIFs, DesignHub CSV metadata, and approved-element collections.",
   "author": {
     "name": "Tygb99",
     "url": "https://github.com/Tygb99"
@@ -21,7 +21,8 @@
     "gif",
     "csv",
     "sprite-gen",
-    "collection"
+    "collection",
+    "template-fit"
   ],
   "skills": "./skills/",
   "hooks": "./hooks/claude-session-start-auto-update.json"

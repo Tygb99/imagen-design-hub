@@ -1,6 +1,6 @@
-# imagen-design-hub 0.9.0
+# imagen-design-hub 0.10.0
 
-[한국어](README.ko.md) · [Changelog](2026-11-13-22-10-33-CHANGELOG.md)
+[한국어](README.ko.md) · [Changelog](2026-11-18-11-35-17-CHANGELOG.md)
 
 Recommend useful PNG elements and create native transparent assets with Codex, following Images 2.6 generation and editing guidance. Finish dimensions and DPI locally, prepare DesignHub metadata, and organize approved public elements into collections.
 
@@ -11,7 +11,16 @@ Recommend useful PNG elements and create native transparent assets with Codex, f
 - Graphic backgrounds and balanced patterns: [jpg-background](skills/jpg-background/SKILL.md), with official Background/Photo type checks.
 - True vector elements: [svg](skills/svg/SKILL.md).
 - Aside upload and CSV roundtrip: [upload-csv](skills/upload-csv/SKILL.md), using `setInputFiles()` first and the native file picker as fallback.
+- Template-fit parts: [template-fit](skills/template-fit/SKILL.md), turning one keyword into transparent PNG parts for other people's templates.
 - Collections: [collection](skills/collection/SKILL.md), for current limits, existing membership, eligible groups, names/keywords, registration, and saved-state checks.
+
+## Version 0.10.0
+
+Added the `template-fit` skill in English and Korean. Give it one keyword and it plans a bundle of transparent PNG parts that buyers can drop into templates made by others: at least 60% edge panels, top bands, corner ornaments, open frames, bottom trims or scatter clusters, the rest small single props, never a full scene. It limits style to flat vector or photorealistic material, colors to one main and one or two support colors from mainstream template palettes, makes mirrored pairs one side only and puts the use (frame, corner ornament, band) in names and keywords. Generation and finishing stay on `png-element`. Added `designhub_preflight.py ratio --max-ratio 2.5`, because native outputs vary (observed long sides about 1400–2200 px) and longer bands crop below the 700 px short side; in the test, three of four first attempts were 2.9–4.6× and were regenerated.
+
+Example: “Use $imagen-design-hub:template-fit to make 20 laurel-wreath parts that fit other people's templates.”
+
+[Survey and test record](records/2026-11-18-11-35-17-template-fit.md)
 
 ## Version 0.9.0
 
@@ -66,7 +75,7 @@ For an already registered local plugin, update the source, then reinstall with C
 codex plugin add imagen-design-hub@tygb99-personal
 ```
 
-Verify the listed version is 0.9.0 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
+Verify the listed version is 0.10.0 and start a new task after reinstall to load updated skills. To remove the plugin, run `codex plugin remove imagen-design-hub@<marketplace-name>` and then `node "$HOME/plugins/imagen-design-hub/scripts/unregister_marketplace.mjs"`. No npm package installation is required. The existing auto-update script only fast-forwards clean source checkouts; local edits are preserved. A local edit/reinstall is not a public release or GitHub push.
 
 ## Dependencies
 

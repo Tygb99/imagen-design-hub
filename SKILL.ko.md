@@ -3,7 +3,7 @@ name: imagen-design-hub
 description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG 요소, sprite-gen GIF, 업로드 CSV, 승인 요소 컬렉션을 처리합니다.
 ---
 
-# Imagen Design Hub 0.9.0
+# Imagen Design Hub 0.10.0
 
 [English](SKILL.md)
 
@@ -16,6 +16,7 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 - SVG: [svg](skills/svg/SKILL.ko.md). 실제 벡터 요소. 선택한 도구에서 지원하면 Images 2.6 SVG 내보내기를 사용하고 경로와 DesignHub 기준을 검수한다.
 - GIF: [gif](skills/gif/SKILL.ko.md). 설치된 sprite-gen의 component-row 파이프라인과 실제 재생 검수.
 - 업로드: [upload-csv](skills/upload-csv/SKILL.ko.md). Aside의 파일 직접 지정을 우선하고 실패하면 파일 선택 창을 사용한다. CSV 병합은 로컬 도구.
+- 템플릿에 어울리는 요소: [template-fit](skills/template-fit/SKILL.ko.md). 키워드 하나로 남의 템플릿에 끼워 넣기 좋은 투명 PNG 부품(가장자리 패널·위쪽 띠·구석 장식·열린 테두리·아래 띠·흩뿌림 묶음·작은 단품)을 그림체·색·비율·이름 규칙에 맞춰 만든다.
 - 컬렉션: [collection](skills/collection/SKILL.ko.md). 현재 한도와 기존 소속 확인, 승인·공개 요소 묶기, 제목·키워드 등록·수정, 저장된 ID와 구성 확인.
 
 ## Images 2.6과 네이티브 투명 배경
@@ -34,7 +35,7 @@ description: DesignHub 네이티브 투명 PNG 추천·제작, JPG 배경, SVG �
 
 브라우저 생성은 명시적 요청에만 사용한다. 현재 ChatGPT 로그인에서 내장 도구가 제공되는 경우 네이티브 PNG에는 Aside·추가 로그인·API 키가 필요하지 않다.
 
-트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. `scripts/designhub_preflight.py`는 PNG·GIF를 그림 경계로 자르고, 올리기 전 투명 여백이 남은 파일을 실패시키며, `records/designhub-rejected-elements.csv`에 있는 이름을 멈춘다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
+트림·크기·DPI는 Pillow 또는 프로젝트 처리기로 맞춘다. 번들 고유 파일명 도구는 유지한다. `scripts/designhub_preflight.py`는 PNG·GIF를 그림 경계로 자르고, 올리기 전 투명 여백이 남은 파일을 실패시키며, `records/designhub-rejected-elements.csv`에 있는 이름을 멈추며, `ratio` 명령은 보이는 그림의 긴 변이 짧은 변의 정한 배수를 넘으면 실패시킨다. sprite-gen 행 생성의 크로마 추출은 GIF 전용이며 PNG에 적용하지 않는다. 설치된 스킬을 읽고 엔진을 플러그인에 복제하지 않는다.
 
 ## 산출물·메타데이터
 

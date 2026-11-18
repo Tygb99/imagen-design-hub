@@ -1,0 +1,4 @@
+interface:
+  display_name: "Imagen Design Hub: Template-Fit Elements"
+  short_description: "Turn one keyword into transparent PNG parts that fit other people's templates"
+  default_prompt: "Use $imagen-design-hub:template-fit to plan a keyword bundle of transparent PNG parts for other people's MiriCanvas templates: mostly edge panels, top bands, corners, open frames, bottom trims and scatter clusters, flat or photorealistic style, ratio at most 2.5, no text. Generate and finish them with png-element and check ratio and margin with the preflight script."
